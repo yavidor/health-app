@@ -17,12 +17,3 @@ This is the primary approved design direction for the application landing/dashbo
 - **Squad Game & Leaderboard**: Weekly leaderboard rankings and color-coded daily quest checklist (5k Walk, Daily Vitamins, Log Workout, 8h Sleep).
 
 ---
-
-## 📱 Mobile Responsive Behavior
-On mobile viewports:
-- The left sidebar collapses into a top app bar with a hamburger icon and profile pill.
-- The cards stack into a clean vertical flow:
-  1. **Today's Workout**
-  2. **Nutrition & Macros**
-  3. **Cross-Metric Analytics**
-  4. **Squad Game & Daily Quests**
