@@ -5,7 +5,8 @@
 - **LLM documentation**: `docs/clankers/` — architectural plans, hosting guides, tooling practices
 - **Design system**: `docs/humans/design/colors.md` — strict palette for UI elements and text
 - **Architecture**: `docs/clankers/implementation-plan.md` — complete tech stack and implementation roadmap
-- **RULE**: LLMs must NOT write/edit in `docs/humans/` — all documentation updates must go to `docs/clankers/`
+- **Tool using**: `docs/clankers/tool-call-best-practices.md` - Explains how to use tools under current limitations. Read it before interacting with anything
+- **RULE**: LLMs must NOT write/edit in `docs/humans/` — all documentation updates must go to `docs/clankers/`, `docs/humans/` is to be written only by humans (but read by agents as well)
 
 ## Key Facts
 - **Local-first PWA** — Progressive Web App with offline support
@@ -29,3 +30,4 @@ health-app/
 - No CI/CD, tests, or lint configured yet
 - Follow color palette strictly: bright tones for UI elements, dark tones for text
 - PWA manifest and service worker needed for home-screen installability
+- Read the tool using guide before starting to use tools
