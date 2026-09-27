@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitness - Health App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              seaBlue: {
+                light: '#6aa6ae',
+                DEFAULT: '#185661',
+                dark: '#0a3c45',
+              },
+              forestGreen: {
+                light: '#437456',
+                DEFAULT: '#156b44',
+                dark: '#0e341f',
+              },
+              leafGreen: {
+                light: '#e4eebc',
+                DEFAULT: '#adbf73',
+                dark: '#697948',
+              },
+              pinkish: {
+                light: '#efd6d2',
+                DEFAULT: '#d2968d',
+                dark: '#b6968d',
+              },
+              cardLight: '#F8FAF7',
+              cardMedium: '#E2ECD8',
+              cardDark: '#CDE4B4',
+              textPrimary: '#1B3B2B',
+              textMuted: '#2C4F3C',
+              textSecondary: '#4A7C6A',
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+      .transition-all {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 200ms;
+      }
+      .fade-in {
+        animation: fadeIn 0.3s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .progress-ring__circle {
+        transition: stroke-dashoffset 0.35s;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+      }
+    </style>
+  </head>
+  <body class="bg-cardLight text-textPrimary min-h-screen">
+    <div class="flex min-h-screen">
+      <!-- Mobile Body -->
+      <div class="mx-auto flex w-full max-w-md flex-1 flex-col">
+        <!-- Header -->
+        <header class="bg-cardMedium sticky top-0 z-10 p-5 shadow-sm">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="text-textPrimary text-2xl font-bold">🏋️ Fitness</h1>
+              <p class="text-textMuted text-sm">Workout planner & tracker</p>
+            </div>
+            <button
+              class="bg-leafGreen hover:bg-forestGreen flex h-10 w-10 items-center justify-center rounded-full text-white shadow-sm transition-all"
+            >
+              <span class="text-xl">+</span>
+            </button>
+          </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-5 pb-24">
+          <!-- Stats Cards -->
+          <section class="mb-6 grid grid-cols-2 gap-3">
+            <div class="rounded-2xl bg-white p-4 shadow-sm">
+              <div class="mb-2 flex items-center gap-3">
+                <div
+                  class="bg-seaBlue/10 text-seaBlue flex h-10 w-10 items-center justify-center rounded-xl"
+                >
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <span class="text-textMuted text-sm">This Week</span>
+              </div>
+              <p class="text-textPrimary text-2xl font-bold">210 min</p>
+              <p class="text-textMuted text-xs">4 workouts</p>
+            </div>
+            <div class="rounded-2xl bg-white p-4 shadow-sm">
+              <div class="mb-2 flex items-center gap-3">
+                <div
+                  class="bg-forestGreen/10 text-forestGreen flex h-10 w-10 items-center justify-center rounded-xl"
+                >
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
+                </div>
+                <span class="text-textMuted text-sm">This Week</span>
+              </div>
+              <p class="text-textPrimary text-2xl font-bold">1,245 min</p>
+              <p class="text-textMuted text-xs">210 mins total</p>
+            </div>
+          </section>
+
+          <!-- Active Workout -->
+          <section class="mb-6">
+            <div class="mb-3 flex items-center justify-between">
+              <h3 class="text-textPrimary text-lg font-semibold">Active Workout</h3>
+              <span class="bg-pinkish rounded-md px-2 py-1 text-xs font-medium text-white"
+                >LIVE</span
+              >
+            </div>
+            <div class="from-forestGreen to-seaBlue rounded-2xl bg-gradient-to-br p-5 text-white">
+              <div class="mb-4 flex items-start justify-between">
+                <div>
+                  <h2 class="mb-1 text-2xl font-bold">Upper Body</h2>
+                  <p class="text-sm text-white/80">Gym • 45 min remaining</p>
+                </div>
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20">
+                  <span class="text-2xl">⏱️</span>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <!-- Progress Bar -->
+                <div class="h-2 rounded-full bg-white/20">
+                  <div class="h-2 rounded-full bg-white" style="width: 65%"></div>
+                </div>
+                <!-- Exercise List -->
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-sm">
+                    <span class="flex items-center gap-2 text-white/90">
+                      <span>🏋️ Bench Press</span>
+                      <span class="rounded bg-white/30 px-1.5 py-0.5 text-xs">4/5</span>
+                    </span>
+                    <span class="text-white/70">450 kg</span>
+                  </div>
+                  <div class="flex items-center justify-between text-sm">
+                    <span class="flex items-center gap-2 text-white/90">
+                      <span>🏋️ Overhead Press</span>
+                      <span class="rounded bg-white/30 px-1.5 py-0.5 text-xs">3/5</span>
+                    </span>
+                    <span class="text-white/70">80 kg</span>
+                  </div>
+                  <div class="flex items-center justify-between text-sm">
+                    <span class="flex items-center gap-2 text-white/90">
+                      <span>💪 Bicep Curls</span>
+                      <span class="rounded bg-white/30 px-1.5 py-0.5 text-xs">2/5</span>
+                    </span>
+                    <span class="text-white/70">45 kg</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Workout Categories -->
+          <section class="mb-6">
+            <h3 class="text-textPrimary mb-3 text-lg font-semibold">My Workouts</h3>
+            <div class="mb-4 grid grid-cols-4 gap-2">
+              <button
+                class="rounded-xl bg-white p-3 text-left shadow-sm transition-all hover:shadow-md"
+              >
+                <div
+                  class="bg-pinkish/10 text-pinkish mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg text-sm"
+                >
+                  💪
+                </div>
+                <span class="text-textPrimary text-xs font-medium">Upper</span>
+              </button>
+              <button
+                class="rounded-xl bg-white p-3 text-left shadow-sm transition-all hover:shadow-md"
+              >
+                <div
+                  class="bg-seaBlue/10 text-seaBlue mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg text-sm"
+                >
+                  🏃
+                </div>
+                <span class="text-textPrimary text-xs font-medium">Cardio</span>
+              </button>
+              <button
+                class="rounded-xl bg-white p-3 text-left shadow-sm transition-all hover:shadow-md"
+              >
+                <div
+                  class="bg-forestGreen/10 text-forestGreen mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg text-sm"
+                >
+                  🧘
+                </div>
+                <span class="text-textPrimary text-xs font-medium">Core</span>
+              </button>
+              <button
+                class="rounded-xl bg-white p-3 text-left shadow-sm transition-all hover:shadow-md"
+              >
+                <div
+                  class="bg-leafGreen/10 text-leafGreen mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg text-sm"
+                >
+                  🧘
+                </div>
+                <span class="text-textPrimary text-xs font-medium">Flex</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Workout List -->
+          <section>
+            <div class="mb-3 flex items-center justify-between">
+              <h3 class="text-textPrimary text-lg font-semibold">Workout History</h3>
+              <button class="text-leafGreen text-sm font-medium">View all</button>
+            </div>
+            <div class="space-y-3">
+              <!-- Workout Card -->
+              <div class="rounded-2xl bg-white p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-pinkish/10 text-pinkish flex h-14 w-14 items-center justify-center rounded-xl text-2xl"
+                  >
+                    🏋️
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="text-textPrimary font-semibold">Upper Body</h4>
+                    <p class="text-textMuted text-xs">Gym • 3 hours ago</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-textPrimary font-bold">450 kg</p>
+                    <p class="text-textMuted text-xs">4 sets</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Workout Card -->
+              <div class="rounded-2xl bg-white p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-seaBlue/10 text-seaBlue flex h-14 w-14 items-center justify-center rounded-xl text-2xl"
+                  >
+                    🏃
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="text-textPrimary font-semibold">Morning Run</h4>
+                    <p class="text-textMuted text-xs">Home • 1 day ago</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-textPrimary font-bold">5.2 km</p>
+                    <p class="text-textMuted text-xs">42 min</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Workout Card -->
+              <div class="rounded-2xl bg-white p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-forestGreen/10 text-forestGreen flex h-14 w-14 items-center justify-center rounded-xl text-2xl"
+                  >
+                    💪
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="text-textPrimary font-semibold">Lower Body</h4>
+                    <p class="text-textMuted text-xs">Gym • 2 days ago</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-textPrimary font-bold">85 kg</p>
+                    <p class="text-textMuted text-xs">6 sets</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Workout Card -->
+              <div class="rounded-2xl bg-white p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-leafGreen/10 text-leafGreen flex h-14 w-14 items-center justify-center rounded-xl text-2xl"
+                  >
+                    🧘
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="text-textPrimary font-semibold">Core Workout</h4>
+                    <p class="text-textMuted text-xs">Home • 3 days ago</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-textPrimary font-bold">35 min</p>
+                    <p class="text-textMuted text-xs">5 rounds</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <!-- Mobile Tab Bar -->
+        <nav class="pb-safe fixed right-0 bottom-0 left-0 border-t border-gray-200 bg-white">
+          <div class="flex h-16 items-center justify-around">
+            <button
+              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+              <span class="text-xs font-medium">Home</span>
+            </button>
+            <button class="text-leafGreen flex flex-col items-center gap-1 p-2">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                />
+              </svg>
+              <span class="text-xs font-medium">Fitness</span>
+            </button>
+            <button
+              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+              <span class="text-xs font-medium">Food</span>
+            </button>
+            <button
+              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+              <span class="text-xs font-medium">Stats</span>
+            </button>
+            <button
+              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+              <span class="text-xs font-medium">Squad</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Desktop Sidebar -->
+      <aside class="bg-cardMedium hidden h-screen w-64 flex-col border-r border-gray-200 lg:flex">
+        <div class="p-6">
+          <div class="flex items-center gap-3">
+            <div
+              class="from-leafGreen to-forestGreen flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br text-2xl text-white"
+            >
+              🏃
+            </div>
+            <div>
+              <h1 class="text-textPrimary text-xl font-bold">Health App</h1>
+              <p class="text-textMuted text-xs">Local-first PWA</p>
+            </div>
+          </div>
+        </div>
+        <nav class="flex-1 space-y-2 p-4">
+          <a
+            href="#"
+            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+            Dashboard
+          </a>
+          <a
+            href="#"
+            class="text-textPrimary flex items-center gap-3 rounded-xl bg-white px-4 py-3 font-medium shadow-sm"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+              />
+            </svg>
+            Fitness
+          </a>
+          <a
+            href="#"
+            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            Food & Macros
+          </a>
+          <a
+            href="#"
+            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              />
+            </svg>
+            Analytics
+          </a>
+          <a
+            href="#"
+            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
+            Squad Game
+          </a>
+        </nav>
+        <div class="border-t border-gray-200 p-4">
+          <div class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm">
+            <div
+              class="from-seaBlue to-forestGreen flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white"
+            >
+              A
+            </div>
+            <div class="flex-1">
+              <p class="text-textPrimary text-sm font-medium">Alex</p>
+              <p class="text-textMuted text-xs">Free Plan</p>
+            </div>
+            <button class="rounded-lg p-2 transition-colors hover:bg-gray-100">
+              <svg
+                class="text-textMuted h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>
+```

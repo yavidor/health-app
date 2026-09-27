@@ -39,7 +39,7 @@ flowchart LR
 ## 2. Why This Setup Is Ideal for a Raspberry Pi
 
 1. **True $0 / Month:** No VPS, no database hosting bills, no static IP charges.
-2. **No Port Forwarding Required:** Cloudflare Tunnel establishes an *outbound* connection from your Pi to Cloudflare's edge. Your home router's firewall stays completely closed, and CGNAT (common with home ISPs) is not an issue.
+2. **No Port Forwarding Required:** Cloudflare Tunnel establishes an _outbound_ connection from your Pi to Cloudflare's edge. Your home router's firewall stays completely closed, and CGNAT (common with home ISPs) is not an issue.
 3. **Automatic SSL / HTTPS:** Cloudflare provisions and renews SSL certificates for free, which is strictly required for mobile PWAs and service workers.
 4. **Low Power & Resource Footprint:**
    - **RAM Usage:** Fastify + SQLite uses **< 50 MB** of RAM.
@@ -51,6 +51,7 @@ flowchart LR
 ## 3. Step-by-Step Setup Guide
 
 ### Step 1: Prepare the Raspberry Pi
+
 Ensure your Raspberry Pi (Raspberry Pi OS / Debian) has Node.js and Git installed.
 
 ```bash
@@ -69,6 +70,7 @@ npm -v
 ---
 
 ### Step 2: Build and Run the App Locally on the Pi
+
 Clone your repository and build the production bundle:
 
 ```bash
@@ -87,9 +89,11 @@ npm run start
 ---
 
 ### Step 3: Run Continuously via systemd (Auto-Restart on Boot)
+
 Create a systemd service so the app automatically boots up if the Pi restarts (e.g. after a power outage).
 
 Create `/etc/systemd/system/health-app.service`:
+
 ```ini
 [Unit]
 Description=Health App Service
@@ -110,6 +114,7 @@ WantedBy=multi-user.target
 ```
 
 Enable and start the service:
+
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable health-app
@@ -128,7 +133,7 @@ sudo systemctl status health-app
    sudo mkdir -p --mode=0755 /usr/share/keyrings
    curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
    echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
-   
+
    sudo apt update
    sudo apt install -y cloudflared
    ```
@@ -136,7 +141,7 @@ sudo systemctl status health-app
    ```bash
    # Authenticate with your Cloudflare account
    cloudflared tunnel login
-   
+
    # Create a tunnel named 'health-tunnel'
    cloudflared tunnel create health-tunnel
    ```
@@ -171,7 +176,9 @@ Now `https://app.yourdomain.com` will route directly to your Raspberry Pi with f
 Since SQLite is a single file (e.g. `data/health.db`), backing it up is trivial.
 
 ### Option A: Local USB Flash Drive Backup
+
 Plug an inexpensive USB flash drive into the Pi, and add a nightly cron job:
+
 ```bash
 # Open crontab
 crontab -e
@@ -181,7 +188,9 @@ crontab -e
 ```
 
 ### Option B: Free Cloud Backup with `rclone`
+
 Use `rclone` (free command-line tool) to mirror daily encrypted database backups to Google Drive, Dropbox, or OneDrive (all within free storage tiers):
+
 ```bash
 0 3 * * * sqlite3 /home/pi/health-app/data/health.db ".backup /tmp/backup.db" && rclone copy /tmp/backup.db "gdrive:HealthAppBackups"
 ```
@@ -191,6 +200,7 @@ Use `rclone` (free command-line tool) to mirror daily encrypted database backups
 ## 5. Security & Friend Group Authentication
 
 For a close friend group, you don't need heavy OAuth or complex password resets:
+
 - **Invite Token / Group PIN:** A shared squad invite code (e.g. `FIT-SQUAD-2026`) lets your friends create their profile without public registration spam.
 - **Session Tokens:** Simple HTTP-only JWTs or persistent random tokens stored in SQLite.
 - **Cloudflare Access (Optional extra layer):** If you want to restrict the URL strictly to specific email addresses, you can turn on Cloudflare Zero Trust Access (Free for up to 50 users).

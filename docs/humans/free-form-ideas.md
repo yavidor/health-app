@@ -1,4 +1,5 @@
 # Game-ish Idea
+
 Have a feature of a semi-competitive game \
 You can invite friend and earn points based on activities you need to do. \
 The players can add their mutual goals, with some example goals like doing a workout, taking daily pills, going on a walk, sleeping full (Each objective earns a set amount of points) \

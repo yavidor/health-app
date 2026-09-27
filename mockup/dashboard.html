@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Bright tones - UI elements, cards, progress indicators
+              seaBlue: {
+                light: '#6aa6ae',
+                DEFAULT: '#185661',
+                dark: '#0a3c45',
+              },
+              forestGreen: {
+                light: '#437456',
+                DEFAULT: '#156b44',
+                dark: '#0e341f',
+              },
+              leafGreen: {
+                light: '#e4eebc',
+                DEFAULT: '#adbf73',
+                dark: '#697948',
+              },
+              pinkish: {
+                light: '#efd6d2',
+                DEFAULT: '#d2968d',
+                dark: '#b69a96',
+              },
+              // Card background tones
+              cardLight: '#F8FAF7',
+              cardMedium: '#E2ECD8',
+              cardDark: '#CDE4B4',
+              // Text tones
+              textPrimary: '#1B3B2B',
+              textMuted: '#2C4F3C',
+              textSecondary: '#4A7C6A',
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+      /* Smooth transitions */
+      .transition-all {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 200ms;
+      }
+      .fade-in {
+        animation: fadeIn 0.3s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f0f0f0;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cde4b4;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #adbf73;
+      }
+
+      /* Progress ring animation */
+      .progress-ring__circle {
+        transition: stroke-dashoffset 0.35s;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+      }
+
+      /* Glass effect */
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body class="bg-cardLight text-textPrimary min-h-screen">
+    <!-- App Container with Mobile-First Layout -->
+    <div class="flex min-h-screen">
+      <!-- Mobile App Body (center content) -->
+      <div class="relative mx-auto flex w-full max-w-md flex-1 flex-col">
+        <!-- Header -->
+        <header class="bg-cardMedium sticky top-0 z-10 p-5 shadow-sm">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="text-textPrimary text-2xl font-bold">🏃 Health App</h1>
+              <p class="text-textMuted text-sm">Good morning, Alex! 👋</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <!-- Streak Badge -->
+              <div
+                class="bg-leafGreen flex items-center gap-1.5 rounded-full px-3 py-1.5 text-white shadow-sm"
+              >
+                <span>🔥</span>
+                <span class="text-sm font-semibold">12</span>
+                <span class="text-xs">day</span>
+              </div>
+              <!-- Date -->
+              <div class="text-right">
+                <p class="text-textPrimary text-sm font-medium">Mon, Sep 27</p>
+                <p class="text-textMuted text-xs">September</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto p-5 pb-24">
+          <!-- Hero Section -->
+          <section class="mb-6">
+            <div
+              class="from-seaBlue to-forestGreen rounded-3xl bg-gradient-to-r p-6 text-white shadow-lg"
+            >
+              <div class="mb-4 flex items-start justify-between">
+                <div>
+                  <p class="text-seaBlue-light mb-1 text-sm font-medium">Daily Total</p>
+                  <h2 class="text-4xl font-bold">
+                    450 <span class="text-seaBlue-light text-sm font-normal">/ 2500</span> kcal
+                  </h2>
+                </div>
+                <div class="rounded-xl bg-white/20 p-2.5">
+                  <svg
+                    class="h-8 w-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Daily Rings -->
+              <div class="flex justify-center gap-4">
+                <!-- Calorie Ring -->
+                <div class="flex flex-col items-center gap-2">
+                  <div class="relative h-16 w-16">
+                    <svg class="h-full w-full" viewBox="0 0 60 60">
+                      <circle
+                        class="text-white/20"
+                        cx="30"
+                        cy="30"
+                        r="28"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="6"
+                      />
+                      <circle
+                        class="progress-ring__circle"
+                        cx="30"
+                        cy="30"
+                        r="28"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="6"
+                        stroke-linecap="round"
+                        stroke-dasharray="175.93"
+                        stroke-dashoffset="127.15"
+                        style="stroke: url(#calorieGradient)"
+                      />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <span class="text-xs font-bold text-white">72%</span>
+                    </div>
+                  </div>
+                  <span class="text-xs text-white/90">Calories</span>
+                </div>
+
+                <!-- Protein Ring -->
+                <div class="flex flex-col items-center gap-2">
+                  <div class="relative h-16 w-16">
+                    <svg class="h-full w-full" viewBox="0 0 60 60">
+                      <circle
+                        class="text-white/20"
+                        cx="30"
+                        cy="30"
+                        r="28"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="6"
+                      />
+                      <circle
+                        class="progress-ring__circle"
+                        cx="30"
+                        cy="30"
+                        r="28"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="6"
+                        stroke-linecap="round"
+                        stroke-dasharray="175.93"
+                        stroke-dashoffset="112.34"
+                        style="stroke: url(#proteinGradient)"
+                      />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <span class="text-xs font-bold text-white">65g</span>
+                    </div>
+                  </div>
+                  <span class="text-xs text-white/90">Protein</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Quick Actions -->
+          <section class="mb-6">
+            <h3 class="text-textPrimary mb-3 text-lg font-semibold">Quick Actions</h3>
+            <div class="grid grid-cols-4 gap-3">
+              <button
+                class="bg-cardDark hover:bg-leafGreen rounded-2xl p-4 text-center text-white shadow-sm transition-all active:scale-95"
+              >
+                <div class="mb-1 text-2xl">🏋️</div>
+                <span class="text-xs font-medium">Workout</span>
+              </button>
+              <button
+                class="bg-cardDark hover:bg-forestGreen rounded-2xl p-4 text-center text-white shadow-sm transition-all active:scale-95"
+              >
+                <div class="mb-1 text-2xl">🥗</div>
+                <span class="text-xs font-medium">Meal</span>
+              </button>
+              <button
+                class="bg-cardDark hover:bg-seaBlue rounded-2xl p-4 text-center text-white shadow-sm transition-all active:scale-95"
+              >
+                <div class="mb-1 text-2xl">📊</div>
+                <span class="text-xs font-medium">Stats</span>
+              </button>
+              <button
+                class="bg-cardDark hover:bg-pinkish rounded-2xl p-4 text-center text-white shadow-sm transition-all active:scale-95"
+              >
+                <div class="mb-1 text-2xl">🎮</div>
+                <span class="text-xs font-medium">Squad</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Daily Quests -->
+          <section class="mb-6">
+            <div class="mb-3 flex items-center justify-between">
+              <h3 class="text-textPrimary text-lg font-semibold">Today's Quests</h3>
+              <button class="text-leafGreen text-sm font-medium">View all</button>
+            </div>
+            <div class="space-y-3">
+              <!-- Quest Item -->
+              <div class="border-leafGreen rounded-2xl border-l-4 bg-white p-4 shadow-sm">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="bg-leafGreen/10 text-leafGreen flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
+                    >
+                      💊
+                    </div>
+                    <div>
+                      <h4 class="text-textPrimary font-semibold">Daily Vitamins</h4>
+                      <p class="text-textMuted text-xs">Vitamin C, D, B12</p>
+                    </div>
+                  </div>
+                  <button
+                    class="bg-leafGreen hover:bg-forestGreen flex h-12 w-12 items-center justify-center rounded-xl text-white transition-all"
+                  >
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quest Item -->
+              <div class="border-seaBlue rounded-2xl border-l-4 bg-white p-4 shadow-sm">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="bg-seaBlue/10 text-seaBlue flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
+                    >
+                      🚶
+                    </div>
+                    <div>
+                      <h4 class="text-textPrimary font-semibold">5k Steps</h4>
+                      <p class="text-textMuted text-xs">Daily walk goal</p>
+                    </div>
+                  </div>
+                  <button
+                    class="bg-seaBlue hover:bg-forestGreen flex h-12 w-12 items-center justify-center rounded-xl text-white transition-all"
+                  >
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quest Item -->
+              <div class="border-pinkish rounded-2xl border-l-4 bg-white p-4 shadow-sm">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="bg-pinkish/10 text-pinkish flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
+                    >
+                      🏃
+                    </div>
+                    <div>
+                      <h4 class="text-textPrimary font-semibold">Morning Run</h4>
+                      <p class="text-textMuted text-xs">30 min cardio</p>
+                    </div>
+                  </div>
+                  <button
+                    class="bg-pinkish hover:bg-forestGreen flex h-12 w-12 items-center justify-center rounded-xl text-white transition-all"
+                  >
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Recent Activity -->
+          <section>
+            <div class="mb-3 flex items-center justify-between">
+              <h3 class="text-textPrimary text-lg font-semibold">Recent Activity</h3>
+              <button class="text-leafGreen text-sm font-medium">See all</button>
+            </div>
+            <div class="space-y-3">
+              <!-- Activity Card -->
+              <div class="flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-pinkish/10 text-pinkish flex h-12 w-12 items-center justify-center rounded-xl text-xl"
+                  >
+                    🏃
+                  </div>
+                  <div>
+                    <h4 class="text-textPrimary font-semibold">Morning Run</h4>
+                    <p class="text-textMuted text-xs">5.2 km • 42 min • 320 kcal</p>
+                  </div>
+                </div>
+                <span class="text-textMuted text-sm font-medium">7:42 AM</span>
+              </div>
+
+              <!-- Activity Card -->
+              <div class="flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-seaBlue/10 text-seaBlue flex h-12 w-12 items-center justify-center rounded-xl text-xl"
+                  >
+                    🥗
+                  </div>
+                  <div>
+                    <h4 class="text-textPrimary font-semibold">Lunch</h4>
+                    <p class="text-textMuted text-xs">Grilled chicken • 550 kcal</p>
+                  </div>
+                </div>
+                <span class="text-textMuted text-sm font-medium">1:30 PM</span>
+              </div>
+
+              <!-- Activity Card -->
+              <div class="flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-forestGreen/10 text-forestGreen flex h-12 w-12 items-center justify-center rounded-xl text-xl"
+                  >
+                    💪
+                  </div>
+                  <div>
+                    <h4 class="text-textPrimary font-semibold">Upper Body</h4>
+                    <p class="text-textMuted text-xs">Gym • 60 min • 380 kcal</p>
+                  </div>
+                </div>
+                <span class="text-textMuted text-sm font-medium">6:00 PM</span>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <!-- Mobile Tab Bar -->
+        <nav class="pb-safe fixed right-0 bottom-0 left-0 border-t border-gray-200 bg-white">
+          <div class="flex h-16 items-center justify-around">
+            <button class="text-leafGreen flex flex-col items-center gap-1 p-2">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+              <span class="text-xs font-medium">Home</span>
+            </button>
+            <button
+              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                />
+              </svg>
+              <span class="text-xs font-medium">Fitness</span>
+            </button>
+            <button
+              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+              <span class="text-xs font-medium">Food</span>
+            </button>
+            <button
+              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+              <span class="text-xs font-medium">Stats</span>
+            </button>
+            <button
+              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+              <span class="text-xs font-medium">Squad</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Desktop Sidebar (hidden on mobile) -->
+      <aside class="bg-cardMedium hidden h-screen w-64 flex-col border-r border-gray-200 lg:flex">
+        <!-- Sidebar Header -->
+        <div class="p-6">
+          <div class="flex items-center gap-3">
+            <div
+              class="from-leafGreen to-forestGreen flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br text-2xl text-white"
+            >
+              🏃
+            </div>
+            <div>
+              <h1 class="text-textPrimary text-xl font-bold">Health App</h1>
+              <p class="text-textMuted text-xs">Local-first PWA</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-1 space-y-2 p-4">
+          <a
+            href="#"
+            class="bg-leafGreen/20 text-textPrimary flex items-center gap-3 rounded-xl px-4 py-3 font-medium"
+          >
+            <svg
+              class="text-leafGreen h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+            Dashboard
+          </a>
+          <a
+            href="#"
+            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+              />
+            </svg>
+            Fitness
+          </a>
+          <a
+            href="#"
+            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            Food & Macros
+          </a>
+          <a
+            href="#"
+            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              />
+            </svg>
+            Analytics
+          </a>
+          <a
+            href="#"
+            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
+            Squad Game
+          </a>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="border-t border-gray-200 p-4">
+          <div class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm">
+            <div
+              class="from-seaBlue to-forestGreen flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white"
+            >
+              A
+            </div>
+            <div class="flex-1">
+              <p class="text-textPrimary text-sm font-medium">Alex</p>
+              <p class="text-textMuted text-xs">Free Plan</p>
+            </div>
+            <button class="rounded-lg p-2 transition-colors hover:bg-gray-100">
+              <svg
+                class="text-textMuted h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>
+```
