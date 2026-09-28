@@ -20,7 +20,7 @@ flowchart LR
     subgraph Home ["Your Home Network"]
         subgraph RPi ["Raspberry Pi"]
             CFD["cloudflared daemon\n(Outbound connection only)"]
-            NodeApp["Lightweight Node.js (Fastify)\n• Serves Vite PWA static build\n• REST API for sync & leaderboards"]
+            GoApp["Lightweight Go HTTP Server\n• Serves Vite PWA static build\n• REST API for sync & leaderboards"]
             DB[(SQLite Database\nSingle file on disk)]
             Backup["Daily Cron Backup\n(rclone to Drive or USB)"]
         end
@@ -29,8 +29,8 @@ flowchart LR
     Phone1 -->|HTTPS| Edge
     Phone2 -->|HTTPS| Edge
     Edge <== encrypted tunnel ==> CFD
-    CFD -->|localhost:3000| NodeApp
-    NodeApp <--> DB
+    CFD -->|localhost:3000| GoApp
+    GoApp <--> DB
     DB -.-> Backup
 ```
 
@@ -41,8 +41,8 @@ flowchart LR
 1. **True $0 / Month:** No VPS, no database hosting bills, no static IP charges.
 2. **No Port Forwarding Required:** Cloudflare Tunnel establishes an _outbound_ connection from your Pi to Cloudflare's edge. Your home router's firewall stays completely closed, and CGNAT (common with home ISPs) is not an issue.
 3. **Automatic SSL / HTTPS:** Cloudflare provisions and renews SSL certificates for free, which is strictly required for mobile PWAs and service workers.
-4. **Low Power & Resource Footprint:**
-   - **RAM Usage:** Fastify + SQLite uses **< 50 MB** of RAM.
+4. **Low Power & Resource Footprint**:
+   - **RAM Usage:** Go HTTP server + SQLite uses **< 50 MB** of RAM.
    - **CPU Usage:** Near 0% at idle, negligible during requests.
    - **Storage:** SQLite file stays tiny (under 50 MB for years of workout and meal history).
 
@@ -52,20 +52,21 @@ flowchart LR
 
 ### Step 1: Prepare the Raspberry Pi
 
-Ensure your Raspberry Pi (Raspberry Pi OS / Debian) has Node.js and Git installed.
+Ensure your Raspberry Pi (Raspberry Pi OS / Debian) has Go and Git installed.
 
 ```bash
 # Update package list
 sudo apt update && sudo apt upgrade -y
 
-# Install Node.js (v20 LTS or v22)
-curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-sudo apt install -y nodejs git build-essential
+# Install Go (version 1.22+)
+sudo wget -qO- https://go.dev/dl/go1.22.5.linux-arm64.tar.gz | sudo tar -C /usr/local -xzf -
+
+# Add Go to PATH permanently
+echo 'export PATH=$PATH:/usr/local/go/bin' | sudo tee /etc/profile.d/go.sh
 
 # Verify versions
-node -v
-npm -v
-```
+go version
+git --version
 
 ---
 
@@ -78,19 +79,23 @@ Clone your repository and build the production bundle:
 git clone <your-repo-url> ~/health-app
 cd ~/health-app
 
-# Install dependencies and build frontend
+# Install frontend dependencies and build
 npm install
 npm run build
 
-# Start the lightweight production server
-npm run start
-```
+# Build Go binary (production)
+go build -o main
+
+# Start the Go HTTP server
+./main
 
 ---
 
 ### Step 3: Run Continuously via systemd (Auto-Restart on Boot)
 
 Create a systemd service so the app automatically boots up if the Pi restarts (e.g. after a power outage).
+
+**Note**: The `main` binary must exist at `/home/pi/health-app/main` (built via `go build`).
 
 Create `/etc/systemd/system/health-app.service`:
 
@@ -103,11 +108,9 @@ After=network.target
 Type=simple
 User=pi
 WorkingDirectory=/home/pi/health-app
-ExecStart=/usr/bin/npm run start
+ExecStart=/home/pi/health-app/main
 Restart=always
 RestartSec=10
-Environment=NODE_ENV=production
-Environment=PORT=3000
 
 [Install]
 WantedBy=multi-user.target

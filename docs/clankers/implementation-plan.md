@@ -1,6 +1,6 @@
 # Health App: Architecture & Implementation Plan
 
-This document defines the complete technical implementation plan for the Health & Fitness App, tailored to run **strictly locally** without external web services, using a **modern web stack (Vite + React + Tailwind CSS)** configured as a **Mobile-First Progressive Web App (PWA)** that also adapts to desktop screens.
+This document defines the complete technical implementation plan for the Health & Fitness App, using a **modern web stack (Vite + React + Tailwind CSS)** with a **minimal Go backend** and **SQLite database**. The frontend is configured as a **Mobile-First Progressive Web App (PWA)** that also adapts to desktop screens.
 
 ---
 
@@ -15,7 +15,7 @@ This document defines the complete technical implementation plan for the Health 
 - **Application development**: No React components written yet
 - **UI/UX implementation**: Dashboard, workouts, nutrition, analytics, and squad game screens
 - **PWA configuration**: Web app manifest and service worker to be created
-- **Backend services**: Minimal Node.js server for API (if needed)
+- **Backend services**: Go HTTP server with SQLite for API
 
 ---
 
@@ -23,7 +23,8 @@ This document defines the complete technical implementation plan for the Health 
 | :----------------------- | :-------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Framework / Build**    | **Vite + React (TypeScript)**           | Instant local boot time (`npm run dev`), zero mobile toolchain friction, standard web DOM/HTML/CSS.                                                  |
 | **Styling & Theme**      | **Tailwind CSS**                        | Strict adherence to the palette in `docs/humans/design/colors.md` using custom CSS variables (bright tones for UI/cards, dark tones for text/icons). |
-| **Storage (Local-Only)** | **IndexedDB (`idb-keyval` / Dexie.js)** | 100% offline and local on the computer/browser; supports rich relational data without setting up external servers.                                   |
+| **Backend & Database**   | **Go + SQLite**                         | Lightweight HTTP server with in-process SQLite database for user data, leaderboards, and quest tracking.                                             |
+| **Frontend & Static**    | **Vite + Static Assets**                | Served by the Go backend; PWA manifest and service worker for offline support.                                                                          |
 | **Data Visualization**   | **Recharts**                            | Lightweight, responsive SVG charts for cross-metric correlation (e.g., Calorie intake vs. Body measurements).                                        |
 | **Iconography**          | **Lucide React**                        | Clean, accessible vector icons for mobile tab bars and dashboard widgets.                                                                            |
 | **Deployment / Target**  | **PWA (Mobile & Desktop)**              | Installable to mobile home screen (standalone window, no address bar, offline ready) and responsive desktop web layout.                              |
@@ -32,10 +33,16 @@ This document defines the complete technical implementation plan for the Health 
 
 ## 2. System Architecture (Flowchart)
 
-The application operates completely offline with an in-browser local storage engine and modular feature layers.
+The application runs as a local Go server with a SQLite backend, with all user data persisted on the server and accessible to all users.
 
 ```mermaid
 flowchart TD
+    subgraph Backend ["Backend Server (Go + SQLite)"]
+        API[REST API Server]
+        DB[(SQLite Database)]
+        API --> DB
+    end
+
     subgraph Client ["Client Layer (Vite + React SPA)"]
         Nav[Adaptive Navigation: Mobile Tab Bar / Desktop Sidebar]
 
@@ -49,20 +56,8 @@ flowchart TD
         Nav --> Modules
     end
 
-    subgraph State ["Local State & Logic"]
-        Store[Reactive State Store / Context]
-        GameEngine[Gamification Points Engine]
-        Modules --> Store
-        Game --> GameEngine
-        GameEngine --> Store
-    end
-
-    subgraph Storage ["Local Persistence Layer (Local Machine Only)"]
-        IDB[(IndexedDB / LocalStorage)]
-        ExportImport[JSON Backup & Restore Engine]
-        Store <--> IDB
-        IDB <--> ExportImport
-    end
+    Client -->|API Requests| Backend
+    Backend -->|JSON Responses| Client
 ```
 
 ---
