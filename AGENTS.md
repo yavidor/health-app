@@ -1,6 +1,6 @@
 # AGENTS.md
 
-> [NOTE]
+> [!IMPORTANT]
 > Read `llm-conduct` before making any interactions or tool calls
 
 ## Source of Truth & Agent Behavior
