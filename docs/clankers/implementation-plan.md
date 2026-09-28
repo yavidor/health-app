@@ -7,11 +7,9 @@ This document defines the complete technical implementation plan for the Health 
 ## 0. Current Project State
 
 ### Completed
-- **Project scaffolding**: Vite + React + TypeScript initialized in `./app` directory
+- **Project scaffolding**: Vite + React + TypeScript initialized
 - **Linting & Formatting**: oxlint and prettier configured and passing
 - **Design system**: Color palette defined in `docs/humans/design/colors.md`
-- **Architecture documentation**: Complete ER diagrams, flowcharts, and component hierarchy defined
-- **Hosting guide**: Raspberry Pi deployment with Cloudflare Tunnel documented
 
 ### Pending
 - **Application development**: No React components written yet
@@ -268,11 +266,13 @@ classDiagram
     AppLayout --> GameService : calls
 ```
 
+> **Note:** Component hierarchy is planned but not yet implemented. Refer to Phase 3 of the roadmap.
+
 ---
 
 ## 7. Step-by-Step Implementation Roadmap
 
-- [x] **Phase 1: Project Scaffolding & Design System**
+- [ ] **Phase 1: Project Scaffolding & Design System**
   - Initialize Vite React + TypeScript in `./app`.
   - Install and configure Tailwind CSS with custom palette color tokens.
   - Setup local responsive layout frame (Mobile container with Desktop sidebar fallback).
@@ -285,6 +285,8 @@ classDiagram
   - **Food:** Calorie & macro logging (Protein, Carbs, Fats) with daily target progress.
   - **Stats:** Multi-axis interactive chart correlating Calorie intake vs. Weight/Measurements.
   - **Squad Game:** Mutual goals, points engine, and local simulated leaderboard.
+
+> **Current Status:** All features are planned but not yet implemented.
 - [ ] **Phase 4: PWA Packaging & Polish**
   - Add Web App Manifest and Service Worker for offline support and home-screen installability.
   - Verify WCAG contrast and palette constraints.

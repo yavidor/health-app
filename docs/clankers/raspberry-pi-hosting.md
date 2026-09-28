@@ -1,4 +1,4 @@
-# Raspberry Pi Self-Hosting Guide ($0/Month Stack)
+# Raspberry Pi Self-Hosting Guide (Pending Implementation)
 
 This guide details how to host the Health App on a single Raspberry Pi with **$0 monthly cloud costs**, zero port forwarding, automatic HTTPS, and remote access for your friend group using **Cloudflare Tunnel**.
 
