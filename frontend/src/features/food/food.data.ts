@@ -1,16 +1,21 @@
+import type { IconName } from '../../components/ui/AppIcon';
 import type { Accent } from '../../components/ui/accents';
 import type { DonutSegment } from '../../components/charts/MacroDonut';
 import type { ChartDatum } from '../../components/charts';
 
 export type MealSlot = 'breakfast' | 'lunch' | 'dinner' | 'snacks';
 
-export const MEAL_SLOTS: readonly { id: MealSlot; label: string; emoji: string; accent: Accent }[] =
-  [
-    { id: 'breakfast', label: 'Breakfast', emoji: '🍳', accent: 'leaf' },
-    { id: 'lunch', label: 'Lunch', emoji: '🥪', accent: 'sea' },
-    { id: 'dinner', label: 'Dinner', emoji: '🍽️', accent: 'pinkish' },
-    { id: 'snacks', label: 'Snacks', emoji: '🍿', accent: 'forest' },
-  ];
+export const MEAL_SLOTS: readonly {
+  id: MealSlot;
+  label: string;
+  icon: IconName;
+  accent: Accent;
+}[] = [
+  { id: 'breakfast', label: 'Breakfast', icon: 'egg', accent: 'leaf' },
+  { id: 'lunch', label: 'Lunch', icon: 'sandwich', accent: 'sea' },
+  { id: 'dinner', label: 'Dinner', icon: 'utensils', accent: 'pinkish' },
+  { id: 'snacks', label: 'Snacks', icon: 'popcorn', accent: 'forest' },
+];
 
 export interface Meal {
   id: string;
@@ -27,7 +32,7 @@ export interface FoodData {
   goal: { consumed: number; target: number };
   macroTotals: { protein: number; carbs: number; fat: number };
   meals: readonly Meal[];
-  quickAdd: readonly { id: string; label: string; emoji: string }[];
+  quickAdd: readonly { id: string; label: string; icon: IconName }[];
   weeklyCalories: readonly ChartDatum[];
 }
 
@@ -77,10 +82,10 @@ export const FOOD_FIXTURE: FoodData = {
     }),
   ],
   quickAdd: [
-    { id: 'water', label: 'Water', emoji: '💧' },
-    { id: 'protein', label: 'Protein', emoji: '🥤' },
-    { id: 'fruit', label: 'Fruit', emoji: '🍎' },
-    { id: 'coffee', label: 'Coffee', emoji: '☕' },
+    { id: 'water', label: 'Water', icon: 'droplet' },
+    { id: 'protein', label: 'Protein', icon: 'water' },
+    { id: 'fruit', label: 'Fruit', icon: 'apple' },
+    { id: 'coffee', label: 'Coffee', icon: 'coffee' },
   ],
   weeklyCalories: [
     { day: 'M', kcal: 2180 },
@@ -92,11 +97,11 @@ export const FOOD_FIXTURE: FoodData = {
   ],
 };
 
-export const MEAL_ICON: Record<MealSlot, string> = {
-  breakfast: '🍳',
-  lunch: '🥪',
-  dinner: '🍽️',
-  snacks: '🍿',
+export const MEAL_ICON: Record<MealSlot, IconName> = {
+  breakfast: 'egg',
+  lunch: 'sandwich',
+  dinner: 'utensils',
+  snacks: 'popcorn',
 };
 
 export function macroSegments(totals: FoodData['macroTotals']): DonutSegment[] {

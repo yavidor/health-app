@@ -1,3 +1,4 @@
+import type { IconName } from '../../components/ui/AppIcon';
 import type { ChartDatum } from '../../components/charts';
 import type { DonutSegment } from '../../components/charts/MacroDonut';
 
@@ -19,7 +20,7 @@ export interface SummaryStat {
   /** `up` is good (e.g. more workouts); `down` is good (e.g. less weight). */
   direction: 'up' | 'down';
   positive: boolean;
-  emoji: string;
+  icon: IconName;
 }
 
 export interface Measurement {
@@ -27,7 +28,7 @@ export interface Measurement {
   label: string;
   latest: string;
   change: string;
-  emoji: string;
+  icon: IconName;
 }
 
 export interface StatsData {
@@ -71,7 +72,7 @@ export const STATS_FIXTURE: StatsData = {
       delta: '▼ 340 vs last month',
       direction: 'down',
       positive: true,
-      emoji: '🔥',
+      icon: 'flame',
     },
     {
       id: 'workouts',
@@ -80,7 +81,7 @@ export const STATS_FIXTURE: StatsData = {
       delta: '▲ 3 vs last month',
       direction: 'up',
       positive: true,
-      emoji: '🏋️',
+      icon: 'dumbbell',
     },
     {
       id: 'fat',
@@ -89,7 +90,7 @@ export const STATS_FIXTURE: StatsData = {
       delta: '▼ 1.8 pts',
       direction: 'down',
       positive: true,
-      emoji: '💪',
+      icon: 'beef',
     },
     {
       id: 'steps',
@@ -98,7 +99,7 @@ export const STATS_FIXTURE: StatsData = {
       delta: '▲ 620 vs last month',
       direction: 'up',
       positive: true,
-      emoji: '🚶',
+      icon: 'footsteps',
     },
   ],
   correlation: {
@@ -113,10 +114,10 @@ export const STATS_FIXTURE: StatsData = {
     ],
   },
   measurements: [
-    { id: 'waist', label: 'Waist', latest: '82.0 cm', change: '−4.5', emoji: '📏' },
-    { id: 'chest', label: 'Chest', latest: '101.5 cm', change: '+1.0', emoji: '🫁' },
-    { id: 'hips', label: 'Hips', latest: '96.0 cm', change: '−3.0', emoji: '🌀' },
-    { id: 'thigh', label: 'Thigh', latest: '58.5 cm', change: '−1.5', emoji: '🦵' },
+    { id: 'waist', label: 'Waist', latest: '82.0 cm', change: '−4.5', icon: 'ruler' },
+    { id: 'chest', label: 'Chest', latest: '101.5 cm', change: '+1.0', icon: 'gauge' },
+    { id: 'hips', label: 'Hips', latest: '96.0 cm', change: '−3.0', icon: 'wind' },
+    { id: 'thigh', label: 'Thigh', latest: '58.5 cm', change: '−1.5', icon: 'chevronsUp' },
   ],
   macroTotals: { kcal: 2180, protein: 164, carbs: 246, fat: 61 },
   storage: { entries: 1284, workouts: 42 },

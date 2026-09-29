@@ -1,6 +1,6 @@
 import { Plus, Users } from 'lucide-react';
 import { Page } from '../../components/layout/Page';
-import { Button, Card, CardHeader, EmptyState, ProgressBar } from '../../components/ui';
+import { AppIcon, Button, Card, CardHeader, EmptyState, ProgressBar } from '../../components/ui';
 import { ACCENT_TEXT } from '../../components/ui/accents';
 import { Feed, QuickAdd } from '../../components/domain/Feed';
 import { SQUAD_FIXTURE, type SquadData } from './squad.data';
@@ -15,7 +15,11 @@ export function SquadPage({ data = SQUAD_FIXTURE }: SquadPageProps) {
 
   return (
     <Page
-      title="🎮 Squad"
+      title={
+        <span className="flex items-center gap-2">
+          <AppIcon name="gamepad" size={22} className="text-forest-bright" /> Squad
+        </span>
+      }
       subtitle={`${data.members} friends competing`}
       headerAction={
         <Button size="sm" variant="outline" leadingIcon={<Plus size={14} />}>
@@ -26,7 +30,7 @@ export function SquadPage({ data = SQUAD_FIXTURE }: SquadPageProps) {
       <Card className="from-leaf-bright to-leaf-text bg-gradient-to-br p-5">
         <div className="flex items-center gap-3">
           <span className="text-forest-dark rounded-full bg-white/60 px-3 py-1 text-sm font-bold">
-            #{you?.rank ?? '—'}
+            {you?.rank ? `#${you.rank}` : 'Unranked'}
           </span>
           <div className="flex-1">
             <p className="text-forest-dark text-xl font-bold">
@@ -99,7 +103,7 @@ export function SquadPage({ data = SQUAD_FIXTURE }: SquadPageProps) {
         title="Recent Wins"
         items={data.wins.map((win) => ({
           id: win.id,
-          icon: win.emoji,
+          icon: <AppIcon name={win.icon} size={20} />,
           title: win.title,
           subtitle: win.subtitle,
           accent: win.accent,

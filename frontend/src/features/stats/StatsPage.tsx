@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Download, Lightbulb, Lock, Plus } from 'lucide-react';
 import { Page } from '../../components/layout/Page';
-import { Button, Card, CardHeader, SegmentedControl, StatCard } from '../../components/ui';
+import { AppIcon, Button, Card, CardHeader, SegmentedControl, StatCard } from '../../components/ui';
 import { ChartCard, MacroDonut, TrendChart } from '../../components/charts';
 import {
   STATS_FIXTURE,
@@ -21,7 +21,11 @@ export function StatsPage({ data = STATS_FIXTURE }: StatsPageProps) {
 
   return (
     <Page
-      title="📊 Stats"
+      title={
+        <span className="flex items-center gap-2">
+          <AppIcon name="chart" size={22} className="text-forest-bright" /> Stats
+        </span>
+      }
       subtitle="Cross-metric trends"
       headerAside={
         <div className="w-48">
@@ -54,7 +58,7 @@ export function StatsPage({ data = STATS_FIXTURE }: StatsPageProps) {
             key={stat.id}
             label={stat.label}
             value={stat.value}
-            icon={<span>{stat.emoji}</span>}
+            icon={<AppIcon name={stat.icon} size={16} />}
             accent={stat.direction === 'up' ? 'forest' : 'sea'}
           >
             <span
@@ -116,7 +120,11 @@ export function StatsPage({ data = STATS_FIXTURE }: StatsPageProps) {
             {data.measurements.map((row) => (
               <tr key={row.id} className="border-forest-dark/5 border-t">
                 <td className="py-2">
-                  <span className="mr-2">{row.emoji}</span>
+                  <AppIcon
+                    name={row.icon}
+                    size={14}
+                    className="text-sea-text mr-2 inline-block align-[-2px]"
+                  />
                   <span className="text-forest-dark font-medium">{row.label}</span>
                 </td>
                 <td className="text-sea-text py-2 tabular-nums">{row.latest}</td>

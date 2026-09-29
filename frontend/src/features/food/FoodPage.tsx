@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
 import { Page } from '../../components/layout/Page';
-import { Card, CardHeader, IconButton, SegmentedControl } from '../../components/ui';
+import { AppIcon, Card, CardHeader, IconButton, SegmentedControl } from '../../components/ui';
 import { ChartCard, GroupedBarChart, MacroDonut } from '../../components/charts';
 import { DailyTotalCard } from '../../components/domain/DailyTotalCard';
 import { Feed, QuickAdd } from '../../components/domain/Feed';
@@ -33,7 +33,11 @@ export function FoodPage({ data = FOOD_FIXTURE }: FoodPageProps) {
 
   return (
     <Page
-      title="🥗 Food & Macros"
+      title={
+        <span className="flex items-center gap-2">
+          <AppIcon name="salad" size={22} className="text-forest-bright" /> Food &amp; Macros
+        </span>
+      }
       subtitle="Track what you eat"
       headerAside={
         <div className="text-right">
@@ -75,7 +79,7 @@ export function FoodPage({ data = FOOD_FIXTURE }: FoodPageProps) {
         <div className="grid grid-cols-4 gap-2">
           {MEAL_SLOTS.map((slot) => (
             <div key={slot.id} className="rounded-card bg-mist p-3 text-center">
-              <div className="text-xl leading-none">{slot.emoji}</div>
+              <AppIcon name={slot.icon} size={20} className="text-forest-dark mx-auto" />
               <div className="text-forest-dark mt-1 text-xs font-medium">{slot.label}</div>
             </div>
           ))}

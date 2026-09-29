@@ -7,6 +7,7 @@ import {
   CardHeader,
   IconButton,
   ProgressBar,
+  AppIcon,
   QuickActionGrid,
   StatCard,
 } from '../../components/ui';
@@ -27,7 +28,11 @@ export function DashboardPage({ data = DASHBOARD_FIXTURE }: DashboardPageProps) 
 
   return (
     <Page
-      title="🏃 Health App"
+      title={
+        <span className="flex items-center gap-2">
+          <AppIcon name="heart" size={22} className="text-forest-bright" /> Health App
+        </span>
+      }
       subtitle={`Good morning, ${data.greeting.name}!`}
       headerAside={
         <span className="bg-leaf-text flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-white">
@@ -55,7 +60,7 @@ export function DashboardPage({ data = DASHBOARD_FIXTURE }: DashboardPageProps) 
           items={data.quickActions.map((action) => ({
             value: action.id,
             label: action.label,
-            icon: action.emoji,
+            icon: <AppIcon name={action.icon} size={20} />,
           }))}
           onSelect={() => {}}
         />
@@ -66,7 +71,10 @@ export function DashboardPage({ data = DASHBOARD_FIXTURE }: DashboardPageProps) 
         actionLabel="View all"
         onAction={() => {}}
         bordered
-        items={data.quests.map((quest) => ({ ...quest, icon: quest.emoji }))}
+        items={data.quests.map((quest) => ({
+          ...quest,
+          icon: <AppIcon name={quest.icon} size={20} />,
+        }))}
         emptyTitle="No quests left"
         emptyDescription="Add goals to earn squad points."
         renderRowAction={(item) => {
@@ -89,7 +97,7 @@ export function DashboardPage({ data = DASHBOARD_FIXTURE }: DashboardPageProps) 
         onAction={() => {}}
         items={data.activity.map((entry) => ({
           id: entry.id,
-          icon: entry.emoji,
+          icon: <AppIcon name={entry.icon} size={20} />,
           title: entry.title,
           subtitle: entry.subtitle,
           trailing: entry.time,

@@ -1,10 +1,10 @@
-import { Card } from '../components/ui';
+import { AppIcon, Card } from '../components/ui';
 
 /** Chrome that is identical on every page lives here, not in `App`. */
 export const BRAND = {
   title: 'Health App',
   subtitle: 'Self-hosted',
-  icon: '🏃',
+  icon: <AppIcon name="heart" size={20} />,
 } as const;
 
 export const PROFILE = {

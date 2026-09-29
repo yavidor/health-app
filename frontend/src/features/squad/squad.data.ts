@@ -1,4 +1,5 @@
 import type { Accent } from '../../components/ui/accents';
+import type { IconName } from '../../components/ui/AppIcon';
 
 export interface SquadMember {
   id: string;
@@ -21,7 +22,7 @@ export interface SquadGoal {
 
 export interface SquadWin {
   id: string;
-  emoji: string;
+  icon: IconName;
   title: string;
   subtitle: string;
   accent: Accent;
@@ -31,7 +32,7 @@ export interface SquadData {
   members: number;
   leaderboard: readonly SquadMember[];
   goals: readonly SquadGoal[];
-  quickActions: readonly { id: string; label: string; emoji: string }[];
+  quickActions: readonly { id: string; label: string; icon: IconName }[];
   wins: readonly SquadWin[];
 }
 
@@ -59,22 +60,22 @@ export const SQUAD_FIXTURE: SquadData = {
     { id: 'g4', label: 'Sleep 8 hours', progress: 7, target: 8, points: 30 },
   ],
   quickActions: [
-    { id: 'workout', label: 'Workout', emoji: '🏋️' },
-    { id: 'steps', label: 'Steps', emoji: '🚶' },
-    { id: 'pills', label: 'Vitamins', emoji: '💊' },
-    { id: 'sleep', label: 'Sleep', emoji: '😴' },
+    { id: 'workout', label: 'Workout', icon: 'dumbbell' },
+    { id: 'steps', label: 'Steps', icon: 'footsteps' },
+    { id: 'pills', label: 'Vitamins', icon: 'pill' },
+    { id: 'sleep', label: 'Sleep', icon: 'moon' },
   ],
   wins: [
     {
       id: 'w1',
-      emoji: '🏆',
+      icon: 'trophy',
       title: 'Beat Sam for 2nd',
       subtitle: 'Overtook Sam by 40 points',
       accent: 'leaf',
     },
     {
       id: 'w2',
-      emoji: '🔥',
+      icon: 'flame',
       title: '7-day streak',
       subtitle: 'Logged a goal every day',
       accent: 'pinkish',

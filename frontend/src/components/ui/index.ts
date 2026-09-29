@@ -14,4 +14,6 @@ export type {
   SegmentedControlProps,
   QuickActionGridProps,
 } from './Feedback';
-export { ACCENT_TEXT, ACCENT_TINT, ACCENT_BORDER, ACCENT_SOLID } from './accents';
+export { ACCENT_TEXT, ACCENT_TINT, ACCENT_BORDER, ACCENT_SOLID, ACCENT_HEX } from './accents';
+export { AppIcon, ICONS } from './AppIcon';
+export type { AppIconProps, IconName } from './AppIcon';

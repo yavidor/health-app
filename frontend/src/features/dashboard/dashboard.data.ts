@@ -1,8 +1,9 @@
 import type { Accent } from '../../components/ui/accents';
+import type { IconName } from '../../components/ui/AppIcon';
 
 export interface Quest {
   id: string;
-  emoji: string;
+  icon: IconName;
   title: string;
   subtitle: string;
   accent: Accent;
@@ -10,7 +11,7 @@ export interface Quest {
 
 export interface ActivityEntry {
   id: string;
-  emoji: string;
+  icon: IconName;
   title: string;
   subtitle: string;
   time: string;
@@ -28,7 +29,7 @@ export interface DashboardData {
   greeting: { name: string; streakDays: number };
   dailyTotal: { consumed: number; goal: number };
   rings: { label: string; pct: number; display: string; accent: 'sea' | 'forest' }[];
-  quickActions: { id: string; label: string; emoji: string }[];
+  quickActions: { id: string; label: string; icon: IconName }[];
   quests: readonly Quest[];
   activity: readonly ActivityEntry[];
   macros: readonly MacroSnapshot[];
@@ -44,26 +45,38 @@ export const DASHBOARD_FIXTURE: DashboardData = {
     { label: 'Protein', pct: 65, display: '65g', accent: 'forest' },
   ],
   quickActions: [
-    { id: 'workout', label: 'Workout', emoji: '🏋️' },
-    { id: 'meal', label: 'Meal', emoji: '🥗' },
-    { id: 'stats', label: 'Stats', emoji: '📊' },
-    { id: 'squad', label: 'Squad', emoji: '🎮' },
+    { id: 'workout', label: 'Workout', icon: 'dumbbell' },
+    { id: 'meal', label: 'Meal', icon: 'salad' },
+    { id: 'stats', label: 'Stats', icon: 'chart' },
+    { id: 'squad', label: 'Squad', icon: 'gamepad' },
   ],
   quests: [
     {
       id: 'vitamins',
-      emoji: '💊',
+      icon: 'pill',
       title: 'Daily Vitamins',
       subtitle: 'Vitamin C, D, B12',
       accent: 'leaf',
     },
-    { id: 'steps', emoji: '🚶', title: '5k Steps', subtitle: 'Daily walk goal', accent: 'sea' },
-    { id: 'run', emoji: '🏃', title: 'Morning Run', subtitle: '30 min cardio', accent: 'pinkish' },
+    {
+      id: 'steps',
+      icon: 'footsteps',
+      title: '5k Steps',
+      subtitle: 'Daily walk goal',
+      accent: 'sea',
+    },
+    {
+      id: 'run',
+      icon: 'activity',
+      title: 'Morning Run',
+      subtitle: '30 min cardio',
+      accent: 'pinkish',
+    },
   ],
   activity: [
     {
       id: 'a1',
-      emoji: '🏃',
+      icon: 'activity',
       title: 'Morning Run',
       subtitle: '5.2 km • 42 min • 320 kcal',
       time: '7:42 AM',
@@ -71,7 +84,7 @@ export const DASHBOARD_FIXTURE: DashboardData = {
     },
     {
       id: 'a2',
-      emoji: '🥗',
+      icon: 'salad',
       title: 'Lunch',
       subtitle: 'Grilled chicken • 550 kcal',
       time: '1:30 PM',
@@ -79,7 +92,7 @@ export const DASHBOARD_FIXTURE: DashboardData = {
     },
     {
       id: 'a3',
-      emoji: '💪',
+      icon: 'dumbbell',
       title: 'Upper Body',
       subtitle: 'Gym • 60 min • 380 kcal',
       time: '6:00 PM',

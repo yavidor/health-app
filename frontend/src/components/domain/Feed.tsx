@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Button, EmptyState, ListRow } from '../ui';
 import { cn } from '../../lib/cn';
+import { AppIcon, type IconName } from '../ui/AppIcon';
 import type { Accent } from '../ui/accents';
 
 export interface FeedItem {
@@ -76,7 +77,7 @@ export function Feed({
 export interface QuickAddItem {
   id: string;
   label: string;
-  emoji: string;
+  icon: IconName;
   onAdd: () => void;
 }
 
@@ -95,7 +96,7 @@ export function QuickAdd({
           onClick={item.onAdd}
           className="rounded-tile bg-mist text-forest-dark hover:bg-leaf-bright flex flex-col items-center gap-1 p-3 transition-colors active:scale-95"
         >
-          <span className="text-xl leading-none">{item.emoji}</span>
+          <AppIcon name={item.icon} size={20} className="text-forest-dark" />
           <span className="text-xs font-medium">{item.label}</span>
         </button>
       ))}

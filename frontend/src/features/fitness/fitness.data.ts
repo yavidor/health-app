@@ -1,4 +1,5 @@
 import type { Accent } from '../../components/ui/accents';
+import type { IconName } from '../../components/ui/AppIcon';
 
 export interface ExerciseProgress {
   id: string;
@@ -20,13 +21,13 @@ export interface ActiveWorkout {
 export interface WorkoutCategory {
   id: string;
   label: string;
-  emoji: string;
+  icon: IconName;
   accent: Accent;
 }
 
 export interface WorkoutHistoryEntry {
   id: string;
-  emoji: string;
+  icon: IconName;
   title: string;
   subtitle: string;
   headline: string;
@@ -58,15 +59,15 @@ export const FITNESS_FIXTURE: FitnessData = {
     ],
   },
   categories: [
-    { id: 'upper', label: 'Upper', emoji: '💪', accent: 'pinkish' },
-    { id: 'cardio', label: 'Cardio', emoji: '🏃', accent: 'sea' },
-    { id: 'core', label: 'Core', emoji: '🧘', accent: 'forest' },
-    { id: 'flex', label: 'Flex', emoji: '🤸', accent: 'leaf' },
+    { id: 'upper', label: 'Upper', icon: 'dumbbell', accent: 'pinkish' },
+    { id: 'cardio', label: 'Cardio', icon: 'activity', accent: 'sea' },
+    { id: 'core', label: 'Core', icon: 'heart', accent: 'forest' },
+    { id: 'flex', label: 'Flex', icon: 'sparkles', accent: 'leaf' },
   ],
   history: [
     {
       id: 'h1',
-      emoji: '🏋️',
+      icon: 'dumbbell',
       title: 'Upper Body',
       subtitle: 'Gym • 3 hours ago',
       headline: '450 kg',
@@ -75,7 +76,7 @@ export const FITNESS_FIXTURE: FitnessData = {
     },
     {
       id: 'h2',
-      emoji: '🏃',
+      icon: 'activity',
       title: 'Morning Run',
       subtitle: 'Home • 1 day ago',
       headline: '5.2 km',
@@ -84,7 +85,7 @@ export const FITNESS_FIXTURE: FitnessData = {
     },
     {
       id: 'h3',
-      emoji: '💪',
+      icon: 'dumbbell',
       title: 'Lower Body',
       subtitle: 'Gym • 2 days ago',
       headline: '85 kg',
@@ -93,7 +94,7 @@ export const FITNESS_FIXTURE: FitnessData = {
     },
     {
       id: 'h4',
-      emoji: '🧘',
+      icon: 'heart',
       title: 'Core Workout',
       subtitle: 'Home • 3 days ago',
       headline: '35 min',

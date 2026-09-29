@@ -27,7 +27,7 @@ export interface RouteDefinition extends NavItem {
 
 /**
  * Single source of truth for navigation. Adding a page:
-  *   1. create `src/app/features/<name>/<Name>Page.tsx` rendering `<Page>`
+ *   1. create `src/app/features/<name>/<Name>Page.tsx` rendering `<Page>`
  *   2. add an entry here
  * The tab bar, sidebar and router all read from this list.
  */

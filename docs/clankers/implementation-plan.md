@@ -8,7 +8,7 @@ This document defines the complete technical implementation plan for the Health 
 
 ### Completed
 - **Project scaffolding**: Vite + React + TypeScript initialized
-- **Linting & Formatting**: oxlint and prettier configured and passing
+- **Linting & Formatting**: eslint (flat config) and prettier configured and passing
 - **Design system**: Color palette defined in `docs/humans/design/colors.md`
 
 ### Pending

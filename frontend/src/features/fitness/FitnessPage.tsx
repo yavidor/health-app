@@ -1,6 +1,6 @@
 import { Clock, Plus, Zap } from 'lucide-react';
 import { Page } from '../../components/layout/Page';
-import { Badge, Card, IconButton, ProgressBar, StatCard } from '../../components/ui';
+import { AppIcon, Badge, Card, IconButton, ProgressBar, StatCard } from '../../components/ui';
 import { ACCENT_TEXT, ACCENT_TINT } from '../../components/ui/accents';
 import { Feed } from '../../components/domain/Feed';
 import { FITNESS_FIXTURE, type FitnessData } from './fitness.data';
@@ -14,7 +14,11 @@ export function FitnessPage({ data = FITNESS_FIXTURE }: FitnessPageProps) {
 
   return (
     <Page
-      title="🏋️ Fitness"
+      title={
+        <span className="flex items-center gap-2">
+          <AppIcon name="dumbbell" size={22} className="text-forest-bright" /> Fitness
+        </span>
+      }
       subtitle="Workout planner & tracker"
       headerAction={
         <IconButton label="Add workout" accent="leaf">
@@ -90,7 +94,7 @@ export function FitnessPage({ data = FITNESS_FIXTURE }: FitnessPageProps) {
               <div
                 className={`mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg ${ACCENT_TEXT[category.accent]}`}
               >
-                {category.emoji}
+                <AppIcon name={category.icon} size={18} />
               </div>
               <span className="text-forest-dark text-xs font-medium">{category.label}</span>
             </button>
@@ -104,7 +108,7 @@ export function FitnessPage({ data = FITNESS_FIXTURE }: FitnessPageProps) {
         onAction={() => {}}
         items={data.history.map((entry) => ({
           id: entry.id,
-          icon: entry.emoji,
+          icon: <AppIcon name={entry.icon} size={20} />,
           title: entry.title,
           subtitle: entry.subtitle,
           trailing: `${entry.headline} · ${entry.detail}`,
