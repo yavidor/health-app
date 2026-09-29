@@ -24,10 +24,10 @@ This document defines the complete technical implementation plan for the Health 
 | **Framework / Build**    | **Vite + React (TypeScript)**           | Instant local boot time (`npm run dev`), zero mobile toolchain friction, standard web DOM/HTML/CSS.                                                  |
 | **Styling & Theme**      | **Tailwind CSS**                        | Strict adherence to the palette in `docs/humans/design/colors.md` using custom CSS variables (bright tones for UI/cards, dark tones for text/icons). |
 | **Backend & Database**   | **Go + SQLite**                         | Lightweight HTTP server with in-process SQLite database for user data, leaderboards, and quest tracking.                                             |
-| **Frontend & Static**    | **Vite + Static Assets**                | Served by the Go backend; PWA manifest and service worker for offline support.                                                                          |
+| **Frontend & Static**    | **Vite + Static Assets**                | Served by the Go backend; PWA manifest and service worker for installability.                                                                          |
 | **Data Visualization**   | **Recharts**                            | Lightweight, responsive SVG charts for cross-metric correlation (e.g., Calorie intake vs. Body measurements).                                        |
 | **Iconography**          | **Lucide React**                        | Clean, accessible vector icons for mobile tab bars and dashboard widgets.                                                                            |
-| **Deployment / Target**  | **PWA (Mobile & Desktop)**              | Installable to mobile home screen (standalone window, no address bar, offline ready) and responsive desktop web layout.                              |
+| **Deployment / Target**  | **PWA (Mobile & Desktop)**              | Installable to mobile home screen (standalone window, no address bar) and responsive desktop web layout. and responsive desktop web layout.                              |
 
 ---
 
@@ -191,7 +191,7 @@ sequenceDiagram
     actor User
     participant UI as Daily Quest Checklist
     participant Engine as Gamification Engine
-    participant DB as Local Storage (IndexedDB)
+    participant DB as Health API (Go + SQLite)
     participant Board as Squad Leaderboard State
 
     User->>UI: Checks off "Daily Pills / Vitamins"
@@ -268,11 +268,11 @@ classDiagram
 ## 7. Step-by-Step Implementation Roadmap
 
 - [ ] **Phase 1: Project Scaffolding & Design System**
-  - Initialize Vite React + TypeScript in `./app`.
+  - Initialize Vite React + TypeScript in `./frontend`.
   - Install and configure Tailwind CSS with custom palette color tokens.
   - Setup local responsive layout frame (Mobile container with Desktop sidebar fallback).
-- [ ] **Phase 2: Local Storage & Data Models**
-  - Implement IndexedDB helper (`db.ts`) with seed data for initial testing.
+- [ ] **Phase 2: Backend & Data Models**
+  - Implement the Go API with SQLite schema and migrations.
   - Add simple export/import JSON utility for backups.
 - [ ] **Phase 3: Core Feature Implementation**
   - **Dashboard:** Daily progress rings, quick logging, and quest checklist.
@@ -283,5 +283,5 @@ classDiagram
 
 > **Current Status:** All features are planned but not yet implemented.
 - [ ] **Phase 4: PWA Packaging & Polish**
-  - Add Web App Manifest and Service Worker for offline support and home-screen installability.
+  - Add Web App Manifest and Service Worker for home-screen installability.
   - Verify WCAG contrast and palette constraints.

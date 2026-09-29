@@ -23,7 +23,7 @@ The Health & Fitness App is a Progressive Web App (PWA) built with Vite + React 
 ### Key Principles
 - **Mobile-first design** with responsive desktop adaptation
 - **Strict color palette adherence** for brand consistency
-- **Offline-first architecture** with IndexedDB persistence
+- **Server-backed architecture** — Go + SQLite API, no browser-local storage
 - **Visual feedback** through smooth animations and transitions
 
 ---
@@ -32,43 +32,40 @@ The Health & Fitness App is a Progressive Web App (PWA) built with Vite + React 
 
 ### CSS Variable Definitions
 
-All colors are defined as CSS custom properties for consistent theming:
+All colors are defined as Tailwind v4 `@theme` custom properties in
+`frontend/src/index.css`, mirroring the palette in `docs/humans/design/colors.md`:
 
 ```css
-/* Backgrounds - Light Tones */
-:root {
-  --color-bg-light: #F8FAF7;
-  --color-card-light: #E2ECD8;
-  --color-card-medium: #C8DDB5;
-  --color-card-dark: #AABD94;
-  
-  /* Accent Colors - Bright UI Elements */
-  --color-sea-blue: #6aa6ae;
-  --color-forest-green: #437456;
-  --color-leaf-green: #e4eebc;
-  --color-pinkish: #efd6d2;
-  
-  /* Text Colors - Dark Tones */
-  --color-text-primary: #185661;
-  --color-text-muted: #0a3c45;
-  --color-text-secondary: #d2968d;
+@theme {
+  --color-sea-bright: #6aa6ae;
+  --color-sea-text: #185661;
+  --color-sea-dark: #0a3c45;
+
+  --color-forest-bright: #437456;
+  --color-forest-text: #156b44;
+  --color-forest-dark: #0e341f;
+
+  --color-leaf-bright: #e4eebc;
+  --color-leaf-text: #adbf73;
+  --color-leaf-dark: #697948;
+
+  --color-pinkish-bright: #efd6d2;
+  --color-pinkish-text: #d2968d;
+  --color-pinkish-dark: #b69a96;
+
+  --color-mist: #e2ecd8;
 }
 ```
 
 ### Complete Palette Reference
 
-| Color Name | Light (UI Elements) | Default (Cards) | Dark (Text/Icons) | Usage |
-|------------|---------------------|-----------------|------------------|-------|
-| **seaBlue** | `#6aa6ae` | `#185661` | `#0a3c45` | Buttons, primary buttons, active states |
-| **forestGreen** | `#437456` | `#156b44` | `#0e341f` | Secondary buttons, success states, icons |
-| **leafGreen** | `#e4eebc` | `#adbf73` | `#697948` | Progress backgrounds, neutral accents |
-| **pinkish** | `#efd6d2` | `#d2968d` | `#b6968d` | Alert backgrounds, warning states, secondary text |
-| **cardLight** | `#E2ECD8` | `--card-light` | `--card-light` | Card backgrounds, light containers |
-| **cardMedium** | `#C8DDB5` | `--card-medium` | `--card-medium` | Secondary card backgrounds |
-| **cardDark** | `#AABD94` | `--card-dark` | `--card-dark` | Footer backgrounds, dark containers |
-| **textPrimary** | `--text-primary` | `--text-primary` | `--text-primary` | Main headings, prominent text |
-| **textMuted** | `--text-muted` | `--text-muted` | `--text-muted` | Body copy, captions |
-| **textSecondary** | `--text-secondary` | `--text-secondary` | `--text-secondary` | Labels, badges, secondary info |
+| Family | Bright (UI Elements) | Text (Default) | Dark (Deep/Accent) | Usage |
+|--------|---------------------|----------------|--------------------|-------|
+| **Sea** | `sea-bright` `#6aa6ae` | `sea-text` `#185661` | `sea-dark` `#0a3c45` | Primary buttons, active states |
+| **Forest** | `forest-bright` `#437456` | `forest-text` `#156b44` | `forest-dark` `#0e341f` | Secondary buttons, success states, icons |
+| **Leaf** | `leaf-bright` `#e4eebc` | `leaf-text` `#adbf73` | `leaf-dark` `#697948` | Progress backgrounds, neutral accents |
+| **Pinkish** | `pinkish-bright` `#efd6d2` | `pinkish-text` `#d2968d` | `pinkish-dark` `#b69a96` | Alert backgrounds, warning states |
+| **Mist** | `mist` `#e2ecd8` | — | — | Card backgrounds, light containers |
 
 ### Card Background Variants
 
@@ -680,36 +677,31 @@ health-app/
 ├── mockups/              # Visual wireframes
 │   ├── dashboard.html    # Daily progress overview
 │   └── fitness.html      # Fitness routines
-├── app/
-│   ├── components/       # Reusable components
-│   │   ├── ui/
-│   │   │   ├── Button.tsx
-│   │   │   ├── Card.tsx
-│   │   │   ├── Modal.tsx
-│   │   │   └── ProgressRing.tsx
-│   │   └── features/
-│   │       ├── Dashboard.tsx
-│   │       ├── Fitness.tsx
-│   │       ├── Nutrition.tsx
-│   │       └── Analytics.tsx
-│   ├── hooks/            # Custom React hooks
-│   ├── context/          # React Context providers
-│   │   ├── ThemeContext.tsx
-│   │   ├── AuthContext.tsx
-│   │   └── AppStateContext.tsx
-│   ├── services/         # Data services
-│   │   ├── api.ts
-│   │   ├── storage.ts
-│   │   └── exportImport.ts
-│   ├── pages/            # Route pages
-│   │   ├── Dashboard.tsx
-│   │   ├── Fitness.tsx
-│   │   ├── Nutrition.tsx
-│   │   ├── Analytics.tsx
-│   │   └── SquadGame.tsx
-│   └── App.tsx           # Root component
-├── index.html            # HTML entry point
-└── package.json          # Dependencies
+├── frontend/
+│   ├── src/
+│   │   ├── app/                # Application wiring
+│   │   │   ├── config.tsx      # Brand + sidebar footer
+│   │   │   ├── router.ts       # Hash router
+│   │   │   └── routes.tsx      # ROUTES registry
+│   │   ├── components/
+│   │   │   ├── ui/             # Button, Card, Progress, Badge, Data, Feedback, accents
+│   │   │   ├── layout/         # AppShell, Page, PageLoader
+│   │   │   ├── domain/         # DailyTotalCard, Feed
+│   │   │   └── charts/         # MacroDonut and Recharts wrappers
+│   │   ├── features/           # One folder per route page
+│   │   │   ├── dashboard/      # DashboardPage.tsx + dashboard.data.ts
+│   │   │   ├── fitness/        # FitnessPage.tsx + fitness.data.ts
+│   │   │   ├── food/           # FoodPage.tsx + food.data.ts
+│   │   │   ├── squad/          # SquadPage.tsx + squad.data.ts
+│   │   │   └── stats/          # StatsPage.tsx + stats.data.ts
+│   │   ├── lib/                # cn.ts classname joiner
+│   │   ├── App.tsx             # Resolves a route, renders it
+│   │   ├── main.tsx            # React entry point
+│   │   └── index.css           # Tailwind v4 @theme palette tokens
+│   ├── public/                 # Static assets
+│   ├── mockups/                # Design wireframes
+│   ├── index.html              # HTML entry point
+│   └── package.json            # Dependencies
 ```
 
 ---

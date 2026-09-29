@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-sea-bright: #6aa6ae;
+  --color-sea-text: #185661;
+  --color-sea-dark: #0a3c45;
+
+  --color-forest-bright: #437456;
+  --color-forest-text: #156b44;
+  --color-forest-dark: #0e341f;
+
+  --color-leaf-bright: #e4eebc;
+  --color-leaf-text: #adbf73;
+  --color-leaf-dark: #697948;
+
+  --color-pinkish-bright: #efd6d2;
+  --color-pinkish-text: #d2968d;
+  --color-pinkish-dark: #b69a96;
+
+  --color-mist: #e2ecd8;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --radius-card: 1rem;
+  --radius-tile: 0.75rem;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: #fff;
+    color: var(--color-sea-dark);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    color: var(--color-forest-dark);
+  }
+}
+
+@utility shadow-card {
+  box-shadow:
+    0 1px 2px rgb(14 52 31 / 0.04),
+    0 4px 12px rgb(14 52 31 / 0.06);
+}
