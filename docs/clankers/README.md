@@ -10,6 +10,9 @@ LLM-generated documentation for the Health App project.
 | -------------------------------------------------------------- | ----------------------------- | ------------------------------------------------------- |
 | [`implementation-plan.md`](./implementation-plan.md)           | System architecture & roadmap | Tech stack, ER diagrams, component hierarchy            |
 | [`raspberry-pi-hosting.md`](./raspberry-pi-hosting.md)         | $0 hosting solution           | Cloudflare Tunnel, systemd service, SQLite backup       |
+| [`frontend-architecture.md`](./frontend-architecture.md)         | Frontend layout & conventions | Layers, routing, page/feature layout                   |
+| [`design-system.md`](./design-system.md)                       | Design system reference       | Palette tokens, components, file structure              |
+| [`color-using-guide.md`](./color-using-guide.md)               | Tailwind color usage          | Which token to use where                               |
 
 ---
 
@@ -26,10 +29,12 @@ The **primary documentation** lives in [`../humans/`](../humans/) — read-only 
 
 ## UI Mockups
 
-Visual wireframes in the [`../mockups/`](../mockups/) directory:
+Visual wireframes in the [`../../frontend/mockups/`](../../frontend/mockups/) directory:
 
-- [`dashboard.html`](../mockup/dashboard.html) — Daily progress overview with workout logging, food tracking, and quest checklist
-- [`fitness.html`](../mockup/fitness.html) — Fitness routines and workout session logger
+- [`dashboard.html`](../../frontend/mockups/dashboard.html) — Daily progress overview with workout logging, food tracking, and quest checklist
+- [`fitness.html`](../../frontend/mockups/fitness.html) — Fitness routines and workout session logger
+- [`food.html`](../../frontend/mockups/food.html) — Meal and macro tracking
+- [`stats.html`](../../frontend/mockups/stats.html) — Cross-metric analytics: weight trend, dual-axis calories-vs-weight correlation, body measurements, macro balance
 
 These mockups define the target UI for implementation.
 
@@ -39,24 +44,30 @@ These mockups define the target UI for implementation.
 
 ```
 health-app/
-├── src/                    ← React source code (Vite + TypeScript)
-│   └── assets/            ← Images, SVGs
-├── data/                  ← SQLite database
-├── docs/                  ← Documentation
-│   ├── humans/            ← Source of truth (read-only)
-│   └── clankers/          ← Agent documentation
-├── public/                ← Static assets
-├── index.html             ← HTML entry point
-├── mockups/               ← Design mockups
+├── frontend/               ← React PWA (Vite + TypeScript)
+│   ├── src/
+│   │   ├── app/            # Routing, config, router
+│   │   ├── components/     # Shared components
+│   │   ├── features/       # Feature pages
+│   │   ├── lib/            # Utilities
+│   │   └── index.css
+│   ├── public/             # Static assets
+│   ├── mockups/            # Design wireframes (dashboard, fitness, food, stats)
+│   ├── index.html          # HTML entry point
+│   └── package.json
+├── data/                   # SQLite database
+└── docs/                   # Documentation
+    ├── humans/             # Source of truth (read-only)
+    └── clankers/           # Agent documentation
 ```
 
 ---
 
 ## Quick Links
 
-- [Project README](../README.md)
+- [Docs Overview](../README.md)
 - [Human Documentation](../humans/)
 - [Implementation Plan](./implementation-plan.md)
 - [Host on Raspberry Pi](./raspberry-pi-hosting.md)
-- [Source Code](../src/)
-- [UI Mockups](../mockups/)
+- [Frontend Source Code](../../frontend/src/)
+- [UI Mockups](../../frontend/mockups/)

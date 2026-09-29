@@ -1,1 +1,9 @@
 node_modules/
+
+# Go
+backend/health-app
+backend/raspberry-health-app
+
+# Frontend build output
+frontend/dist/
+frontend/.vite/
