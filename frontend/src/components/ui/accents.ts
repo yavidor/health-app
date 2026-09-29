@@ -31,3 +31,11 @@ export const ACCENT_SOLID: Record<Accent, string> = {
   leaf: 'bg-leaf-text',
   pinkish: 'bg-pinkish-text',
 };
+
+/** Raw hex values — SVG attributes (stroke/fill/stopColor) can't use Tailwind classes. */
+export const ACCENT_HEX: Record<Accent, string> = {
+  forest: '#156b44',
+  sea: '#185661',
+  leaf: '#697948',
+  pinkish: '#b69a96',
+};

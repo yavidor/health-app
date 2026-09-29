@@ -1,5 +1,5 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
-import { ACCENT_SOLID, ACCENT_TEXT, type Accent } from '../ui/accents';
+import { ACCENT_HEX, ACCENT_TEXT, type Accent } from '../ui/accents';
 
 export interface DonutSegment {
   key: string;
@@ -36,7 +36,7 @@ export function MacroDonut({ segments, centerLabel, centerDetail, size = 160 }: 
               stroke="none"
             >
               {segments.map((segment) => (
-                <Cell key={segment.key} fill={ACCENT_SOLID[segment.accent]} />
+                <Cell key={segment.key} fill={ACCENT_HEX[segment.accent]} />
               ))}
             </Pie>
             <Tooltip
@@ -63,7 +63,7 @@ export function MacroDonut({ segments, centerLabel, centerDetail, size = 160 }: 
             <li key={segment.key} className="flex items-center gap-2 text-sm">
               <span
                 className="h-2.5 w-2.5 shrink-0 rounded-full"
-                style={{ backgroundColor: ACCENT_SOLID[segment.accent] }}
+                style={{ backgroundColor: ACCENT_HEX[segment.accent] }}
               />
               <span className="text-sea-text flex-1">{segment.label}</span>
               <span className="text-sea-text/70 text-xs">{segment.detail ?? `${pct}%`}</span>

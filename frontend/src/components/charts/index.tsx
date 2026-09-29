@@ -17,7 +17,7 @@ import {
   YAxis,
 } from 'recharts';
 import { Card, CardHeader } from '../ui/Card';
-import { ACCENT_SOLID, type Accent } from '../ui/accents';
+import { ACCENT_HEX, type Accent } from '../ui/accents';
 
 const AXIS = { stroke: '#0a3c45', fontSize: 11, opacity: 0.7 } as const;
 
@@ -115,7 +115,7 @@ export function TrendChart({
               key={s.key}
               dataKey={s.key}
               name={s.label}
-              stroke={ACCENT_SOLID[s.accent]}
+              stroke={ACCENT_HEX[s.accent]}
               strokeWidth={2}
               dot={false}
             />
@@ -126,8 +126,8 @@ export function TrendChart({
           <defs>
             {series.map((s) => (
               <linearGradient key={s.key} id={`fill-${s.key}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={ACCENT_SOLID[s.accent]} stopOpacity={0.35} />
-                <stop offset="100%" stopColor={ACCENT_SOLID[s.accent]} stopOpacity={0.02} />
+                <stop offset="0%" stopColor={ACCENT_HEX[s.accent]} stopOpacity={0.35} />
+                <stop offset="100%" stopColor={ACCENT_HEX[s.accent]} stopOpacity={0.02} />
               </linearGradient>
             ))}
           </defs>
@@ -141,7 +141,7 @@ export function TrendChart({
               key={s.key}
               dataKey={s.key}
               name={s.label}
-              stroke={ACCENT_SOLID[s.accent]}
+              stroke={ACCENT_HEX[s.accent]}
               strokeWidth={2}
               fill={`url(#fill-${s.key})`}
             />
@@ -174,7 +174,7 @@ export function GroupedBarChart({
             key={s.key}
             dataKey={s.key}
             name={s.label}
-            fill={ACCENT_SOLID[s.accent]}
+            fill={ACCENT_HEX[s.accent]}
             radius={[6, 6, 0, 0]}
           />
         ))}
