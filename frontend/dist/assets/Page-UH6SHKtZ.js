@@ -1,1 +1,0 @@
-import{b as e,g as t,h as n}from"./index-BuD9J4Ey.js";var r=t();function i({title:t,subtitle:i,headerAside:a,headerAction:o,children:s,className:c}){return(0,r.jsxs)(`div`,{className:e(`flex min-h-full flex-col`,c),children:[(0,r.jsx)(n,{title:t,subtitle:i,aside:a,action:o}),(0,r.jsx)(`div`,{className:`flex-1 space-y-6 p-5 pb-24`,children:s})]})}export{i as t};
