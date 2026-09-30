@@ -59,29 +59,20 @@ When resolving conflicts or making decisions:
 - **Data**: SQLite on the server, JSON export/import for backups
 - **Features**: workout planner, meal/macro tracker, cross-metric analytics, squad game with points
 - **Deployment target**: Raspberry Pi hosted via Cloudflare Tunnel (full HTTPS, no port forwarding)
+- **More detail**: `docs/clankers/implementation-plan.md`, `docs/clankers/raspberry-pi-hosting.md`
 
 ## Project Structure
 
 ```
-health-app/
-├── docs/
-│   ├── humans/      ← source of truth (design, features, data)
-│   │   ├── design/
-│   └── clankers/    ← LLM documentation (implementation plan, hosting)
-├── mockups/         ← UI wireframes (visual targets)
-├── frontend/        ← React SPA (Vite + TypeScript PWA)
-│   ├── src/
-│   │   ├── app/     ← application code (routing, features, components)
-│   │   └── assets/
-│   └── public/      ← static assets
-└── data/            ← SQLite database
+docs/humans/design/   ← human source of truth
+docs/clankers/         ← LLM docs
+mockups/               ← UI wireframes
+frontend/src/app/      ← application code
+data/                  ← SQLite database
 ```
 
 ## Important Notes
 
-- Project scaffolded with Vite + React + TypeScript
-- eslint (flat config) configured for linting, prettier configured for formatting
-- eslint and prettier passing on source files
 - Follow color palette strictly: bright tones for UI elements, dark tones for text
 - Tailwind CSS **needs to be installed and configured**
 - PWA manifest and service worker **need to be created**
