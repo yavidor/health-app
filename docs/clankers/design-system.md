@@ -664,44 +664,16 @@ label { font-size: 0.875rem; font-weight: 500; }
 ## File Structure
 
 ```
-health-app/
-├── docs/
-│   ├── humans/           # Source of truth (design, features, data)
-│   │   ├── design/
-│   │   │   └── colors.md  # Color palette specification
-│   │   └── features.md    # Feature requirements
-│   └── clankers/         # LLM documentation
-│       ├── implementation-plan.md  # Architecture
-│       ├── raspberry-pi-hosting.md  # Deployment
-│       └── color-using-guide.md    # Design system
-├── mockups/              # Visual wireframes
-│   ├── dashboard.html    # Daily progress overview
-│   └── fitness.html      # Fitness routines
-├── frontend/
-│   ├── src/
-│   │   ├── app/                # Application wiring
-│   │   │   ├── config.tsx      # Brand + sidebar footer
-│   │   │   ├── router.ts       # Hash router
-│   │   │   └── routes.tsx      # ROUTES registry
-│   │   ├── components/
-│   │   │   ├── ui/             # Button, Card, Progress, Badge, Data, Feedback, accents
-│   │   │   ├── layout/         # AppShell, Page, PageLoader
-│   │   │   ├── domain/         # DailyTotalCard, Feed
-│   │   │   └── charts/         # MacroDonut and Recharts wrappers
-│   │   ├── features/           # One folder per route page
-│   │   │   ├── dashboard/      # DashboardPage.tsx + dashboard.data.ts
-│   │   │   ├── fitness/        # FitnessPage.tsx + fitness.data.ts
-│   │   │   ├── food/           # FoodPage.tsx + food.data.ts
-│   │   │   ├── squad/          # SquadPage.tsx + squad.data.ts
-│   │   │   └── stats/          # StatsPage.tsx + stats.data.ts
-│   │   ├── lib/                # cn.ts classname joiner
-│   │   ├── App.tsx             # Resolves a route, renders it
-│   │   ├── main.tsx            # React entry point
-│   │   └── index.css           # Tailwind v4 @theme palette tokens
-│   ├── public/                 # Static assets
-│   ├── mockups/                # Design wireframes
-│   ├── index.html              # HTML entry point
-│   └── package.json            # Dependencies
+frontend/src/app/
+├── config.tsx      # Brand + sidebar footer
+├── router.ts       # Hash router
+├── routes.tsx      # ROUTES registry
+├── components/     # ui/ layout/ domain/ charts/
+├── features/       # dashboard/ fitness/ food/ squad/ stats/
+├── lib/            # cn.ts classname joiner
+├── App.tsx         # Resolves a route, renders it
+├── main.tsx        # React entry point
+└── index.css       # Tailwind v4 @theme palette tokens
 ```
 
 ---
