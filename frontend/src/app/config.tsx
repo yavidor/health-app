@@ -9,7 +9,6 @@ export const BRAND = {
 
 export const PROFILE = {
   name: 'Alex',
-  plan: 'Free Plan',
   initial: 'A',
 } as const;
 
@@ -21,7 +20,6 @@ export function SidebarFooter() {
       </span>
       <div className="flex-1">
         <p className="text-forest-dark text-sm font-medium">{PROFILE.name}</p>
-        <p className="text-sea-text text-xs">{PROFILE.plan}</p>
       </div>
     </Card>
   );

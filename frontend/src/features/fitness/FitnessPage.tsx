@@ -1,4 +1,4 @@
-import { Clock, Plus, Zap } from 'lucide-react';
+import { Clock, Dumbbell, Plus, Timer, Zap } from 'lucide-react';
 import { Page } from '../../components/layout/Page';
 import { AppIcon, Badge, Card, IconButton, ProgressBar, StatCard } from '../../components/ui';
 import { ACCENT_TEXT, ACCENT_TINT } from '../../components/ui/accents';
@@ -56,8 +56,8 @@ export function FitnessPage({ data = FITNESS_FIXTURE }: FitnessPageProps) {
                 {active.location} • {active.remainingMinutes} min remaining
               </p>
             </div>
-            <span className="rounded-tile flex h-12 w-12 items-center justify-center bg-white/20 text-2xl">
-              ⏱️
+            <span className="rounded-tile flex h-12 w-12 items-center justify-center bg-white/20">
+              <Timer size={24} />
             </span>
           </div>
 
@@ -71,7 +71,7 @@ export function FitnessPage({ data = FITNESS_FIXTURE }: FitnessPageProps) {
             {active.exercises.map((exercise) => (
               <li key={exercise.id} className="flex items-center justify-between text-sm">
                 <span className="flex items-center gap-2 text-white/90">
-                  🏋️ {exercise.name}
+                  <Dumbbell size={16} /> {exercise.name}
                   <span className="rounded bg-white/30 px-1.5 py-0.5 text-xs">
                     {exercise.setsDone}/{exercise.setsTotal}
                   </span>

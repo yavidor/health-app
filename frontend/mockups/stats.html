@@ -6,742 +6,401 @@
     <title>Stats - Health App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      // Mirrors frontend/src/index.css @theme tokens so mockups match the app.
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              seaBlue: {
-                light: '#6aa6ae',
-                DEFAULT: '#185661',
-                dark: '#0a3c45',
-              },
-              forestGreen: {
-                light: '#437456',
-                DEFAULT: '#156b44',
-                dark: '#0e341f',
-              },
-              leafGreen: {
-                light: '#e4eebc',
-                DEFAULT: '#adbf73',
-                dark: '#697948',
-              },
-              pinkish: {
-                light: '#efd6d2',
-                DEFAULT: '#d2968d',
-                dark: '#b69a96',
-              },
-              cardLight: '#F8FAF7',
-              cardMedium: '#E2ECD8',
-              cardDark: '#CDE4B4',
-              textPrimary: '#1B3B2B',
-              textMuted: '#2C4F3C',
-              textSecondary: '#4A7C6A',
+              sea: { bright: '#6aa6ae', text: '#185661', dark: '#0a3c45' },
+              forest: { bright: '#437456', text: '#156b44', dark: '#0e341f' },
+              leaf: { bright: '#e4eebc', text: '#adbf73', dark: '#697948' },
+              pinkish: { bright: '#efd6d2', text: '#d2968d', dark: '#b69a96' },
+              mist: '#e2ecd8',
             },
-            fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
-            },
+            borderRadius: { card: '1rem', tile: '0.75rem' },
+            fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
           },
         },
       };
     </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-      .transition-all {
-        transition-property: all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 200ms;
-      }
-      .fade-in {
-        animation: fadeIn 0.3s ease-in;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .progress-ring__circle {
-        transition: stroke-dashoffset 0.35s;
-        transform: rotate(-90deg);
-        transform-origin: 50% 50%;
-      }
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f0f0f0;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #cde4b4;
-        border-radius: 4px;
+      body { background: #fff; color: #0a3c45; }
+      h1, h2, h3, h4 { font-weight: 600; color: #0e341f; }
+      .shadow-card {
+        box-shadow: 0 1px 2px rgb(14 52 31 / 0.04), 0 4px 12px rgb(14 52 31 / 0.06);
       }
     </style>
   </head>
-  <body class="bg-cardLight text-textPrimary min-h-screen">
+  <body class="min-h-screen font-sans">
     <div class="flex min-h-screen">
-      <!-- Mobile Body -->
-      <div class="mx-auto flex w-full max-w-md flex-1 flex-col">
-        <!-- Header -->
-        <header class="bg-cardMedium sticky top-0 z-10 p-5 shadow-sm">
-          <div class="flex items-center justify-between">
-            <div>
-              <h1 class="text-textPrimary text-2xl font-bold">📊 Stats</h1>
-              <p class="text-textMuted text-sm">Cross-metric analytics</p>
+      <div class="mx-auto flex w-full max-w-md flex-1 flex-col lg:max-w-2xl">
+        <header class="bg-mist shadow-card sticky top-0 z-10 p-5">
+          <div class="flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <h1 class="text-forest-dark flex items-center gap-2 truncate text-2xl font-bold">
+                <svg class="text-forest-bright" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg>
+                Stats
+              </h1>
+              <p class="text-sea-text truncate text-sm">Cross-metric trends</p>
             </div>
-            <button
-              class="text-textMuted hover:bg-cardDark/60 flex h-10 w-10 items-center justify-center rounded-full bg-white/60 shadow-sm transition-all"
-            >
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                />
-              </svg>
-            </button>
+            <div class="flex shrink-0 items-center gap-2">
+              <div class="w-48">
+                <div class="rounded-tile bg-mist flex gap-1 p-1" role="tablist">
+                  <button role="tab" class="text-sea-text/70 flex flex-1 items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium">7D</button>
+                  <button role="tab" aria-selected="true" class="shadow-card text-forest-text flex flex-1 items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium">30D</button>
+                  <button role="tab" class="text-sea-text/70 flex flex-1 items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium">3M</button>
+                  <button role="tab" class="text-sea-text/70 flex flex-1 items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium">6M</button>
+                  <button role="tab" class="text-sea-text/70 flex flex-1 items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium">1Y</button>
+                </div>
+              </div>
+            </div>
           </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto p-5 pb-24">
-          <!-- Time Range Selector -->
-          <section class="mb-5">
-            <div class="bg-cardDark/50 flex rounded-xl p-1">
-              <button class="text-textMuted flex-1 rounded-lg py-2 text-xs font-semibold">
-                7D
-              </button>
-              <button
-                class="text-textPrimary flex-1 rounded-lg bg-white py-2 text-xs font-semibold shadow-sm"
-              >
-                30D
-              </button>
-              <button class="text-textMuted flex-1 rounded-lg py-2 text-xs font-semibold">
-                3M
-              </button>
-              <button class="text-textMuted flex-1 rounded-lg py-2 text-xs font-semibold">
-                6M
-              </button>
-              <button class="text-textMuted flex-1 rounded-lg py-2 text-xs font-semibold">
-                1Y
-              </button>
-            </div>
-          </section>
-
-          <!-- Hero: Weight Trend -->
-          <section class="mb-6">
-            <div class="rounded-2xl bg-white p-5 shadow-sm">
-              <div class="mb-1 flex items-center justify-between">
-                <h3 class="text-textPrimary text-lg font-semibold">Weight Trend</h3>
-                <span
-                  class="bg-leafGreen/20 text-leafGreen-dark rounded-md px-2 py-1 text-xs font-semibold"
-                  >▼ 3.2 kg</span
-                >
-              </div>
-              <p class="text-textMuted mb-4 text-xs">Last 30 days • daily weigh-ins</p>
-
-              <!-- Area Chart -->
-              <svg class="h-36 w-full" viewBox="0 0 320 140" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="weightFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#adbf73" stop-opacity="0.45" />
-                    <stop offset="100%" stop-color="#adbf73" stop-opacity="0" />
-                  </linearGradient>
-                </defs>
-                <!-- Grid -->
-                <line x1="0" y1="30" x2="320" y2="30" stroke="#e2ecd8" stroke-width="1" />
-                <line x1="0" y1="60" x2="320" y2="60" stroke="#e2ecd8" stroke-width="1" />
-                <line x1="0" y1="90" x2="320" y2="90" stroke="#e2ecd8" stroke-width="1" />
-                <line x1="0" y1="120" x2="320" y2="120" stroke="#e2ecd8" stroke-width="1" />
-                <!-- Area -->
-                <path
-                  d="M10,30 L37,38 L64,34 L92,45 L119,52 L146,58 L174,55 L201,66 L228,72 L255,78 L283,84 L310,90 L310,120 L10,120 Z"
-                  fill="url(#weightFill)"
-                />
-                <!-- Line -->
-                <path
-                  d="M10,30 L37,38 L64,34 L92,45 L119,52 L146,58 L174,55 L201,66 L228,72 L255,78 L283,84 L310,90"
-                  fill="none"
-                  stroke="#156b44"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="transition-all"
-                />
-                <!-- Last point marker -->
-                <circle cx="310" cy="90" r="4" fill="#156b44" />
-                <circle cx="310" cy="90" r="7" fill="#156b44" fill-opacity="0.2" />
-              </svg>
-
-              <!-- Axis Labels -->
-              <div class="text-textMuted mt-1 flex justify-between text-[10px]">
-                <span>Aug 29</span>
-                <span>Sep 6</span>
-                <span>Sep 13</span>
-                <span>Sep 20</span>
-                <span>Today</span>
-              </div>
-              <div class="mt-3 flex items-baseline gap-2">
-                <span class="text-textPrimary text-3xl font-bold">75.2</span>
-                <span class="text-textMuted text-sm">kg</span>
-                <span class="text-textMuted text-xs">from 78.4 kg</span>
-              </div>
-            </div>
-          </section>
-
-          <!-- Summary Metrics -->
-          <section class="mb-6 grid grid-cols-2 gap-3">
-            <div class="rounded-2xl bg-white p-4 shadow-sm">
-              <div
-                class="bg-seaBlue/10 text-seaBlue mb-2 flex h-9 w-9 items-center justify-center rounded-xl"
-              >
-                <span class="text-lg">🔥</span>
-              </div>
-              <p class="text-textPrimary text-xl font-bold">2,180</p>
-              <p class="text-textMuted text-xs">Avg kcal / day</p>
-              <p class="text-forestGreen mt-1 text-[11px] font-semibold">▼ 340 vs last month</p>
-            </div>
-            <div class="rounded-2xl bg-white p-4 shadow-sm">
-              <div
-                class="bg-leafGreen/10 text-leafGreen-dark mb-2 flex h-9 w-9 items-center justify-center rounded-xl"
-              >
-                <span class="text-lg">🏋️</span>
-              </div>
-              <p class="text-textPrimary text-xl font-bold">14</p>
-              <p class="text-textMuted text-xs">Workouts logged</p>
-              <p class="text-forestGreen mt-1 text-[11px] font-semibold">▲ 3 vs last month</p>
-            </div>
-            <div class="rounded-2xl bg-white p-4 shadow-sm">
-              <div
-                class="bg-pinkish/10 text-pinkish-dark mb-2 flex h-9 w-9 items-center justify-center rounded-xl"
-              >
-                <span class="text-lg">💪</span>
-              </div>
-              <p class="text-textPrimary text-xl font-bold">18.4%</p>
-              <p class="text-textMuted text-xs">Body fat</p>
-              <p class="text-forestGreen mt-1 text-[11px] font-semibold">▼ 1.8 pts</p>
-            </div>
-            <div class="rounded-2xl bg-white p-4 shadow-sm">
-              <div
-                class="bg-forestGreen/10 text-forestGreen mb-2 flex h-9 w-9 items-center justify-center rounded-xl"
-              >
-                <span class="text-lg">🚶</span>
-              </div>
-              <p class="text-textPrimary text-xl font-bold">9,240</p>
-              <p class="text-textMuted text-xs">Avg steps / day</p>
-              <p class="text-pinkish-dark mt-1 text-[11px] font-semibold">▲ 620 vs last month</p>
-            </div>
-          </section>
-
-          <!-- Cross-Metric Correlation Chart -->
-          <section class="mb-6">
-            <div class="mb-3 flex items-center justify-between">
-              <h3 class="text-textPrimary text-lg font-semibold">Calories vs. Weight</h3>
-              <button class="text-leafGreen text-sm font-medium">Full screen</button>
-            </div>
-            <div class="rounded-2xl bg-white p-5 shadow-sm">
-              <!-- Legend -->
-              <div class="mb-4 flex flex-wrap items-center gap-4">
-                <div class="flex items-center gap-1.5">
-                  <span class="bg-seaBlue h-2.5 w-2.5 rounded-full"></span>
-                  <span class="text-textMuted text-xs">Calories (left axis)</span>
+        <main class="flex-1 space-y-6 p-5 pb-24">
+          <!-- Weight trend -->
+          <div class="rounded-card shadow-card bg-white">
+            <div class="space-y-3 p-4">
+              <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                  <h3 class="text-forest-dark truncate text-base font-semibold">Weight Trend</h3>
+                  <p class="text-sea-text/70 truncate text-xs">30D • daily weigh-ins</p>
                 </div>
-                <div class="flex items-center gap-1.5">
-                  <span class="bg-pinkish h-2.5 w-2.5 rounded-full"></span>
-                  <span class="text-textMuted text-xs">Weight (right axis)</span>
+                <div class="shrink-0">
+                  <span class="text-forest-dark text-sm font-semibold">▼ 3.2 kg<span class="text-sea-text ml-2 text-xs font-normal">now</span></span>
                 </div>
               </div>
-
-              <!-- Dual-axis chart -->
-              <svg class="h-44 w-full" viewBox="0 0 320 150" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="corrBar" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#6aa6ae" stop-opacity="0.9" />
-                    <stop offset="100%" stop-color="#6aa6ae" stop-opacity="0.35" />
-                  </linearGradient>
-                </defs>
-                <!-- Grid -->
-                <line x1="0" y1="20" x2="320" y2="20" stroke="#e2ecd8" stroke-width="1" />
-                <line x1="0" y1="52" x2="320" y2="52" stroke="#e2ecd8" stroke-width="1" />
-                <line x1="0" y1="84" x2="320" y2="84" stroke="#e2ecd8" stroke-width="1" />
-                <line x1="0" y1="116" x2="320" y2="116" stroke="#e2ecd8" stroke-width="1" />
-                <!-- Calibration band (healthy weight range) -->
-                <rect x="0" y="84" width="320" height="32" fill="#e4eebc" fill-opacity="0.35" />
-
-                <!-- Calorie bars -->
-                <rect x="14" y="88" width="24" height="38" rx="4" fill="url(#corrBar)" />
-                <rect x="52" y="69" width="24" height="57" rx="4" fill="url(#corrBar)" />
-                <rect x="90" y="95" width="24" height="31" rx="4" fill="url(#corrBar)" />
-                <rect x="128" y="56" width="24" height="70" rx="4" fill="url(#corrBar)" />
-                <rect x="166" y="78" width="24" height="48" rx="4" fill="url(#corrBar)" />
-                <rect x="204" y="44" width="24" height="82" rx="4" fill="url(#corrBar)" />
-                <rect x="242" y="88" width="24" height="38" rx="4" fill="url(#corrBar)" />
-                <rect x="280" y="72" width="24" height="54" rx="4" fill="url(#corrBar)" />
-
-                <!-- Weight line (right axis) -->
-                <path
-                  d="M26,34 L64,46 L102,53 L140,58 L178,68 L216,75 L254,82 L292,98"
-                  fill="none"
-                  stroke="#d2968d"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="transition-all"
-                />
-                <circle cx="292" cy="98" r="4" fill="#d2968d" />
-                <circle cx="292" cy="98" r="7" fill="#d2968d" fill-opacity="0.2" />
-              </svg>
-
-              <!-- Dual axis labels -->
-              <div class="text-textMuted mt-1 flex items-center justify-between text-[10px]">
-                <span>3,000</span>
-                <span class="text-pinkish-dark font-semibold">78.5 kg</span>
-                <span>2,000</span>
-                <span class="text-pinkish-dark font-semibold">75.5 kg</span>
-                <span>1,000</span>
-              </div>
-              <div class="text-textMuted mt-2 flex justify-between text-[10px]">
-                <span>W1</span>
-                <span>W2</span>
-                <span>W3</span>
-                <span>W4</span>
+              <div style="height: 240px">
+                <svg viewBox="0 0 360 240" class="h-full w-full">
+                  <defs>
+                    <linearGradient id="fill-weight" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#185661" stop-opacity="0.35" />
+                      <stop offset="100%" stop-color="#185661" stop-opacity="0.02" />
+                    </linearGradient>
+                  </defs>
+                  <g stroke="rgba(14,52,31,0.08)" stroke-dasharray="3 3">
+                    <line x1="34" y1="20" x2="352" y2="20" />
+                    <line x1="34" y1="70" x2="352" y2="70" />
+                    <line x1="34" y1="120" x2="352" y2="120" />
+                    <line x1="34" y1="170" x2="352" y2="170" />
+                    <line x1="34" y1="210" x2="352" y2="210" />
+                  </g>
+                  <g fill="#0a3c45" fill-opacity="0.7" font-size="11" font-family="Inter, sans-serif" text-anchor="end">
+                    <text x="28" y="24">80</text>
+                    <text x="28" y="124">77</text>
+                    <text x="28" y="214">74</text>
+                  </g>
+                  <path d="M48 44 L124 78 L200 116 L276 158 L340 180 L340 210 L48 210 Z" fill="url(#fill-weight)" />
+                  <polyline points="48,44 124,78 200,116 276,158 340,180" fill="none" stroke="#185661" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <g fill="#0a3c45" fill-opacity="0.7" font-size="11" font-family="Inter, sans-serif" text-anchor="middle">
+                    <text x="48" y="228">Aug 29</text>
+                    <text x="124" y="228">Sep 6</text>
+                    <text x="200" y="228">Sep 13</text>
+                    <text x="276" y="228">Sep 20</text>
+                    <text x="340" y="228">Today</text>
+                  </g>
+                </svg>
               </div>
             </div>
-          </section>
+          </div>
 
-          <!-- Insight Card -->
-          <section class="mb-6">
-            <div class="border-seaBlue rounded-2xl border-l-4 bg-white p-4 shadow-sm">
-              <div class="flex items-start gap-3">
-                <div
-                  class="bg-seaBlue/10 text-seaBlue flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl text-lg"
-                >
-                  💡
+          <!-- Summary stats -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="rounded-card shadow-card flex flex-col items-start gap-2 bg-white p-4 text-left">
+              <div class="flex w-full items-center gap-2">
+                <span class="bg-sea-text/10 text-sea-text flex h-8 w-8 items-center justify-center rounded-tile">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></svg>
+                </span>
+                <span class="text-sea-text/70 truncate text-xs">Avg kcal / day</span>
+              </div>
+              <div class="text-forest-dark text-2xl font-bold tabular-nums">2,180</div>
+              <span class="text-forest-bright text-xs font-medium">▼ 340 vs last month</span>
+            </div>
+            <div class="rounded-card shadow-card flex flex-col items-start gap-2 bg-white p-4 text-left">
+              <div class="flex w-full items-center gap-2">
+                <span class="bg-forest-text/10 text-forest-text flex h-8 w-8 items-center justify-center rounded-tile">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg>
+                </span>
+                <span class="text-sea-text/70 truncate text-xs">Workouts logged</span>
+              </div>
+              <div class="text-forest-dark text-2xl font-bold tabular-nums">14</div>
+              <span class="text-forest-bright text-xs font-medium">▲ 3 vs last month</span>
+            </div>
+            <div class="rounded-card shadow-card flex flex-col items-start gap-2 bg-white p-4 text-left">
+              <div class="flex w-full items-center gap-2">
+                <span class="bg-sea-text/10 text-sea-text flex h-8 w-8 items-center justify-center rounded-tile">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.4 13.7A6.5 6.5 0 1 0 6.28 6.6c-1.1 3.13-.78 3.9-3.18 6.08A3 3 0 0 0 5 18c4 0 8.4-1.8 11.4-4.3" /><path d="m18.5 6 1.754 3.5a6.48 6.48 0 0 1-1.854 8.2C15.4 20.2 11 22 7 22a3 3 0 0 1-2.68-1.66L2.4 16.5" /><circle cx="12.5" cy="8.5" r="2.5" /></svg>
+                </span>
+                <span class="text-sea-text/70 truncate text-xs">Body fat</span>
+              </div>
+              <div class="text-forest-dark text-2xl font-bold tabular-nums">18.4%</div>
+              <span class="text-forest-bright text-xs font-medium">▼ 1.8 pts</span>
+            </div>
+            <div class="rounded-card shadow-card flex flex-col items-start gap-2 bg-white p-4 text-left">
+              <div class="flex w-full items-center gap-2">
+                <span class="bg-forest-text/10 text-forest-text flex h-8 w-8 items-center justify-center rounded-tile">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /><path d="M16 17h4" /><path d="M4 13h4" /></svg>
+                </span>
+                <span class="text-sea-text/70 truncate text-xs">Avg steps / day</span>
+              </div>
+              <div class="text-forest-dark text-2xl font-bold tabular-nums">9,240</div>
+              <span class="text-forest-bright text-xs font-medium">▲ 620 vs last month</span>
+            </div>
+          </div>
+
+          <!-- Correlation -->
+          <div class="rounded-card shadow-card bg-white">
+            <div class="space-y-3 p-4">
+              <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                  <h3 class="text-forest-dark truncate text-base font-semibold">Calories vs. Weight</h3>
+                  <p class="text-sea-text/70 truncate text-xs">Calories (left) · Weight (right)</p>
                 </div>
+                <div class="shrink-0">
+                  <button class="text-forest-bright hover:bg-mist h-8 rounded-tile px-3 text-xs font-medium">Full screen</button>
+                </div>
+              </div>
+              <div style="height: 240px">
+                <svg viewBox="0 0 360 240" class="h-full w-full">
+                  <defs>
+                    <linearGradient id="fill-cal" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#b69a96" stop-opacity="0.35" />
+                      <stop offset="100%" stop-color="#b69a96" stop-opacity="0.02" />
+                    </linearGradient>
+                    <linearGradient id="fill-wt" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#185661" stop-opacity="0.35" />
+                      <stop offset="100%" stop-color="#185661" stop-opacity="0.02" />
+                    </linearGradient>
+                  </defs>
+                  <g stroke="rgba(14,52,31,0.08)" stroke-dasharray="3 3">
+                    <line x1="34" y1="20" x2="352" y2="20" />
+                    <line x1="34" y1="70" x2="352" y2="70" />
+                    <line x1="34" y1="120" x2="352" y2="120" />
+                    <line x1="34" y1="170" x2="352" y2="170" />
+                    <line x1="34" y1="210" x2="352" y2="210" />
+                  </g>
+                  <g fill="#0a3c45" fill-opacity="0.7" font-size="11" font-family="Inter, sans-serif">
+                    <text x="28" y="24" text-anchor="end">2,600</text>
+                    <text x="28" y="124" text-anchor="end">1,300</text>
+                    <text x="352" y="24" text-anchor="start" dx="4">79 kg</text>
+                    <text x="352" y="124" text-anchor="start" dx="4">76 kg</text>
+                  </g>
+                  <path d="M60 62 L150 128 L240 168 L330 108 L330 210 L60 210 Z" fill="url(#fill-cal)" />
+                  <polyline points="60,62 150,128 240,168 330,108" fill="none" stroke="#b69a96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M60 40 L150 66 L240 96 L330 148 L330 210 L60 210 Z" fill="url(#fill-wt)" />
+                  <polyline points="60,40 150,66 240,96 330,148" fill="none" stroke="#185661" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <g fill="#0a3c45" fill-opacity="0.7" font-size="11" font-family="Inter, sans-serif" text-anchor="middle">
+                    <text x="60" y="228">W1</text>
+                    <text x="150" y="228">W2</text>
+                    <text x="240" y="228">W3</text>
+                    <text x="330" y="228">W4</text>
+                  </g>
+                  <g font-size="12" font-family="Inter, sans-serif">
+                    <rect x="60" y="222" width="10" height="10" fill="#b69a96" />
+                    <text x="74" y="231" fill="#0a3c45" fill-opacity="0.7">Calories</text>
+                    <rect x="150" y="222" width="10" height="10" fill="#185661" />
+                    <text x="164" y="231" fill="#0a3c45" fill-opacity="0.7">Weight (kg)</text>
+                  </g>
+                </svg>
+              </div>
+              <div class="rounded-tile bg-leaf-bright mt-3 flex gap-2 p-3">
+                <svg class="text-forest-bright shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg>
                 <div>
-                  <h4 class="text-textPrimary font-semibold">Strong negative correlation</h4>
-                  <p class="text-textMuted mt-1 text-xs leading-relaxed">
-                    Weeks averaging under 2,200 kcal tracked with a 0.4–0.6 kg weekly drop. Weeks
-                    above 2,600 kcal held weight flat. Correlation: <strong>r = −0.72</strong>
-                  </p>
+                  <p class="text-forest-dark text-sm font-semibold">Strong negative correlation</p>
+                  <p class="text-sea-text mt-0.5 text-xs">Weeks averaging under 2,200 kcal tracked with a 0.4–0.6 kg weekly drop. Weeks above 2,600 kcal held weight flat. Correlation: <span class="font-semibold">r = −0.72</span></p>
                 </div>
               </div>
             </div>
-          </section>
+          </div>
 
-          <!-- Body Measurements -->
-          <section class="mb-6">
-            <div class="mb-3 flex items-center justify-between">
-              <h3 class="text-textPrimary text-lg font-semibold">Body Measurements</h3>
-              <button class="text-leafGreen text-sm font-medium">+ Log</button>
-            </div>
-            <div class="rounded-2xl bg-white p-4 shadow-sm">
-              <!-- Column header -->
-              <div
-                class="text-textMuted border-b border-gray-100 pb-2 text-[10px] font-semibold tracking-wide uppercase"
-              >
-                <div class="grid grid-cols-[1fr_auto_auto] items-center gap-3">
-                  <span>Metric</span>
-                  <span class="w-16 text-right">Latest</span>
-                  <span class="w-14 text-right">Change</span>
-                </div>
+          <!-- Body measurements -->
+          <div class="rounded-card shadow-card space-y-3 bg-white p-4">
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <h3 class="text-forest-dark truncate text-base font-semibold">Body Measurements</h3>
               </div>
-
-              <!-- Waist -->
-              <div class="border-b border-gray-100 py-3">
-                <div class="grid grid-cols-[1fr_auto_auto] items-center gap-3">
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-base">📏</span>
-                    <div>
-                      <p class="text-textPrimary text-sm font-medium">Waist</p>
-                      <svg class="h-5 w-20" viewBox="0 0 80 20" preserveAspectRatio="none">
-                        <path
-                          d="M2,5 L18,7 L34,6 L50,11 L66,13 L78,15"
-                          fill="none"
-                          stroke="#156b44"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="text-textPrimary w-16 text-right text-sm font-semibold"
-                    >82.0 cm</span
-                  >
-                  <span class="text-forestGreen w-14 text-right text-xs font-bold">−4.5</span>
-                </div>
-              </div>
-
-              <!-- Chest -->
-              <div class="border-b border-gray-100 py-3">
-                <div class="grid grid-cols-[1fr_auto_auto] items-center gap-3">
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-base">🫁</span>
-                    <div>
-                      <p class="text-textPrimary text-sm font-medium">Chest</p>
-                      <svg class="h-5 w-20" viewBox="0 0 80 20" preserveAspectRatio="none">
-                        <path
-                          d="M2,12 L18,11 L34,10 L50,9 L66,8 L78,7"
-                          fill="none"
-                          stroke="#156b44"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="text-textPrimary w-16 text-right text-sm font-semibold"
-                    >101.5 cm</span
-                  >
-                  <span class="text-forestGreen w-14 text-right text-xs font-bold">+1.0</span>
-                </div>
-              </div>
-
-              <!-- Hips -->
-              <div class="border-b border-gray-100 py-3">
-                <div class="grid grid-cols-[1fr_auto_auto] items-center gap-3">
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-base">🌀</span>
-                    <div>
-                      <p class="text-textPrimary text-sm font-medium">Hips</p>
-                      <svg class="h-5 w-20" viewBox="0 0 80 20" preserveAspectRatio="none">
-                        <path
-                          d="M2,6 L18,8 L34,7 L50,10 L66,12 L78,13"
-                          fill="none"
-                          stroke="#156b44"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="text-textPrimary w-16 text-right text-sm font-semibold"
-                    >96.0 cm</span
-                  >
-                  <span class="text-forestGreen w-14 text-right text-xs font-bold">−3.0</span>
-                </div>
-              </div>
-
-              <!-- Thigh -->
-              <div class="py-3">
-                <div class="grid grid-cols-[1fr_auto_auto] items-center gap-3">
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-base">🦵</span>
-                    <div>
-                      <p class="text-textPrimary text-sm font-medium">Thigh</p>
-                      <svg class="h-5 w-20" viewBox="0 0 80 20" preserveAspectRatio="none">
-                        <path
-                          d="M2,7 L18,9 L34,8 L50,12 L66,12 L78,14"
-                          fill="none"
-                          stroke="#156b44"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="text-textPrimary w-16 text-right text-sm font-semibold"
-                    >58.5 cm</span
-                  >
-                  <span class="text-forestGreen w-14 text-right text-xs font-bold">−1.5</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Macro Balance -->
-          <section class="mb-6">
-            <h3 class="text-textPrimary mb-3 text-lg font-semibold">Macro Balance</h3>
-            <div class="rounded-2xl bg-white p-5 shadow-sm">
-              <div class="flex items-center gap-5">
-                <!-- Donut -->
-                <div class="relative h-28 w-28 flex-shrink-0">
-                  <svg class="h-full w-full" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="40" fill="none" stroke="#e2ecd8" stroke-width="14" />
-                    <circle
-                      class="progress-ring__circle"
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      fill="none"
-                      stroke="#156b44"
-                      stroke-width="14"
-                      stroke-dasharray="251.3"
-                      stroke-dashoffset="75.4"
-                    />
-                    <circle
-                      class="progress-ring__circle"
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      fill="none"
-                      stroke="#6aa6ae"
-                      stroke-width="14"
-                      stroke-dasharray="251.3"
-                      stroke-dashoffset="188.5"
-                    />
-                    <circle
-                      class="progress-ring__circle"
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      fill="none"
-                      stroke="#d2968d"
-                      stroke-width="14"
-                      stroke-dasharray="251.3"
-                      stroke-dashoffset="188.5"
-                    />
-                  </svg>
-                  <div class="absolute inset-0 flex flex-col items-center justify-center">
-                    <span class="text-textPrimary text-sm font-bold">2,180</span>
-                    <span class="text-textMuted text-[10px]">kcal avg</span>
-                  </div>
-                </div>
-
-                <!-- Legend -->
-                <div class="flex-1 space-y-2.5">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                      <span class="bg-forestGreen h-2.5 w-2.5 rounded-full"></span>
-                      <span class="text-textPrimary text-xs font-medium">Protein</span>
-                    </div>
-                    <span class="text-textMuted text-xs">30% • 164 g</span>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                      <span class="bg-seaBlue h-2.5 w-2.5 rounded-full"></span>
-                      <span class="text-textPrimary text-xs font-medium">Carbs</span>
-                    </div>
-                    <span class="text-textMuted text-xs">45% • 246 g</span>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                      <span class="bg-pinkish h-2.5 w-2.5 rounded-full"></span>
-                      <span class="text-textPrimary text-xs font-medium">Fats</span>
-                    </div>
-                    <span class="text-textMuted text-xs">25% • 61 g</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Data Ownership / Export -->
-          <section>
-            <div class="bg-cardMedium rounded-2xl p-4">
-              <div class="flex items-center gap-3">
-                <div
-                  class="bg-forestGreen/10 text-forestGreen flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl text-lg"
-                >
-                  🔒
-                </div>
-                <div class="flex-1">
-                  <h4 class="text-textPrimary text-sm font-semibold">Your data stays local</h4>
-                  <p class="text-textMuted text-xs">1,284 entries • 42 workouts</p>
-                </div>
-                <button
-                  class="bg-leafGreen hover:bg-forestGreen rounded-xl px-3 py-2 text-xs font-semibold text-white transition-all"
-                >
-                  Export
+              <div class="shrink-0">
+                <button class="border-forest-dark/15 text-forest-dark hover:bg-mist inline-flex h-8 items-center justify-center gap-2 rounded-tile border px-3 text-xs font-medium">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+                  Log
                 </button>
               </div>
             </div>
-          </section>
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-sea-text/70 text-left text-xs">
+                  <th class="pb-2 font-medium">Metric</th>
+                  <th class="pb-2 font-medium">Latest</th>
+                  <th class="pb-2 text-right font-medium">Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-forest-dark/5 border-t">
+                  <td class="py-2">
+                    <svg class="text-sea-text mr-2 inline-block align-[-2px]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /><path d="m14.5 12.5 2-2" /><path d="m11.5 9.5 2-2" /><path d="m8.5 6.5 2-2" /><path d="m17.5 15.5 2-2" /></svg>
+                    <span class="text-forest-dark font-medium">Waist</span>
+                  </td>
+                  <td class="text-sea-text py-2 tabular-nums">82.0 cm</td>
+                  <td class="text-forest-bright py-2 text-right font-semibold tabular-nums">−4.5</td>
+                </tr>
+                <tr class="border-forest-dark/5 border-t">
+                  <td class="py-2">
+                    <svg class="text-sea-text mr-2 inline-block align-[-2px]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg>
+                    <span class="text-forest-dark font-medium">Chest</span>
+                  </td>
+                  <td class="text-sea-text py-2 tabular-nums">101.5 cm</td>
+                  <td class="text-sea-text py-2 text-right font-semibold tabular-nums">+1.0</td>
+                </tr>
+                <tr class="border-forest-dark/5 border-t">
+                  <td class="py-2">
+                    <svg class="text-sea-text mr-2 inline-block align-[-2px]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.8 19.6A2 2 0 1 0 14 16H2" /><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" /><path d="M9.8 4.4A2 2 0 1 1 11 8H2" /></svg>
+                    <span class="text-forest-dark font-medium">Hips</span>
+                  </td>
+                  <td class="text-sea-text py-2 tabular-nums">96.0 cm</td>
+                  <td class="text-forest-bright py-2 text-right font-semibold tabular-nums">−3.0</td>
+                </tr>
+                <tr class="border-forest-dark/5 border-t">
+                  <td class="py-2">
+                    <svg class="text-sea-text mr-2 inline-block align-[-2px]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 11-5-5-5 5" /><path d="m17 18-5-5-5 5" /></svg>
+                    <span class="text-forest-dark font-medium">Thigh</span>
+                  </td>
+                  <td class="text-sea-text py-2 tabular-nums">58.5 cm</td>
+                  <td class="text-forest-bright py-2 text-right font-semibold tabular-nums">−1.5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Macro balance -->
+          <div class="rounded-card shadow-card bg-white">
+            <div class="space-y-3 p-4">
+              <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                  <h3 class="text-forest-dark truncate text-base font-semibold">Macro Balance</h3>
+                  <p class="text-sea-text/70 truncate text-xs">2,180 kcal avg</p>
+                </div>
+              </div>
+              <div style="height: 240px">
+                <div class="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
+                  <div class="relative shrink-0" style="width: 160px; height: 160px">
+                    <svg viewBox="0 0 160 160" class="h-full w-full -rotate-90">
+                      <circle cx="80" cy="80" r="62" fill="none" stroke="#156b44" stroke-width="22" stroke-dasharray="136 389" stroke-dashoffset="0" />
+                      <circle cx="80" cy="80" r="62" fill="none" stroke="#185661" stroke-width="22" stroke-dasharray="202 389" stroke-dashoffset="-139" />
+                      <circle cx="80" cy="80" r="62" fill="none" stroke="#b69a96" stroke-width="22" stroke-dasharray="51 389" stroke-dashoffset="-344" />
+                    </svg>
+                    <div class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+                      <span class="text-forest-dark text-xl font-bold tabular-nums">2,180</span>
+                      <span class="text-sea-text text-xs">kcal avg</span>
+                    </div>
+                  </div>
+                  <ul class="w-full space-y-2">
+                    <li class="flex items-center gap-2 text-sm">
+                      <span class="h-2.5 w-2.5 shrink-0 rounded-full" style="background-color: #156b44"></span>
+                      <span class="text-sea-text flex-1">Protein</span>
+                      <span class="text-sea-text/70 text-xs">164 g</span>
+                      <span class="text-forest-text w-10 text-right font-semibold tabular-nums">35%</span>
+                    </li>
+                    <li class="flex items-center gap-2 text-sm">
+                      <span class="h-2.5 w-2.5 shrink-0 rounded-full" style="background-color: #185661"></span>
+                      <span class="text-sea-text flex-1">Carbs</span>
+                      <span class="text-sea-text/70 text-xs">246 g</span>
+                      <span class="text-sea-text w-10 text-right font-semibold tabular-nums">52%</span>
+                    </li>
+                    <li class="flex items-center gap-2 text-sm">
+                      <span class="h-2.5 w-2.5 shrink-0 rounded-full" style="background-color: #b69a96"></span>
+                      <span class="text-sea-text flex-1">Fats</span>
+                      <span class="text-sea-text/70 text-xs">61 g</span>
+                      <span class="text-pinkish-text w-10 text-right font-semibold tabular-nums">13%</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data stays local -->
+          <div class="rounded-card shadow-card flex items-center gap-3 bg-white p-4">
+            <span class="rounded-tile bg-leaf-bright text-forest-bright flex h-11 w-11 items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+            </span>
+            <div class="flex-1">
+              <p class="text-forest-dark text-sm font-semibold">Your data stays local</p>
+              <p class="text-sea-text text-xs">1,284 entries • 42 workouts</p>
+            </div>
+            <button class="border-forest-dark/15 text-forest-dark hover:bg-mist inline-flex h-8 items-center justify-center gap-2 rounded-tile border px-3 text-xs font-medium">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+              Export
+            </button>
+          </div>
         </main>
 
-        <!-- Mobile Tab Bar -->
-        <nav class="pb-safe fixed right-0 bottom-0 left-0 border-t border-gray-200 bg-white">
-          <div class="flex h-16 items-center justify-around">
-            <button
-              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
-            >
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                />
-              </svg>
+        <nav class="border-forest-dark/10 fixed inset-x-0 bottom-0 z-20 border-t bg-white/95 backdrop-blur lg:hidden">
+          <div class="mx-auto flex h-16 max-w-md items-center justify-around">
+            <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>
               <span class="text-xs font-medium">Home</span>
             </button>
-            <button
-              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
-            >
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                />
-              </svg>
+            <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg>
               <span class="text-xs font-medium">Fitness</span>
             </button>
-            <button
-              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
-            >
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                />
-              </svg>
+            <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.528V3a1 1 0 0 1 1-1h0" /><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /></svg>
               <span class="text-xs font-medium">Food</span>
             </button>
-            <button class="text-leafGreen flex flex-col items-center gap-1 p-2">
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                />
-              </svg>
+            <button aria-current="page" class="text-forest-text flex flex-col items-center gap-1 px-2 py-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg>
               <span class="text-xs font-medium">Stats</span>
             </button>
-            <button
-              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
-            >
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a2 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
+            <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
               <span class="text-xs font-medium">Squad</span>
             </button>
           </div>
         </nav>
       </div>
 
-      <!-- Desktop Sidebar (hidden on mobile) -->
-      <aside class="bg-cardMedium hidden h-screen w-64 flex-col border-r border-gray-200 lg:flex">
+      <aside class="border-forest-dark/10 bg-mist sticky top-0 hidden h-screen w-64 flex-col border-r lg:flex">
         <div class="p-6">
           <div class="flex items-center gap-3">
-            <div
-              class="from-leafGreen to-forestGreen flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br text-2xl text-white"
-            >
-              🏃
-            </div>
+            <span class="from-leaf-text to-forest-text flex h-12 w-12 items-center justify-center rounded-tile bg-gradient-to-br text-2xl text-white">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></svg>
+            </span>
             <div>
-              <h1 class="text-textPrimary text-xl font-bold">Health App</h1>
-              <p class="text-textMuted text-xs">Self-hosted PWA</p>
+              <h1 class="text-forest-dark text-xl font-bold">Health App</h1>
+              <p class="text-sea-text text-xs">Self-hosted PWA</p>
             </div>
           </div>
         </div>
-
         <nav class="flex-1 space-y-2 p-4">
-          <a
-            href="#"
-            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
-          >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              />
-            </svg>
+          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
+            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg></span>
             Dashboard
-          </a>
-          <a
-            href="#"
-            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
-          >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-              />
-            </svg>
+          </button>
+          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
+            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></span>
             Fitness
-          </a>
-          <a
-            href="#"
-            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
-          >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-              />
-            </svg>
+          </button>
+          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
+            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.528V3a1 1 0 0 1 1-1h0" /><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /></svg></span>
             Food &amp; Macros
-          </a>
-          <a
-            href="#"
-            class="bg-leafGreen/20 text-textPrimary flex items-center gap-3 rounded-xl px-4 py-3 font-medium"
-          >
-            <svg
-              class="text-leafGreen h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
+          </button>
+          <button aria-current="page" class="rounded-tile shadow-card text-forest-text flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
+            <span class="shrink-0 text-forest-text"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg></span>
             Analytics
-          </a>
-          <a
-            href="#"
-            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
-          >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a2 2 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-              />
-            </svg>
+          </button>
+          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
+            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></span>
             Squad Game
-          </a>
+          </button>
         </nav>
-
-        <div class="border-t border-gray-200 p-4">
-          <div class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm">
-            <div
-              class="from-seaBlue to-forestGreen flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white"
-            >
-              A
-            </div>
+        <div class="border-forest-dark/10 border-t p-4">
+          <div class="shadow-card flex items-center gap-3 rounded-tile bg-white px-4 py-3">
+            <div class="from-sea-text to-forest-text flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white">A</div>
             <div class="flex-1">
-              <p class="text-textPrimary text-sm font-medium">Alex</p>
-              <p class="text-textMuted text-xs">Free Plan</p>
+              <p class="text-forest-dark text-sm font-medium">Alex</p>
             </div>
-            <button class="rounded-lg p-2 transition-colors hover:bg-gray-100">
-              <svg
-                class="text-textMuted h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                />
-              </svg>
-            </button>
           </div>
         </div>
       </aside>

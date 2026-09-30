@@ -3,231 +3,87 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Health App</title>
+    <title>Dashboard - Health App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      // Mirrors frontend/src/index.css @theme tokens so mockups match the app.
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              // Bright tones - UI elements, cards, progress indicators
-              seaBlue: {
-                light: '#6aa6ae',
-                DEFAULT: '#185661',
-                dark: '#0a3c45',
-              },
-              forestGreen: {
-                light: '#437456',
-                DEFAULT: '#156b44',
-                dark: '#0e341f',
-              },
-              leafGreen: {
-                light: '#e4eebc',
-                DEFAULT: '#adbf73',
-                dark: '#697948',
-              },
-              pinkish: {
-                light: '#efd6d2',
-                DEFAULT: '#d2968d',
-                dark: '#b69a96',
-              },
-              // Card background tones
-              cardLight: '#F8FAF7',
-              cardMedium: '#E2ECD8',
-              cardDark: '#CDE4B4',
-              // Text tones
-              textPrimary: '#1B3B2B',
-              textMuted: '#2C4F3C',
-              textSecondary: '#4A7C6A',
+              sea: { bright: '#6aa6ae', text: '#185661', dark: '#0a3c45' },
+              forest: { bright: '#437456', text: '#156b44', dark: '#0e341f' },
+              leaf: { bright: '#e4eebc', text: '#adbf73', dark: '#697948' },
+              pinkish: { bright: '#efd6d2', text: '#d2968d', dark: '#b69a96' },
+              mist: '#e2ecd8',
             },
-            fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
-            },
+            borderRadius: { card: '1rem', tile: '0.75rem' },
+            fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
           },
         },
       };
     </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-      /* Smooth transitions */
-      .transition-all {
-        transition-property: all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 200ms;
+      body { background: #fff; color: #0a3c45; }
+      h1, h2, h3, h4 { font-weight: 600; color: #0e341f; }
+      .shadow-card {
+        box-shadow: 0 1px 2px rgb(14 52 31 / 0.04), 0 4px 12px rgb(14 52 31 / 0.06);
       }
-      .fade-in {
-        animation: fadeIn 0.3s ease-in;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f0f0f0;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #cde4b4;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #adbf73;
-      }
-
-      /* Progress ring animation */
-      .progress-ring__circle {
-        transition: stroke-dashoffset 0.35s;
-        transform: rotate(-90deg);
-        transform-origin: 50% 50%;
-      }
-
-      /* Glass effect */
-      .glass {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-      }
+      .ring-anim { transition: stroke-dashoffset 0.35s; }
     </style>
   </head>
-  <body class="bg-cardLight text-textPrimary min-h-screen">
-    <!-- App Container with Mobile-First Layout -->
+  <body class="min-h-screen font-sans">
     <div class="flex min-h-screen">
-      <!-- Mobile App Body (center content) -->
-      <div class="relative mx-auto flex w-full max-w-md flex-1 flex-col">
-        <!-- Header -->
-        <header class="bg-cardMedium sticky top-0 z-10 p-5 shadow-sm">
-          <div class="flex items-center justify-between">
-            <div>
-              <h1 class="text-textPrimary text-2xl font-bold">🏃 Health App</h1>
-              <p class="text-textMuted text-sm">Good morning, Alex! 👋</p>
+      <!-- Mobile / tablet body -->
+      <div class="mx-auto flex w-full max-w-md flex-1 flex-col lg:max-w-2xl">
+        <header class="bg-mist shadow-card sticky top-0 z-10 p-5">
+          <div class="flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <h1 class="text-forest-dark flex items-center gap-2 truncate text-2xl font-bold">
+                <svg class="text-forest-bright" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></svg>
+                Health App
+              </h1>
+              <p class="text-sea-text truncate text-sm">Good morning, Alex!</p>
             </div>
-            <div class="flex items-center gap-2">
-              <!-- Streak Badge -->
-              <div
-                class="bg-leafGreen flex items-center gap-1.5 rounded-full px-3 py-1.5 text-white shadow-sm"
-              >
-                <span>🔥</span>
-                <span class="text-sm font-semibold">12</span>
-                <span class="text-xs">day</span>
-              </div>
-              <!-- Date -->
-              <div class="text-right">
-                <p class="text-textPrimary text-sm font-medium">Mon, Sep 27</p>
-                <p class="text-textMuted text-xs">September</p>
+            <div class="flex shrink-0 items-center gap-2">
+              <div class="bg-leaf-text flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-white">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></svg>
+                12 day
               </div>
             </div>
           </div>
         </header>
 
-        <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto p-5 pb-24">
-          <!-- Hero Section -->
-          <section class="mb-6">
-            <div
-              class="from-seaBlue to-forestGreen rounded-3xl bg-gradient-to-r p-6 text-white shadow-lg"
-            >
-              <div class="mb-4 flex items-start justify-between">
+        <main class="flex-1 space-y-6 p-5 pb-24">
+          <!-- Daily total hero -->
+          <section>
+            <div class="from-sea-text to-forest-text rounded-card ring-1 ring-white/10 bg-gradient-to-r p-6 text-white shadow-card">
+              <div class="mb-4 flex items-start justify-between gap-3">
                 <div>
-                  <p class="text-seaBlue-light mb-1 text-sm font-medium">Daily Total</p>
-                  <h2 class="text-4xl font-bold">
-                    450 <span class="text-seaBlue-light text-sm font-normal">/ 2500</span> kcal
-                  </h2>
+                  <p class="text-sea-bright mb-1 text-sm font-medium">Daily Total</p>
+                  <h2 class="text-4xl font-bold text-white">450 <span class="text-sea-bright text-sm font-normal">/ 2,500 kcal</span></h2>
                 </div>
-                <div class="rounded-xl bg-white/20 p-2.5">
-                  <svg
-                    class="h-8 w-8 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
-                </div>
+                <span class="text-xs text-white/70">kcal</span>
               </div>
-
-              <!-- Daily Rings -->
-              <div class="flex justify-center gap-4">
-                <!-- Calorie Ring -->
+              <div class="flex flex-wrap justify-center gap-6">
                 <div class="flex flex-col items-center gap-2">
-                  <div class="relative h-16 w-16">
-                    <svg class="h-full w-full" viewBox="0 0 60 60">
-                      <circle
-                        class="text-white/20"
-                        cx="30"
-                        cy="30"
-                        r="28"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="6"
-                      />
-                      <circle
-                        class="progress-ring__circle"
-                        cx="30"
-                        cy="30"
-                        r="28"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="6"
-                        stroke-linecap="round"
-                        stroke-dasharray="175.93"
-                        stroke-dashoffset="127.15"
-                        style="stroke: url(#calorieGradient)"
-                      />
+                  <div class="relative inline-flex h-16 w-16 items-center justify-center">
+                    <svg width="64" height="64" viewBox="0 0 64 64" class="-rotate-90">
+                      <circle cx="32" cy="32" r="29" fill="none" stroke-width="6" stroke="#ffffff" stroke-opacity="0.25" />
+                      <circle class="ring-anim" cx="32" cy="32" r="29" fill="none" stroke-width="6" stroke-linecap="round" stroke="#ffffff" stroke-dasharray="182.2" stroke-dashoffset="51" />
                     </svg>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <span class="text-xs font-bold text-white">72%</span>
-                    </div>
+                    <span class="absolute text-xs font-bold text-white">72%</span>
                   </div>
                   <span class="text-xs text-white/90">Calories</span>
                 </div>
-
-                <!-- Protein Ring -->
                 <div class="flex flex-col items-center gap-2">
-                  <div class="relative h-16 w-16">
-                    <svg class="h-full w-full" viewBox="0 0 60 60">
-                      <circle
-                        class="text-white/20"
-                        cx="30"
-                        cy="30"
-                        r="28"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="6"
-                      />
-                      <circle
-                        class="progress-ring__circle"
-                        cx="30"
-                        cy="30"
-                        r="28"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="6"
-                        stroke-linecap="round"
-                        stroke-dasharray="175.93"
-                        stroke-dashoffset="112.34"
-                        style="stroke: url(#proteinGradient)"
-                      />
+                  <div class="relative inline-flex h-16 w-16 items-center justify-center">
+                    <svg width="64" height="64" viewBox="0 0 64 64" class="-rotate-90">
+                      <circle cx="32" cy="32" r="29" fill="none" stroke-width="6" stroke="#ffffff" stroke-opacity="0.25" />
+                      <circle class="ring-anim" cx="32" cy="32" r="29" fill="none" stroke-width="6" stroke-linecap="round" stroke="#ffffff" stroke-dasharray="182.2" stroke-dashoffset="63.8" />
                     </svg>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <span class="text-xs font-bold text-white">65g</span>
-                    </div>
+                    <span class="absolute text-xs font-bold text-white">65g</span>
                   </div>
                   <span class="text-xs text-white/90">Protein</span>
                 </div>
@@ -235,384 +91,241 @@
             </div>
           </section>
 
-          <!-- Quick Actions -->
-          <section class="mb-6">
-            <h3 class="text-textPrimary mb-3 text-lg font-semibold">Quick Actions</h3>
+          <!-- Quick actions -->
+          <section>
+            <h2 class="text-forest-dark mb-3 text-lg font-semibold">Quick Actions</h2>
             <div class="grid grid-cols-4 gap-3">
-              <button
-                class="bg-cardDark hover:bg-leafGreen rounded-2xl p-4 text-center text-white shadow-sm transition-all active:scale-95"
-              >
-                <div class="mb-1 text-2xl">🏋️</div>
+              <button class="rounded-card shadow-card flex flex-col items-center gap-1 bg-leaf-text/10 p-3 text-leaf-dark transition-colors hover:brightness-95">
+                <span class="text-xl leading-none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></span>
                 <span class="text-xs font-medium">Workout</span>
               </button>
-              <button
-                class="bg-cardDark hover:bg-forestGreen rounded-2xl p-4 text-center text-white shadow-sm transition-all active:scale-95"
-              >
-                <div class="mb-1 text-2xl">🥗</div>
+              <button class="rounded-card shadow-card flex flex-col items-center gap-1 bg-leaf-text/10 p-3 text-leaf-dark transition-colors hover:brightness-95">
+                <span class="text-xl leading-none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10" /><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z" /><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1" /><path d="m13 12 4-4" /><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2" /></svg></span>
                 <span class="text-xs font-medium">Meal</span>
               </button>
-              <button
-                class="bg-cardDark hover:bg-seaBlue rounded-2xl p-4 text-center text-white shadow-sm transition-all active:scale-95"
-              >
-                <div class="mb-1 text-2xl">📊</div>
+              <button class="rounded-card shadow-card flex flex-col items-center gap-1 bg-leaf-text/10 p-3 text-leaf-dark transition-colors hover:brightness-95">
+                <span class="text-xl leading-none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg></span>
                 <span class="text-xs font-medium">Stats</span>
               </button>
-              <button
-                class="bg-cardDark hover:bg-pinkish rounded-2xl p-4 text-center text-white shadow-sm transition-all active:scale-95"
-              >
-                <div class="mb-1 text-2xl">🎮</div>
+              <button class="rounded-card shadow-card flex flex-col items-center gap-1 bg-leaf-text/10 p-3 text-leaf-dark transition-colors hover:brightness-95">
+                <span class="text-xl leading-none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg></span>
                 <span class="text-xs font-medium">Squad</span>
               </button>
             </div>
           </section>
 
-          <!-- Daily Quests -->
-          <section class="mb-6">
-            <div class="mb-3 flex items-center justify-between">
-              <h3 class="text-textPrimary text-lg font-semibold">Today's Quests</h3>
-              <button class="text-leafGreen text-sm font-medium">View all</button>
-            </div>
-            <div class="space-y-3">
-              <!-- Quest Item -->
-              <div class="border-leafGreen rounded-2xl border-l-4 bg-white p-4 shadow-sm">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <div
-                      class="bg-leafGreen/10 text-leafGreen flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
-                    >
-                      💊
-                    </div>
-                    <div>
-                      <h4 class="text-textPrimary font-semibold">Daily Vitamins</h4>
-                      <p class="text-textMuted text-xs">Vitamin C, D, B12</p>
-                    </div>
-                  </div>
-                  <button
-                    class="bg-leafGreen hover:bg-forestGreen flex h-12 w-12 items-center justify-center rounded-xl text-white transition-all"
-                  >
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Quest Item -->
-              <div class="border-seaBlue rounded-2xl border-l-4 bg-white p-4 shadow-sm">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <div
-                      class="bg-seaBlue/10 text-seaBlue flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
-                    >
-                      🚶
-                    </div>
-                    <div>
-                      <h4 class="text-textPrimary font-semibold">5k Steps</h4>
-                      <p class="text-textMuted text-xs">Daily walk goal</p>
-                    </div>
-                  </div>
-                  <button
-                    class="bg-seaBlue hover:bg-forestGreen flex h-12 w-12 items-center justify-center rounded-xl text-white transition-all"
-                  >
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Quest Item -->
-              <div class="border-pinkish rounded-2xl border-l-4 bg-white p-4 shadow-sm">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <div
-                      class="bg-pinkish/10 text-pinkish flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
-                    >
-                      🏃
-                    </div>
-                    <div>
-                      <h4 class="text-textPrimary font-semibold">Morning Run</h4>
-                      <p class="text-textMuted text-xs">30 min cardio</p>
-                    </div>
-                  </div>
-                  <button
-                    class="bg-pinkish hover:bg-forestGreen flex h-12 w-12 items-center justify-center rounded-xl text-white transition-all"
-                  >
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Recent Activity -->
+          <!-- Today's quests -->
           <section>
-            <div class="mb-3 flex items-center justify-between">
-              <h3 class="text-textPrimary text-lg font-semibold">Recent Activity</h3>
-              <button class="text-leafGreen text-sm font-medium">See all</button>
+            <div class="mb-3 flex items-center justify-between gap-3">
+              <h2 class="text-forest-dark text-lg font-semibold">Today's Quests</h2>
+              <button class="text-forest-bright hover:bg-mist h-8 rounded-tile px-3 text-xs font-medium">View all</button>
             </div>
             <div class="space-y-3">
-              <!-- Activity Card -->
-              <div class="flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm">
-                <div class="flex items-center gap-4">
-                  <div
-                    class="bg-pinkish/10 text-pinkish flex h-12 w-12 items-center justify-center rounded-xl text-xl"
-                  >
-                    🏃
-                  </div>
-                  <div>
-                    <h4 class="text-textPrimary font-semibold">Morning Run</h4>
-                    <p class="text-textMuted text-xs">5.2 km • 42 min • 320 kcal</p>
-                  </div>
+              <div class="rounded-card shadow-card border-l-4 border-l-leaf-text flex w-full items-center gap-3 bg-white p-4 text-left">
+                <span class="bg-leaf-text/10 text-leaf-dark flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" /><path d="m8.5 8.5 7 7" /></svg>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="text-forest-dark truncate font-semibold">Daily Vitamins</div>
+                  <div class="text-sea-text/70 truncate text-xs">Vitamin C, D, B12</div>
                 </div>
-                <span class="text-textMuted text-sm font-medium">7:42 AM</span>
+                <div class="shrink-0">
+                  <button aria-label="Complete Daily Vitamins" class="bg-leaf-text inline-flex h-10 w-10 items-center justify-center rounded-full text-white"></button>
+                </div>
               </div>
-
-              <!-- Activity Card -->
-              <div class="flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm">
-                <div class="flex items-center gap-4">
-                  <div
-                    class="bg-seaBlue/10 text-seaBlue flex h-12 w-12 items-center justify-center rounded-xl text-xl"
-                  >
-                    🥗
-                  </div>
-                  <div>
-                    <h4 class="text-textPrimary font-semibold">Lunch</h4>
-                    <p class="text-textMuted text-xs">Grilled chicken • 550 kcal</p>
-                  </div>
+              <div class="rounded-card shadow-card border-l-4 border-l-sea-text flex w-full items-center gap-3 bg-white p-4 text-left">
+                <span class="bg-sea-text/10 text-sea-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /><path d="M16 17h4" /><path d="M4 13h4" /></svg>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="text-forest-dark truncate font-semibold">5k Steps</div>
+                  <div class="text-sea-text/70 truncate text-xs">Daily walk goal</div>
                 </div>
-                <span class="text-textMuted text-sm font-medium">1:30 PM</span>
+                <div class="shrink-0">
+                  <button aria-label="Complete 5k Steps" class="bg-sea-text inline-flex h-10 w-10 items-center justify-center rounded-full text-white"></button>
+                </div>
               </div>
-
-              <!-- Activity Card -->
-              <div class="flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm">
-                <div class="flex items-center gap-4">
-                  <div
-                    class="bg-forestGreen/10 text-forestGreen flex h-12 w-12 items-center justify-center rounded-xl text-xl"
-                  >
-                    💪
-                  </div>
-                  <div>
-                    <h4 class="text-textPrimary font-semibold">Upper Body</h4>
-                    <p class="text-textMuted text-xs">Gym • 60 min • 380 kcal</p>
-                  </div>
+              <div class="rounded-card shadow-card border-l-4 border-l-pinkish-text flex w-full items-center gap-3 bg-white p-4 text-left">
+                <span class="bg-pinkish-text/10 text-pinkish-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" /></svg>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="text-forest-dark truncate font-semibold">Morning Run</div>
+                  <div class="text-sea-text/70 truncate text-xs">30 min cardio</div>
                 </div>
-                <span class="text-textMuted text-sm font-medium">6:00 PM</span>
+                <div class="shrink-0">
+                  <button aria-label="Complete Morning Run" class="bg-pinkish-text inline-flex h-10 w-10 items-center justify-center rounded-full text-white"></button>
+                </div>
               </div>
             </div>
           </section>
+
+          <!-- Recent activity -->
+          <section>
+            <div class="mb-3 flex items-center justify-between gap-3">
+              <h2 class="text-forest-dark text-lg font-semibold">Recent Activity</h2>
+              <button class="text-forest-bright hover:bg-mist h-8 rounded-tile px-3 text-xs font-medium">See all</button>
+            </div>
+            <div class="space-y-3">
+              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
+                <span class="bg-pinkish-text/10 text-pinkish-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" /></svg>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="text-forest-dark truncate font-semibold">Morning Run</div>
+                  <div class="text-sea-text/70 truncate text-xs">5.2 km • 42 min • 320 kcal</div>
+                </div>
+                <div class="text-sea-text shrink-0 text-right text-sm">7:42 AM</div>
+              </div>
+              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
+                <span class="bg-sea-text/10 text-sea-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10" /><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z" /><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1" /><path d="m13 12 4-4" /><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2" /></svg>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="text-forest-dark truncate font-semibold">Lunch</div>
+                  <div class="text-sea-text/70 truncate text-xs">Grilled chicken • 550 kcal</div>
+                </div>
+                <div class="text-sea-text shrink-0 text-right text-sm">1:30 PM</div>
+              </div>
+              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
+                <span class="bg-forest-text/10 text-forest-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="text-forest-dark truncate font-semibold">Upper Body</div>
+                  <div class="text-sea-text/70 truncate text-xs">Gym • 60 min • 380 kcal</div>
+                </div>
+                <div class="text-sea-text shrink-0 text-right text-sm">6:00 PM</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Macros -->
+          <div class="rounded-card shadow-card space-y-4 bg-white p-4">
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <h3 class="text-forest-dark truncate text-base font-semibold">Macros</h3>
+                <p class="text-sea-text/70 truncate text-xs">Today's progress</p>
+              </div>
+            </div>
+            <div class="w-full">
+              <div class="mb-1.5 flex items-baseline justify-between gap-2 text-xs">
+                <span class="text-sea-text/70">Carbs</span>
+                <span class="text-forest-dark font-semibold tabular-nums">84%</span>
+              </div>
+              <div class="bg-forest-dark/10 h-2.5 w-full overflow-hidden rounded-full">
+                <div class="bg-sea-text h-full rounded-full" style="width: 84%"></div>
+              </div>
+            </div>
+            <div class="w-full">
+              <div class="mb-1.5 flex items-baseline justify-between gap-2 text-xs">
+                <span class="text-sea-text/70">Fats</span>
+                <span class="text-forest-dark font-semibold tabular-nums">83%</span>
+              </div>
+              <div class="bg-forest-dark/10 h-2.5 w-full overflow-hidden rounded-full">
+                <div class="bg-pinkish-text h-full rounded-full" style="width: 83%"></div>
+              </div>
+            </div>
+            <div class="w-full">
+              <div class="mb-1.5 flex items-baseline justify-between gap-2 text-xs">
+                <span class="text-sea-text/70">Water</span>
+                <span class="text-forest-dark font-semibold tabular-nums">72%</span>
+              </div>
+              <div class="bg-forest-dark/10 h-2.5 w-full overflow-hidden rounded-full">
+                <div class="bg-leaf-text h-full rounded-full" style="width: 72%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Squad stats -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="rounded-card shadow-card flex flex-col items-start gap-2 bg-white p-4 text-left">
+              <div class="flex w-full items-center gap-2">
+                <span class="bg-leaf-text/10 text-leaf-dark flex h-8 w-8 items-center justify-center rounded-tile">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2" /><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2" /><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3" /><path d="M4 22h16" /><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" /><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3" /></svg>
+                </span>
+                <span class="text-sea-text/70 truncate text-xs">Squad rank</span>
+              </div>
+              <div class="text-forest-dark text-2xl font-bold tabular-nums">#3</div>
+              <span class="bg-leaf-text/10 text-leaf-dark inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium">+120 pts</span>
+            </div>
+            <div class="rounded-card shadow-card flex flex-col items-start gap-2 bg-white p-4 text-left">
+              <div class="flex w-full items-center gap-2">
+                <span class="text-sea-text/70 truncate text-xs">Quests done</span>
+              </div>
+              <div class="text-forest-dark text-2xl font-bold tabular-nums">0/3</div>
+            </div>
+          </div>
         </main>
 
-        <!-- Mobile Tab Bar -->
-        <nav class="pb-safe fixed right-0 bottom-0 left-0 border-t border-gray-200 bg-white">
-          <div class="flex h-16 items-center justify-around">
-            <button class="text-leafGreen flex flex-col items-center gap-1 p-2">
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                />
-              </svg>
+        <!-- Tab bar -->
+        <nav class="border-forest-dark/10 fixed inset-x-0 bottom-0 z-20 border-t bg-white/95 backdrop-blur lg:hidden">
+          <div class="mx-auto flex h-16 max-w-md items-center justify-around">
+            <button aria-current="page" class="text-forest-text flex flex-col items-center gap-1 px-2 py-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>
               <span class="text-xs font-medium">Home</span>
             </button>
-            <button
-              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
-            >
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                />
-              </svg>
+            <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg>
               <span class="text-xs font-medium">Fitness</span>
             </button>
-            <button
-              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
-            >
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                />
-              </svg>
+            <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.528V3a1 1 0 0 1 1-1h0" /><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /></svg>
               <span class="text-xs font-medium">Food</span>
             </button>
-            <button
-              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
-            >
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                />
-              </svg>
+            <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg>
               <span class="text-xs font-medium">Stats</span>
             </button>
-            <button
-              class="text-textMuted hover:text-textPrimary flex flex-col items-center gap-1 p-2"
-            >
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
+            <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
               <span class="text-xs font-medium">Squad</span>
             </button>
           </div>
         </nav>
       </div>
 
-      <!-- Desktop Sidebar (hidden on mobile) -->
-      <aside class="bg-cardMedium hidden h-screen w-64 flex-col border-r border-gray-200 lg:flex">
-        <!-- Sidebar Header -->
+      <!-- Desktop sidebar -->
+      <aside class="border-forest-dark/10 bg-mist sticky top-0 hidden h-screen w-64 flex-col border-r lg:flex">
         <div class="p-6">
           <div class="flex items-center gap-3">
-            <div
-              class="from-leafGreen to-forestGreen flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br text-2xl text-white"
-            >
-              🏃
-            </div>
+            <span class="from-leaf-text to-forest-text flex h-12 w-12 items-center justify-center rounded-tile bg-gradient-to-br text-2xl text-white">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></svg>
+            </span>
             <div>
-              <h1 class="text-textPrimary text-xl font-bold">Health App</h1>
-              <p class="text-textMuted text-xs">Self-hosted PWA</p>
+              <h1 class="text-forest-dark text-xl font-bold">Health App</h1>
+              <p class="text-sea-text text-xs">Self-hosted PWA</p>
             </div>
           </div>
         </div>
-
-        <!-- Navigation -->
         <nav class="flex-1 space-y-2 p-4">
-          <a
-            href="#"
-            class="bg-leafGreen/20 text-textPrimary flex items-center gap-3 rounded-xl px-4 py-3 font-medium"
-          >
-            <svg
-              class="text-leafGreen h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              />
-            </svg>
+          <button aria-current="page" class="rounded-tile shadow-card text-forest-text flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
+            <span class="shrink-0 text-forest-text"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg></span>
             Dashboard
-          </a>
-          <a
-            href="#"
-            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
-          >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-              />
-            </svg>
+          </button>
+          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
+            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></span>
             Fitness
-          </a>
-          <a
-            href="#"
-            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
-          >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-              />
-            </svg>
-            Food & Macros
-          </a>
-          <a
-            href="#"
-            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
-          >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
+          </button>
+          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
+            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.528V3a1 1 0 0 1 1-1h0" /><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /></svg></span>
+            Food &amp; Macros
+          </button>
+          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
+            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg></span>
             Analytics
-          </a>
-          <a
-            href="#"
-            class="text-textMuted flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:bg-white hover:shadow-sm"
-          >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-              />
-            </svg>
+          </button>
+          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
+            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></span>
             Squad Game
-          </a>
+          </button>
         </nav>
-
-        <!-- Sidebar Footer -->
-        <div class="border-t border-gray-200 p-4">
-          <div class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm">
-            <div
-              class="from-seaBlue to-forestGreen flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white"
-            >
-              A
-            </div>
+        <div class="border-forest-dark/10 border-t p-4">
+          <div class="shadow-card flex items-center gap-3 rounded-tile bg-white px-4 py-3">
+            <div class="from-sea-text to-forest-text flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white">A</div>
             <div class="flex-1">
-              <p class="text-textPrimary text-sm font-medium">Alex</p>
-              <p class="text-textMuted text-xs">Free Plan</p>
+              <p class="text-forest-dark text-sm font-medium">Alex</p>
             </div>
-            <button class="rounded-lg p-2 transition-colors hover:bg-gray-100">
-              <svg
-                class="text-textMuted h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                />
-              </svg>
-            </button>
           </div>
         </div>
       </aside>
