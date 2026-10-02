@@ -8,7 +8,6 @@ import (
 
 type Logger struct {
 	*slog.Logger
-	LogLevel slog.Level
 }
 
 const (
@@ -29,11 +28,10 @@ func CreateLogger() *Logger {
 			level = slog.LevelError
 		}
 	}
-	return &Logger{slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{AddSource: true})), level}
-	// return &Logger{slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{AddSource: true})), level}
+	return &Logger{slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{AddSource: true, Level: level}))}
 }
 
-func (logger *Logger) Fatal(v any) {
-	logger.Error("BIG OOPSY", "trace", string(debug.Stack()))
+func (logger *Logger) Fatal(err error) {
+	logger.Error("FATAL ERROR", "err", err.Error(), "trace", string(debug.Stack()))
 	os.Exit(1)
 }
