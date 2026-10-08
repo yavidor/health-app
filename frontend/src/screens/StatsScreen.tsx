@@ -10,13 +10,13 @@ import { useApiData } from '../lib/hooks/useApiData';
 import { ScreenStates } from './ScreenStates';
 import type { RangeKey, StatsData } from '../types';
 
-const RANGES: readonly { value: RangeKey; label: string }[] = [
+const RANGES = [
   { value: '7d', label: '7D' },
   { value: '30d', label: '30D' },
   { value: '3m', label: '3M' },
   { value: '6m', label: '6M' },
   { value: '1y', label: '1Y' },
-];
+] as const satisfies readonly { value: RangeKey; label: string }[];
 
 const DEFAULT_RANGE: RangeKey = '30d';
 
@@ -32,18 +32,24 @@ export function StatsScreen() {
 
   return (
     <ScreenStates {...result} loadingTitle="Loading stats…">
-      {(data) => <StatsScreenBody data={data} range={range} onRangeChange={setRange} />}
+      {(data) => <StatsScreenBody data={data} selection={{ range, onRangeChange: setRange }} />}
     </ScreenStates>
   );
 }
 
-interface StatsScreenBodyProps {
-  data: StatsData;
+/** The selected Range and how to change it, as one value. */
+interface RangeSelection {
   range: RangeKey;
   onRangeChange: (range: RangeKey) => void;
 }
 
-function StatsScreenBody({ data, range, onRangeChange }: StatsScreenBodyProps) {
+interface StatsScreenBodyProps {
+  data: StatsData;
+  selection: RangeSelection;
+}
+
+function StatsScreenBody({ data, selection }: StatsScreenBodyProps) {
+  const { range, onRangeChange } = selection;
   const { weightTrend, correlation, macroTotals } = data;
 
   return (

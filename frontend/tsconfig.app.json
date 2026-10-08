@@ -16,10 +16,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Strictness */
+    /* Strictness — implies noImplicitAny and strictNullChecks */
     "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
 
     /* Linting */
     "noUnusedLocals": true,

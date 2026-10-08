@@ -26,22 +26,30 @@ const DAY_TABS = [
 type DayTab = (typeof DAY_TABS)[number]['value'];
 
 export function FoodScreen() {
+  const [day, setDay] = useState<DayTab>('today');
   const fetcher = useCallback((signal: AbortSignal) => api.get<FoodData>('/food', { signal }), []);
   const result = useApiData(fetcher);
 
   return (
     <ScreenStates {...result} loadingTitle="Loading food…">
-      {(data) => <FoodScreenBody data={data} />}
+      {(data) => <FoodScreenBody data={data} selection={{ day, onDayChange: setDay }} />}
     </ScreenStates>
   );
 }
 
-interface FoodScreenBodyProps {
-  data: FoodData;
+/** The selected Day and how to change it, as one value. */
+interface DaySelection {
+  day: DayTab;
+  onDayChange: (day: DayTab) => void;
 }
 
-function FoodScreenBody({ data }: FoodScreenBodyProps) {
-  const [day, setDay] = useState<DayTab>('today');
+interface FoodScreenBodyProps {
+  data: FoodData;
+  selection: DaySelection;
+}
+
+function FoodScreenBody({ data, selection }: FoodScreenBodyProps) {
+  const { day, onDayChange } = selection;
   const { goal, macroTotals } = data;
   const consumedKcal = data.meals.reduce((sum, entry) => sum + entry.kcal, 0);
 
@@ -80,7 +88,7 @@ function FoodScreenBody({ data }: FoodScreenBodyProps) {
           title="Today"
           action={<button className="text-leaf-dark text-sm font-medium">View all</button>}
         />
-        <SegmentedControl options={DAY_TABS} value={day} onChange={setDay} />
+        <SegmentedControl options={DAY_TABS} value={day} onChange={onDayChange} />
       </Card>
 
       <Feed

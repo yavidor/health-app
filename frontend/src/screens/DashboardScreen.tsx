@@ -18,28 +18,43 @@ import { ScreenStates } from './ScreenStates';
 import type { DashboardData } from '../types';
 
 export function DashboardScreen() {
+  const [completedQuests, setCompletedQuests] = useState<readonly string[]>([]);
   const fetcher = useCallback(
     (signal: AbortSignal) => api.get<DashboardData>('/dashboard', { signal }),
     []
   );
   const result = useApiData(fetcher);
 
+  const toggleQuest = (id: string) =>
+    setCompletedQuests((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+
   return (
     <ScreenStates {...result} loadingTitle="Loading dashboard…">
-      {(data) => <DashboardScreenBody data={data} />}
+      {(data) => (
+        <DashboardScreenBody
+          data={data}
+          selection={{ completedQuests, onToggleQuest: toggleQuest }}
+        />
+      )}
     </ScreenStates>
   );
 }
 
-interface DashboardScreenBodyProps {
-  data: DashboardData;
+/** Which Quests are complete, and how to toggle one, as one value. */
+interface QuestSelection {
+  completedQuests: readonly string[];
+  onToggleQuest: (id: string) => void;
 }
 
-function DashboardScreenBody({ data }: DashboardScreenBodyProps) {
-  const [completed, setCompleted] = useState<readonly string[]>([]);
+interface DashboardScreenBodyProps {
+  data: DashboardData;
+  selection: QuestSelection;
+}
 
-  const toggleQuest = (id: string) =>
-    setCompleted((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+function DashboardScreenBody({ data, selection }: DashboardScreenBodyProps) {
+  const { completedQuests, onToggleQuest } = selection;
 
   return (
     <Page
@@ -87,12 +102,12 @@ function DashboardScreenBody({ data }: DashboardScreenBodyProps) {
         emptyTitle="No quests left"
         emptyDescription="Add goals to earn squad points."
         renderRowAction={(item) => {
-          const isDone = completed.includes(item.id);
+          const isDone = completedQuests.includes(item.id);
           return (
             <IconButton
               label={isDone ? `Undo ${item.title}` : `Complete ${item.title}`}
               accent={item.accent}
-              onClick={() => toggleQuest(item.id)}
+              onClick={() => onToggleQuest(item.id)}
             >
               {isDone ? <Check size={20} /> : null}
             </IconButton>
@@ -145,7 +160,7 @@ function DashboardScreenBody({ data }: DashboardScreenBodyProps) {
         </StatCard>
         <StatCard
           label="Quests done"
-          value={`${completed.length}/${data.quests.length}`}
+          value={`${completedQuests.length}/${data.quests.length}`}
           accent="forest"
         />
       </div>
