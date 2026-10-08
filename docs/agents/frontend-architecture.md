@@ -90,34 +90,8 @@ That is the whole change. The tab bar, desktop sidebar and router all read
 
 ## Checks
 
-`make check` runs typecheck, lint, and tests for both halves of the project. A
-pre-commit hook runs the same set on whatever is staged; see
-`setup-git-hooks.sh` to enable it after cloning.
-
-## Rewriting code
-
-To change the shape of existing files, **reach for a tool that understands the
-language** — an AST tool, a language server, the TypeScript compiler API. Not
-text. Regex and string surgery break on the first nested brace, and the breakage
-is silent until `tsc` catches it.
-
-In preference order:
-
-1. **A tool already in the project.** ESLint can autofix many rewrites
-   (`--fix`), and `typescript` is a devDependency, so the compiler API gives a
-   syntax tree with nothing to install.
-2. **A real tool, installed as a devDependency.** `npm i -D @ast-grep/cli` gives
-   `ast-grep`, which matches and rewrites by syntax rather than by text. Worth it
-   when rewrites are structural and recurring.
-3. **A language server or a proper codemod framework** when the transform is big
-   enough to deserve one.
-
-Do not write a one-off inline script to edit source files as a string. Ad-hoc
-`python -c` or `sed` rewrites are the last resort, not the first, and never for
-nested JSX.
-
-A rule that should persist belongs in `eslint.config.js`, which already owns
-import and lint policy for this codebase.
+Typecheck, lint, and tests run on commit via a pre-commit hook, so a commit takes
+longer than the edit that preceded it.
 
 ## Testing
 
@@ -144,10 +118,6 @@ replaced, and success including the derived numbers a User actually reads.
 - **`App.tsx` only resolves a route and renders it.** Everything else belongs to a
   Screen.
 - **Lucide for icons, emoji for avatars/illustrations** only.
-- **Both tsconfigs are `strict`.**
-- **Fixtures reach Screen tests only through `screenTestUtils.ts`,** which asserts
-  them against each Screen's data interface. A direct `mockData.json` import is an
-  ESLint error.
 
 ## Known gaps
 
