@@ -96,21 +96,28 @@ pre-commit hook runs the same set on whatever is staged; see
 
 ## Rewriting code
 
-To change the shape of existing files, parse them — don't edit them as text. Regex
-and string surgery break on the first nested brace, and the breakage is silent.
+To change the shape of existing files, **reach for a tool that understands the
+language** — an AST tool, a language server, the TypeScript compiler API. Not
+text. Regex and string surgery break on the first nested brace, and the breakage
+is silent until `tsc` catches it.
 
-`typescript` is already a devDependency, so the compiler API is available with no
-new tooling:
+In preference order:
 
-```js
-const ts = require('typescript');
-const source = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
-source.forEachChild((node) => { /* match on node.kind, then edit node.getStart()..node.getEnd() */ });
-```
+1. **A tool already in the project.** ESLint can autofix many rewrites
+   (`--fix`), and `typescript` is a devDependency, so the compiler API gives a
+   syntax tree with nothing to install.
+2. **A real tool, installed as a devDependency.** `npm i -D @ast-grep/cli` gives
+   `ast-grep`, which matches and rewrites by syntax rather than by text. Worth it
+   when rewrites are structural and recurring.
+3. **A language server or a proper codemod framework** when the transform is big
+   enough to deserve one.
 
-Write the codemod as a throwaway script, run it, read the diff, delete the script.
-A persistent rule belongs in `eslint.config.js`, which already owns import and
-lint policy for this codebase.
+Do not write a one-off inline script to edit source files as a string. Ad-hoc
+`python -c` or `sed` rewrites are the last resort, not the first, and never for
+nested JSX.
+
+A rule that should persist belongs in `eslint.config.js`, which already owns
+import and lint policy for this codebase.
 
 ## Testing
 
