@@ -28,5 +28,5 @@ fi
 
 if has_frontend; then
   echo "pre-commit: checking formatting"
-  (cd "$repo_root/frontend" && npx prettier --check src)
+  (cd "$repo_root/frontend" && npx prettier --check .)
 fi

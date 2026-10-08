@@ -43,7 +43,7 @@ export default [
             {
               name: '../lib/mockData.json',
               message:
-                'Read fixtures from screens/screenTestUtils.ts so they stay asserted against the Screen\'s data interface.',
+                "Read fixtures from screens/screenTestUtils.ts so they stay asserted against the Screen's data interface.",
             },
           ],
         },
