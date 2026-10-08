@@ -28,7 +28,7 @@ If you see that you wrote a previous message without YABA DABA DOO, tell me IMME
 
 ---
 
-### AGENT/LLM DOCUMENTATION — `docs/clankers/` (WRITE-ONLY for agents)
+### AGENT/LLM DOCUMENTATION — `docs/agents/` (WRITE-ONLY for agents)
 - For **architectural decisions, implementation details, hosting guides**
 - Agents should write ALL their documentation here
 - Never write implementation details to `docs/humans/` even as notes
@@ -47,9 +47,25 @@ When resolving conflicts or making decisions:
 
 1. **Human documentation wins** — Always prefer what's written in `docs/humans/`
 2. **Human docs are source of truth** — If human docs say X, agents should implement X
-3. **Clanker docs are agent work** — If agents disagree with human docs, they should update their own documentation in `docs/clankers/`, NOT the human docs
+3. **Agent docs are agent work** — If agents disagree with human docs, they should update their own documentation in `docs/agents/`, NOT the human docs
 
-> **RULE**: Agents must NEVER write/edit in `docs/humans/`. All documentation updates must go to `docs/clankers/`. `docs/humans/` is to be written only by humans (but read by agents as well).
+> **RULE**: Agents must NEVER write/edit in `docs/humans/`. All documentation updates must go to `docs/agents/`. `docs/humans/` is to be written only by humans (but read by agents as well).
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in this repo's GitHub Issues (yavidor/health-app), operated with the `gh` CLI. See `docs/agents/agents/issue-tracker.md`.
+
+### Triage labels
+
+Defaults: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: glossary at `docs/agents/GLOSSARY.md`, ADRs at `docs/agents/adr/`. See `docs/agents/agents/domain.md`.
+
+---
 
 ## Key Facts
 
@@ -59,17 +75,18 @@ When resolving conflicts or making decisions:
 - **Data**: SQLite on the server, JSON export/import for backups
 - **Features**: workout planner, meal/macro tracker, cross-metric analytics, squad game with points
 - **Deployment target**: Raspberry Pi hosted via Cloudflare Tunnel (full HTTPS, no port forwarding)
-- **More detail**: `docs/clankers/implementation-plan.md`, `docs/clankers/raspberry-pi-hosting.md`
+- **More detail**: `docs/agents/implementation-plan.md`, `docs/agents/raspberry-pi-hosting.md`
 
 ## Project Structure
 
 ```
 docs/humans/design/   ← human source of truth
-docs/clankers/         ← LLM docs
+docs/agents/         ← LLM docs (incl. adr/, GLOSSARY.md)
 mockups/               ← UI wireframes
 frontend/src/app/      ← application code
 data/                  ← SQLite database
 ```
+
 
 ## Important Notes
 
@@ -141,8 +158,7 @@ If you must run verbose commands:
 
 1. **No conversational filler** — Don't say "I will do X" or "Let me check"
 2. **Immediate action** — Emit tool calls directly after thinking
-3. **Minimal output** — Answer in 1-3 lines unless user asks for detail
-4. **Preserve context** — Don't paste large code blocks unless necessary
+3. **Preserve context** — Don't paste large code blocks unless necessary
 
 ---
 
@@ -150,9 +166,7 @@ If you must run verbose commands:
 
 | Pattern | Why It's Bad | Fix |
 |---|---|---|
-| `bash ls -laR *` | Outputs entire directory tree | Use `glob` tool instead |
 | `grep -r "pattern" *` then read matches | Double work | Read file once with grep first |
-| Multiple `read` calls per file | Fragmented context | Read once with `start_line`/`end_line` |
 | Copying large diffs in messages | Wastes tokens | Use `edit`/`apply_patch` directly |
 | `cd dir && command` | Verbose, unnecessary | Use `workdir` parameter instead |
 
@@ -161,7 +175,6 @@ If you must run verbose commands:
 ## Summary
 
 **Protect your context:**
-- ✅ Answer directly — 1-3 sentences is usually enough
 - ✅ Use chunked file reads — never read entire files blindly
 - ✅ Pipe/truncate bash output — never dump raw logs
 - ✅ Use dedicated tools — `grep`, `glob`, `read` instead of bash for simple tasks
