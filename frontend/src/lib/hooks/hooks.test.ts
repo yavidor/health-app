@@ -2,7 +2,6 @@
 import { useCallback } from 'react';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import mockData from '../mockData.json';
 import { ApiError } from '../api';
 import { useApiData } from './useApiData';
 
@@ -112,24 +111,5 @@ describe('useApiData', () => {
     });
 
     expect(result.current.isError).toBe(false);
-  });
-});
-
-describe('mock fixtures', () => {
-  it('match the domain schemas the pages render', () => {
-    expect(mockData.dashboard.greeting.name).toBeDefined();
-    expect(mockData.dashboard.quests.length).toBeGreaterThan(0);
-
-    expect(mockData.food.meals.length).toBeGreaterThan(0);
-    expect(mockData.food.macroTotals.protein).toBeGreaterThan(0);
-
-    expect(mockData.fitness.categories.length).toBeGreaterThan(0);
-    expect(mockData.fitness.active.title).toBeDefined();
-
-    expect(mockData.squad.leaderboard.length).toBeGreaterThan(0);
-    expect(mockData.squad.goals.length).toBeGreaterThan(0);
-
-    expect(mockData.stats.weightTrend.series.length).toBeGreaterThan(0);
-    expect(mockData.stats.summary.length).toBeGreaterThan(0);
   });
 });

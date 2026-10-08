@@ -48,6 +48,8 @@ export default defineConfig(({ mode }) => ({
     }),
   ],
   test: {
-    environment: 'node',
+    // The DOM environment matches what most of the suite needs: Screens render,
+    // and the pure-function and client tests are indifferent to it.
+    environment: 'jsdom',
   },
 }));

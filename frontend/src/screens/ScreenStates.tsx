@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
-import type { UseApiDataResult } from '../../lib/hooks/useApiData';
-import { EmptyState, ErrorState } from '../ui';
-import { PageLoader } from './PageLoader';
+import type { UseApiDataResult } from '../lib/hooks/useApiData';
+import { EmptyState, ErrorState } from '../components/ui';
+import { PageLoader } from '../components/layout/PageLoader';
 
-export interface DataBoundaryProps<T> extends UseApiDataResult<T> {
+export interface ScreenStatesProps<T> extends UseApiDataResult<T> {
   /** Rendered once data is available. */
   children: (data: T) => ReactNode;
   loadingTitle?: string;
@@ -12,13 +12,16 @@ export interface DataBoundaryProps<T> extends UseApiDataResult<T> {
 }
 
 /**
- * Renders the loading / error / success states for a `useApiData` result.
+ * Renders the loading / error / success states for a Screen's request.
  *
  * While a request is in flight the previous data stays on screen, so retries and
  * range switches do not blank the page. The error state only replaces the
  * content when there is nothing to show.
+ *
+ * Internal to the Screens: a Screen renders its header inside the success
+ * branch, so nothing outside a Screen reads partially-loaded data.
  */
-export function DataBoundary<T>({
+export function ScreenStates<T>({
   data,
   isLoading,
   isError,
@@ -28,7 +31,7 @@ export function DataBoundary<T>({
   loadingTitle,
   emptyTitle = 'No data yet',
   emptyDescription,
-}: DataBoundaryProps<T>) {
+}: ScreenStatesProps<T>) {
   if (data !== undefined) return <>{children(data)}</>;
   if (isError) return <ErrorState error={error} onRetry={refetch} />;
   if (isLoading) return <PageLoader title={loadingTitle} />;

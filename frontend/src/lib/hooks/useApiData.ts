@@ -22,8 +22,8 @@ export interface UseApiDataResult<T> {
  * Minimal GET-with-lifecycle hook.
  *
  * The app is online-first: a failed request surfaces as `isError`/`error` and
- * is never masked with placeholder data. Use `DataBoundary` to render the
- * loading, error, and success states.
+ * is never masked with placeholder data. `ScreenStates` renders the loading,
+ * error, and success states inside the Screen.
  *
  * `fetcher` must be referentially stable (wrap it in `useCallback`) — identity
  * changes retrigger the request, which is how `useStatsData` refetches when the

@@ -3,25 +3,31 @@ import { Apple, BarChart3, Dumbbell, Home, Users } from 'lucide-react';
 import type { ComponentType } from 'react';
 import type { NavItem } from '../components/layout';
 
-/** Pages are code-split: each route's chunk loads on first navigation. */
-const DashboardPage = lazy(() =>
-  import('../pages/DashboardPage').then((m) => ({ default: m.DashboardPage }))
+/** Screens are code-split: each destination's chunk loads on first navigation. */
+const DashboardScreen = lazy(() =>
+  import('../screens/DashboardScreen').then((m) => ({ default: m.DashboardScreen }))
 );
-const FitnessPage = lazy(() =>
-  import('../pages/FitnessPage').then((m) => ({ default: m.FitnessPage }))
+const FitnessScreen = lazy(() =>
+  import('../screens/FitnessScreen').then((m) => ({ default: m.FitnessScreen }))
 );
-const FoodPage = lazy(() => import('../pages/FoodPage').then((m) => ({ default: m.FoodPage })));
-const StatsPage = lazy(() => import('../pages/StatsPage').then((m) => ({ default: m.StatsPage })));
-const SquadPage = lazy(() => import('../pages/SquadPage').then((m) => ({ default: m.SquadPage })));
+const FoodScreen = lazy(() =>
+  import('../screens/FoodScreen').then((m) => ({ default: m.FoodScreen }))
+);
+const StatsScreen = lazy(() =>
+  import('../screens/StatsScreen').then((m) => ({ default: m.StatsScreen }))
+);
+const SquadScreen = lazy(() =>
+  import('../screens/SquadScreen').then((m) => ({ default: m.SquadScreen }))
+);
 
 export interface RouteDefinition extends NavItem {
-  /** The page component. Must render a `<Page>` so headers stay consistent. */
+  /** The Screen. Renders its whole destination, header included. */
   component: ComponentType;
 }
 
 /**
- * Single source of truth for navigation. Adding a page:
- *   1. create `src/pages/<Name>Page.tsx` rendering `<Page>`
+ * Single source of truth for navigation. Adding a Screen:
+ *   1. create `src/screens/<Name>Screen.tsx`
  *   2. add an entry here
  * The tab bar, sidebar and router all read from this list.
  */
@@ -31,34 +37,34 @@ export const ROUTES: readonly RouteDefinition[] = [
     label: 'Home',
     sidebarLabel: 'Dashboard',
     icon: <Home size={20} />,
-    component: DashboardPage,
+    component: DashboardScreen,
   },
   {
     id: 'fitness',
     label: 'Fitness',
     icon: <Dumbbell size={20} />,
-    component: FitnessPage,
+    component: FitnessScreen,
   },
   {
     id: 'food',
     label: 'Food',
     sidebarLabel: 'Food & Macros',
     icon: <Apple size={20} />,
-    component: FoodPage,
+    component: FoodScreen,
   },
   {
     id: 'stats',
     label: 'Stats',
     sidebarLabel: 'Analytics',
     icon: <BarChart3 size={20} />,
-    component: StatsPage,
+    component: StatsScreen,
   },
   {
     id: 'squad',
     label: 'Squad',
     sidebarLabel: 'Squad Game',
     icon: <Users size={20} />,
-    component: SquadPage,
+    component: SquadScreen,
   },
 ];
 

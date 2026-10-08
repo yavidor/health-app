@@ -26,14 +26,17 @@ export interface ApiClientConfig {
 export class ApiClient {
   private baseURL: string;
   private defaultHeaders: Record<string, string>;
-  private customFetch: typeof fetch;
+  /** Undefined means "the global fetch, resolved at call time". */
+  private customFetch?: typeof fetch;
 
   constructor(config: ApiClientConfig = {}) {
     this.baseURL = config.baseURL ?? '/api';
     this.defaultHeaders = config.headers ?? {};
-    this.customFetch =
-      config.fetch ??
-      (typeof fetch !== 'undefined' ? fetch.bind(globalThis) : (null as unknown as typeof fetch));
+    this.customFetch = config.fetch;
+  }
+
+  private fetch(): typeof fetch {
+    return this.customFetch ?? globalThis.fetch.bind(globalThis);
   }
 
   getBaseURL(): string {
@@ -94,7 +97,7 @@ export class ApiClient {
       }
     }
 
-    const response = await this.customFetch(url, {
+    const response = await this.fetch()(url, {
       ...restOptions,
       headers: mergedHeaders,
       body: serializedBody,

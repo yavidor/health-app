@@ -90,3 +90,12 @@ _Avoid_: BodyMetric, Stats
 A single measurable quantity that can be read on a date, such as weight, calories,
 or Mood Score. The unit of cross-data comparison.
 _Avoid_: Measure, Stat, Data point
+
+### App
+
+**Screen**:
+One destination in the app — Food, Stats, Squad, Dashboard, Fitness. A Screen owns
+everything a User sees on arriving there, including its header and its loading,
+error, and empty states. A Screen is the only place its own data is fetched and
+shaped for display; nothing else prepares what it renders.
+_Avoid_: Page, View, Route, Tab
