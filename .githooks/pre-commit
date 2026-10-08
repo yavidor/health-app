@@ -27,6 +27,9 @@ if echo "$staged" | grep -q '^backend/'; then
 fi
 
 if has_frontend; then
+  echo "pre-commit: auditing for stale references"
+  (cd "$repo_root" && node scripts/audit-stale-references.mjs)
+
   echo "pre-commit: checking formatting"
   (cd "$repo_root/frontend" && npx prettier --check .)
 fi

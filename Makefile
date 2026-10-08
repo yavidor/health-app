@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help install dev dev-frontend dev-backend build build-pi test typecheck check lint format deploy clean
+.PHONY: help install dev dev-frontend dev-backend build build-pi test typecheck check audit lint format deploy clean
 
 help: ## Print available make targets with descriptions
 	@echo "Usage: make [target]"
@@ -35,7 +35,10 @@ typecheck: ## Typecheck frontend and backend without emitting
 	cd frontend && npx tsc -b
 	cd backend && go build ./...
 
-check: typecheck lint test ## Run every check a pre-commit hook would run
+check: typecheck lint test audit ## Run every check a pre-commit hook would run
+
+audit: ## Parse the frontend and report stale references after a rename
+	node scripts/audit-stale-references.mjs
 
 lint: ## Run frontend linter and Go vet
 	npm --prefix frontend run lint
