@@ -11,3 +11,7 @@ A user can record their workouts with specific exercises, which they will later 
 # Food
 
 # Stats
+
+## Cycle tracking
+
+Track the monthly cycle, and keep it for data crossing. So for example you'll be able to see how much food you ate by stage of the cycle

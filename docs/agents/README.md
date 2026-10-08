@@ -1,4 +1,4 @@
-# Clanker Documentation
+# Agents-written Documentation
 
 LLM-generated documentation for the Health App project.
 
@@ -58,7 +58,7 @@ health-app/
 ├── data/                   # SQLite database
 └── docs/                   # Documentation
     ├── humans/             # Source of truth (read-only)
-    └── clankers/           # Agent documentation
+    └── agents/           # Agent documentation
 ```
 
 ---
