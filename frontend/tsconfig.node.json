@@ -13,8 +13,11 @@
     "moduleDetection": "force",
     "noEmit": true,
 
-    /* Strictness — implies noImplicitAny and strictNullChecks */
+    /* Strictness — strict implies noImplicitAny and strictNullChecks */
     "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
 
     /* Linting */
     "noUnusedLocals": true,

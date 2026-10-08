@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vitest/config';
 import { mockApiPlugin } from './vite/mockApiPlugin.js';
 
-const latency = Number.parseInt(process.env.VITE_MOCK_LATENCY_MS ?? '', 10);
+const latency = Number.parseInt(process.env['VITE_MOCK_LATENCY_MS'] ?? '', 10);
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({

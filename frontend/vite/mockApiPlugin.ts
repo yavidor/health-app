@@ -48,15 +48,17 @@ function resolveResource(
   const [pathname = '', search = ''] = (url ?? '').split('?');
   const key = pathname.replace(/^\/+|\/+$/g, '');
 
-  if (!key || !(key in fixtures)) return undefined;
+  if (!key) return undefined;
+  const fixture = fixtures[key];
+  if (fixture === undefined) return undefined;
 
   // Echo the requested range so the response matches what the client asked for.
   if (key === 'stats') {
     const range = new URLSearchParams(search).get('range');
-    if (range && RANGES.has(range)) return { key, body: { ...fixtures[key], range } };
+    if (range && RANGES.has(range)) return { key, body: { ...fixture, range } };
   }
 
-  return { key, body: fixtures[key] };
+  return { key, body: fixture };
 }
 
 export interface MockApiPluginOptions {

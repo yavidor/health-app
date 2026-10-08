@@ -34,9 +34,11 @@ describe('Macro Calculation Utilities', () => {
     const totals = { protein: 100, carbs: 100, fat: 0 };
     const segments = statsMacroSegments(totals);
 
-    expect(segments[0].detail).toBe('100g (50%)');
-    expect(segments[1].detail).toBe('100g (50%)');
-    expect(segments[2].detail).toBe('0g (0%)');
+    // Non-null: the segments are positional, so each index is asserted rather
+    // than made optional by the type system.
+    expect(segments[0]!.detail).toBe('100g (50%)');
+    expect(segments[1]!.detail).toBe('100g (50%)');
+    expect(segments[2]!.detail).toBe('0g (0%)');
   });
 
   it('formats meal subtitle correctly', () => {

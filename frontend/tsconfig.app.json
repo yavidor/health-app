@@ -16,8 +16,14 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Strictness — implies noImplicitAny and strictNullChecks */
+    /* Strictness — strict implies noImplicitAny and strictNullChecks.
+       exactOptionalPropertyTypes is deliberately off: React passes undefined
+       to optional props by convention, so it flags `subtitle={maybeUndefined}`
+       on healthy code. */
     "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
 
     /* Linting */
     "noUnusedLocals": true,

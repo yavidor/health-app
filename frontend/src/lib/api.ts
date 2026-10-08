@@ -112,13 +112,14 @@ export class ApiClient {
         errorData = undefined;
       }
 
+      const record: Record<string, unknown> =
+        typeof errorData === 'object' && errorData !== null
+          ? (errorData as Record<string, unknown>)
+          : {};
+      const message = record['message'];
+
       const errorMessage =
-        typeof errorData === 'object' &&
-        errorData !== null &&
-        'message' in errorData &&
-        typeof (errorData as Record<string, unknown>).message === 'string'
-          ? ((errorData as Record<string, unknown>).message as string)
-          : `HTTP ${response.status}: ${response.statusText}`;
+        typeof message === 'string' ? message : `HTTP ${response.status}: ${response.statusText}`;
 
       throw new ApiError(errorMessage, response.status, response.statusText, errorData);
     }

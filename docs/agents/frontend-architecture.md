@@ -118,6 +118,10 @@ replaced, and success including the derived numbers a User actually reads.
 - **`App.tsx` only resolves a route and renders it.** Everything else belongs to a
   Screen.
 - **Lucide for icons, emoji for avatars/illustrations** only.
+- **Index access is checked.** Both tsconfigs set `noUncheckedIndexedAccess`, so
+  `arr[0]` is `T | undefined`. Positional arrays carry a non-null assertion and a
+  comment saying why; `exactOptionalPropertyTypes` is deliberately off, since
+  React passes `undefined` to optional props by convention.
 
 ## Known gaps
 

@@ -68,7 +68,8 @@ export const ROUTES: readonly RouteDefinition[] = [
   },
 ];
 
-export const DEFAULT_ROUTE_ID = ROUTES[0].id;
+// Non-null: ROUTES is the source of truth for navigation and is never empty.
+export const DEFAULT_ROUTE_ID = ROUTES[0]!.id;
 
 /** Navigation projection consumed by `AppShell`. */
 export const NAV_ITEMS: readonly NavItem[] = ROUTES.map(({ id, label, sidebarLabel, icon }) => ({
