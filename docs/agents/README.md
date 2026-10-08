@@ -14,6 +14,9 @@ LLM-generated documentation for the Health App project.
 | [`design-system.md`](./design-system.md)                       | Design system reference       | Palette tokens, components, file structure              |
 | [`color-using-guide.md`](./color-using-guide.md)               | Tailwind color usage          | Which token to use where                               |
 | [`context-management.md`](./context-management.md)           | Token & context efficiency    | Chunked reading, output limits, anti-patterns          |
+| [`issue-tracker.md`](./issue-tracker.md)                     | Where issues live            | GitHub Issues via `gh`, wayfinding operations          |
+| [`triage-labels.md`](./triage-labels.md)                     | Triage label vocabulary       | Mapping of the five canonical roles to label strings   |
+| [`domain.md`](./domain.md)                                   | Domain doc consumer rules     | Where `GLOSSARY.md` and ADRs live, how to read them    |
 
 ---
 
