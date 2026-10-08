@@ -10,13 +10,14 @@ LLM-generated documentation for the Health App project.
 | -------------------------------------------------------------- | ----------------------------- | ------------------------------------------------------- |
 | [`implementation-plan.md`](./implementation-plan.md)           | System architecture & roadmap | Tech stack, ER diagrams, component hierarchy            |
 | [`raspberry-pi-hosting.md`](./raspberry-pi-hosting.md)         | $0 hosting solution           | Cloudflare Tunnel, systemd service, SQLite backup       |
-| [`frontend-architecture.md`](./frontend-architecture.md)         | Frontend layout & conventions | Layers, routing, page/feature layout                   |
+| [`frontend-architecture.md`](./frontend-architecture.md)         | Frontend layout & conventions | Screens, routing, the Screen test seam                 |
 | [`design-system.md`](./design-system.md)                       | Design system reference       | Palette tokens, components, file structure              |
 | [`color-using-guide.md`](./color-using-guide.md)               | Tailwind color usage          | Which token to use where                               |
 | [`context-management.md`](./context-management.md)           | Token & context efficiency    | Chunked reading, output limits, anti-patterns          |
 | [`issue-tracker.md`](./issue-tracker.md)                     | Where issues live            | GitHub Issues via `gh`, wayfinding operations          |
 | [`triage-labels.md`](./triage-labels.md)                     | Triage label vocabulary       | Mapping of the five canonical roles to label strings   |
 | [`domain.md`](./domain.md)                                   | Domain doc consumer rules     | Where `GLOSSARY.md` and ADRs live, how to read them    |
+| [`GLOSSARY.md`](./GLOSSARY.md)                               | Domain vocabulary             | User, Cycle, Cycle Phase, Metric, Screen               |
 
 ---
 

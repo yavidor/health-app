@@ -47,6 +47,10 @@ export function jsonResponse(body: unknown): Response {
  * The dev/QA fixtures, asserted against each Screen's data interface so drift
  * is a build error.
  *
+ * Every Screen test reads its data from here rather than importing
+ * `mockData.json` directly. A direct import skips the assertion, so a fixture
+ * that stops satisfying its Screen would only fail in a browser.
+ *
  * JSON imports widen string unions — `icon` arrives as `string`, not
  * `IconName` — so each widened field is narrowed back to its domain type here.
  * Everything else is checked by `satisfies`: a renamed or newly-required field

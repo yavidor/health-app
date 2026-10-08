@@ -16,4 +16,5 @@
 
 - **Issue tracker**: GitHub Issues via `gh` — see `docs/agents/issue-tracker.md`
 - **Triage labels**: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix` — see `docs/agents/triage-labels.md`
-- **Domain docs**: single-context (`GLOSSARY.md` + `docs/adr/` at root) — see `docs/agents/domain.md`
+- **Domain docs**: single-context (`docs/agents/GLOSSARY.md` + `docs/adr/`) — see `docs/agents/domain.md`
+- **Frontend shape**: when adding a Screen, moving a module between folders, or changing test conventions, read `docs/agents/frontend-architecture.md` first, and update it in the same change — it goes stale silently otherwise

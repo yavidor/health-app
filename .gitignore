@@ -12,3 +12,6 @@ frontend/.vite/
 .agents/
 .opencode/
 skills-lock.json
+
+# Setup scripts
+setup-git-hooks.sh

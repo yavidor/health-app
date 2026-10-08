@@ -88,6 +88,12 @@ extract at that point. A failed extraction means the seam was in the wrong place
 That is the whole change. The tab bar, desktop sidebar and router all read
 `ROUTES`, and the Screen is code-split automatically.
 
+## Checks
+
+`make check` runs typecheck, lint, and tests for both halves of the project. A
+pre-commit hook runs the same set on whatever is staged; see
+`setup-git-hooks.sh` to enable it after cloning.
+
 ## Testing
 
 The seam is the rendered Screen: stub the network, render, assert on what a User
@@ -113,8 +119,10 @@ replaced, and success including the derived numbers a User actually reads.
 - **`App.tsx` only resolves a route and renders it.** Everything else belongs to a
   Screen.
 - **Lucide for icons, emoji for avatars/illustrations** only.
-- **`tsconfig.app.json` is `strict`.** `tsconfig.node.json` is not yet — see Known
-  gaps.
+- **Both tsconfigs are `strict`.**
+- **Fixtures reach Screen tests only through `screenTestUtils.ts`,** which asserts
+  them against each Screen's data interface. A direct `mockData.json` import is an
+  ESLint error.
 
 ## Known gaps
 
@@ -128,7 +136,5 @@ replaced, and success including the derived numbers a User actually reads.
   server-sent ring percentages. Recorded in ADR-0003 (Unresolved) and in a TODO at
   the site; one of the two is wrong and it is a data-shape question.
 - Several `onSelect`/`onAdd` handlers are no-ops pending real mutations.
-- `tsconfig.node.json` has no `strict`, so `vite.config.ts` and the mock plugin are
-  unchecked for implicit `any`.
 - Hash routing only (no history routing); fine for the static PWA deployment but
   URLs are not clean.

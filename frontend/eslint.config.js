@@ -33,10 +33,28 @@ export default [
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/no-unused-expressions': 'warn',
+      // Fixture data reaches Screen tests only via `screens/screenTestUtils.ts`,
+      // which asserts it against each Screen's data interface. A direct import
+      // skips that assertion, so drift would only surface in a browser.
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '../lib/mockData.json',
+              message:
+                'Read fixtures from screens/screenTestUtils.ts so they stay asserted against the Screen\'s data interface.',
+            },
+          ],
+        },
+      ],
       // Custom rules
       'no-emoji/no-emoji': 'error',
       'no-em-dash/no-em-dash': 'error',
     },
   },
+  // The one file allowed to import fixtures directly, since that is where they
+  // are asserted against each Screen's data interface.
+  { files: ['src/screens/screenTestUtils.ts'], rules: { 'no-restricted-imports': 'off' } },
   prettier,
 ];

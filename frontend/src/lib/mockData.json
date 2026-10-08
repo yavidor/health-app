@@ -175,13 +175,35 @@
     "leaderboard": [
       { "id": "u1", "name": "Dana", "rank": 1, "points": 1840, "delta": "▲ 120", "accent": "leaf" },
       { "id": "u2", "name": "Sam", "rank": 2, "points": 1520, "delta": "▲ 40", "accent": "sea" },
-      { "id": "u3", "name": "Alex", "rank": 3, "points": 1290, "delta": "▲ 120", "isYou": true, "accent": "forest" },
+      {
+        "id": "u3",
+        "name": "Alex",
+        "rank": 3,
+        "points": 1290,
+        "delta": "▲ 120",
+        "isYou": true,
+        "accent": "forest"
+      },
       { "id": "u4", "name": "Rin", "rank": 4, "points": 980, "delta": "▼ 30", "accent": "pinkish" },
       { "id": "u5", "name": "Jo", "rank": 5, "points": 640, "delta": "▲ 15", "accent": "sea" }
     ],
     "goals": [
-      { "id": "g1", "label": "Workout", "progress": 1, "target": 1, "points": 50, "completed": true },
-      { "id": "g2", "label": "Daily vitamins", "progress": 1, "target": 1, "points": 20, "completed": true },
+      {
+        "id": "g1",
+        "label": "Workout",
+        "progress": 1,
+        "target": 1,
+        "points": 50,
+        "completed": true
+      },
+      {
+        "id": "g2",
+        "label": "Daily vitamins",
+        "progress": 1,
+        "target": 1,
+        "points": 20,
+        "completed": true
+      },
       { "id": "g3", "label": "5,000 steps", "progress": 3200, "target": 5000, "points": 40 },
       { "id": "g4", "label": "Sleep 8 hours", "progress": 7, "target": 8, "points": 30 }
     ],
@@ -272,10 +294,28 @@
       ]
     },
     "measurements": [
-      { "id": "waist", "label": "Waist", "latest": "82 cm", "change": "-2.5 cm", "icon": "sparkles" },
-      { "id": "chest", "label": "Chest", "latest": "104 cm", "change": "+1.2 cm", "icon": "sparkles" },
+      {
+        "id": "waist",
+        "label": "Waist",
+        "latest": "82 cm",
+        "change": "-2.5 cm",
+        "icon": "sparkles"
+      },
+      {
+        "id": "chest",
+        "label": "Chest",
+        "latest": "104 cm",
+        "change": "+1.2 cm",
+        "icon": "sparkles"
+      },
       { "id": "arms", "label": "Arms", "latest": "37 cm", "change": "+0.5 cm", "icon": "sparkles" },
-      { "id": "thighs", "label": "Thighs", "latest": "58 cm", "change": "-1.0 cm", "icon": "sparkles" }
+      {
+        "id": "thighs",
+        "label": "Thighs",
+        "latest": "58 cm",
+        "change": "-1.0 cm",
+        "icon": "sparkles"
+      }
     ],
     "macroTotals": { "kcal": 2180, "protein": 165, "carbs": 240, "fat": 60 },
     "storage": { "entries": 420, "workouts": 48 }

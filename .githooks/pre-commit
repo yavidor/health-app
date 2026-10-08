@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Frontend changes are checked in full. Type errors and failing tests are the
+# ones that reach a browser unnoticed, so they gate the commit.
+set -euo pipefail
+
+repo_root=$(git rev-parse --show-toplevel)
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+
+has_frontend() {
+  echo "$staged" | grep -q '^frontend/'
+}
+
+if has_frontend; then
+  echo "pre-commit: typechecking frontend"
+  (cd "$repo_root/frontend" && npx tsc -b)
+
+  echo "pre-commit: linting frontend"
+  (cd "$repo_root/frontend" && npx eslint)
+
+  echo "pre-commit: testing frontend"
+  (cd "$repo_root/frontend" && npx vitest run)
+fi
+
+if echo "$staged" | grep -q '^backend/'; then
+  echo "pre-commit: vetting backend"
+  (cd "$repo_root/backend" && go vet ./...)
+fi
+
+if has_frontend; then
+  echo "pre-commit: checking formatting"
+  (cd "$repo_root/frontend" && npx prettier --check src)
+fi

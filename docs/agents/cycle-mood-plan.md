@@ -2,7 +2,7 @@
 
 Split into two features. **Feature A first** — mood-by-cycle-day is worthless
 without phase logic, so the order is forced. Settled during a `/grill-with-docs`
-session; vocabulary in [`GLOSSARY.md`](../../GLOSSARY.md), decisions in
+session; vocabulary in [`GLOSSARY.md`](./GLOSSARY.md), decisions in
 [`docs/adr/`](../adr/).
 
 ## Why this was planned

@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help install dev dev-frontend dev-backend build build-pi test lint format deploy clean
+.PHONY: help install dev dev-frontend dev-backend build build-pi test typecheck check lint format deploy clean
 
 help: ## Print available make targets with descriptions
 	@echo "Usage: make [target]"
@@ -30,6 +30,12 @@ build-pi: ## Build frontend and cross-compile backend for Raspberry Pi
 test: ## Run frontend and backend tests
 	npm --prefix frontend test
 	cd backend && go test ./...
+
+typecheck: ## Typecheck frontend and backend without emitting
+	cd frontend && npx tsc -b
+	cd backend && go build ./...
+
+check: typecheck lint test ## Run every check a pre-commit hook would run
 
 lint: ## Run frontend linter and Go vet
 	npm --prefix frontend run lint
