@@ -7,3 +7,6 @@ backend/raspberry-health-app
 # Frontend build output
 frontend/dist/
 frontend/.vite/
+
+# Agents
+.agents/
