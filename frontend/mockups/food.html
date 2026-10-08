@@ -25,12 +25,25 @@
     </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-      body { background: #fff; color: #0a3c45; }
-      h1, h2, h3, h4 { font-weight: 600; color: #0e341f; }
-      .shadow-card {
-        box-shadow: 0 1px 2px rgb(14 52 31 / 0.04), 0 4px 12px rgb(14 52 31 / 0.06);
+      body {
+        background: #fff;
+        color: #0a3c45;
       }
-      .ring-anim { transition: stroke-dashoffset 0.35s; }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-weight: 600;
+        color: #0e341f;
+      }
+      .shadow-card {
+        box-shadow:
+          0 1px 2px rgb(14 52 31 / 0.04),
+          0 4px 12px rgb(14 52 31 / 0.06);
+      }
+      .ring-anim {
+        transition: stroke-dashoffset 0.35s;
+      }
     </style>
   </head>
   <body class="min-h-screen font-sans">
@@ -40,7 +53,25 @@
           <div class="flex items-center justify-between gap-3">
             <div class="min-w-0">
               <h1 class="text-forest-dark flex items-center gap-2 truncate text-2xl font-bold">
-                <svg class="text-forest-bright" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10" /><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z" /><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1" /><path d="m13 12 4-4" /><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2" /></svg>
+                <svg
+                  class="text-forest-bright"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M7 21h10" />
+                  <path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z" />
+                  <path
+                    d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1"
+                  />
+                  <path d="m13 12 4-4" />
+                  <path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2" />
+                </svg>
                 Food &amp; Macros
               </h1>
               <p class="text-sea-text truncate text-sm">Track what you eat</p>
@@ -50,8 +81,23 @@
                 <p class="text-forest-dark text-sm font-semibold">2,200</p>
                 <p class="text-sea-text text-xs">Daily Goal</p>
               </div>
-              <button aria-label="Add meal" class="bg-leaf-bright text-forest-dark hover:bg-leaf-text inline-flex h-10 w-10 items-center justify-center rounded-full text-white">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+              <button
+                aria-label="Add meal"
+                class="bg-leaf-bright text-forest-dark hover:bg-leaf-text inline-flex h-10 w-10 items-center justify-center rounded-full text-white"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14" />
+                  <path d="M12 5v14" />
+                </svg>
               </button>
             </div>
           </div>
@@ -60,11 +106,15 @@
         <main class="flex-1 space-y-6 p-5 pb-24">
           <!-- Logged today hero -->
           <section>
-            <div class="rounded-card shadow-card from-sea-text to-forest-text ring-1 ring-white/10 bg-gradient-to-r p-6 text-white">
+            <div
+              class="rounded-card shadow-card from-sea-text to-forest-text bg-gradient-to-r p-6 text-white ring-1 ring-white/10"
+            >
               <div class="mb-4 flex items-start justify-between gap-3">
                 <div>
                   <p class="text-sea-bright mb-1 text-sm font-medium">Logged today</p>
-                  <h2 class="text-4xl font-bold text-white">1,600 <span class="text-sea-bright text-sm font-normal">/ 2,200</span></h2>
+                  <h2 class="text-4xl font-bold text-white">
+                    1,600 <span class="text-sea-bright text-sm font-normal">/ 2,200</span>
+                  </h2>
                 </div>
                 <span class="text-xs text-white/70">kcal</span>
               </div>
@@ -72,8 +122,27 @@
                 <div class="flex flex-col items-center gap-2">
                   <div class="relative inline-flex h-16 w-16 items-center justify-center">
                     <svg width="64" height="64" viewBox="0 0 64 64" class="-rotate-90">
-                      <circle cx="32" cy="32" r="29" fill="none" stroke-width="6" stroke="#ffffff" stroke-opacity="0.25" />
-                      <circle class="ring-anim" cx="32" cy="32" r="29" fill="none" stroke-width="6" stroke-linecap="round" stroke="#ffffff" stroke-dasharray="182.2" stroke-dashoffset="49.5" />
+                      <circle
+                        cx="32"
+                        cy="32"
+                        r="29"
+                        fill="none"
+                        stroke-width="6"
+                        stroke="#ffffff"
+                        stroke-opacity="0.25"
+                      />
+                      <circle
+                        class="ring-anim"
+                        cx="32"
+                        cy="32"
+                        r="29"
+                        fill="none"
+                        stroke-width="6"
+                        stroke-linecap="round"
+                        stroke="#ffffff"
+                        stroke-dasharray="182.2"
+                        stroke-dashoffset="49.5"
+                      />
                     </svg>
                     <span class="absolute text-xs font-bold text-white">73%</span>
                   </div>
@@ -82,8 +151,27 @@
                 <div class="flex flex-col items-center gap-2">
                   <div class="relative inline-flex h-16 w-16 items-center justify-center">
                     <svg width="64" height="64" viewBox="0 0 64 64" class="-rotate-90">
-                      <circle cx="32" cy="32" r="29" fill="none" stroke-width="6" stroke="#ffffff" stroke-opacity="0.25" />
-                      <circle class="ring-anim" cx="32" cy="32" r="29" fill="none" stroke-width="6" stroke-linecap="round" stroke="#ffffff" stroke-dasharray="182.2" stroke-dashoffset="38.9" />
+                      <circle
+                        cx="32"
+                        cy="32"
+                        r="29"
+                        fill="none"
+                        stroke-width="6"
+                        stroke="#ffffff"
+                        stroke-opacity="0.25"
+                      />
+                      <circle
+                        class="ring-anim"
+                        cx="32"
+                        cy="32"
+                        r="29"
+                        fill="none"
+                        stroke-width="6"
+                        stroke-linecap="round"
+                        stroke="#ffffff"
+                        stroke-dasharray="182.2"
+                        stroke-dashoffset="38.9"
+                      />
                     </svg>
                     <span class="absolute text-xs font-bold text-white">164g</span>
                   </div>
@@ -98,19 +186,80 @@
             <h2 class="text-forest-dark mb-3 text-lg font-semibold">Today's Meals</h2>
             <div class="grid grid-cols-4 gap-2">
               <div class="rounded-card bg-mist p-3 text-center">
-                <svg class="text-forest-dark mx-auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 4 8 4 14a8 8 0 0 0 16 0c0-6-4-12-8-12" /></svg>
+                <svg
+                  class="text-forest-dark mx-auto"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 2C8 2 4 8 4 14a8 8 0 0 0 16 0c0-6-4-12-8-12" />
+                </svg>
                 <div class="text-forest-dark mt-1 text-xs font-medium">Breakfast</div>
               </div>
               <div class="rounded-card bg-mist p-3 text-center">
-                <svg class="text-forest-dark mx-auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2.37 11.223 8.372-6.777a2 2 0 0 1 2.516 0l8.371 6.777" /><path d="M21 15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-5.25" /><path d="M3 15a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h9" /><path d="m6.67 15 6.13 4.6a2 2 0 0 0 2.8-.4l3.15-4.2" /><rect width="20" height="4" x="2" y="11" rx="1" /></svg>
+                <svg
+                  class="text-forest-dark mx-auto"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m2.37 11.223 8.372-6.777a2 2 0 0 1 2.516 0l8.371 6.777" />
+                  <path d="M21 15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-5.25" />
+                  <path d="M3 15a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h9" />
+                  <path d="m6.67 15 6.13 4.6a2 2 0 0 0 2.8-.4l3.15-4.2" />
+                  <rect width="20" height="4" x="2" y="11" rx="1" />
+                </svg>
                 <div class="text-forest-dark mt-1 text-xs font-medium">Lunch</div>
               </div>
               <div class="rounded-card bg-mist p-3 text-center">
-                <svg class="text-forest-dark mx-auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></svg>
+                <svg
+                  class="text-forest-dark mx-auto"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+                  <path d="M7 2v20" />
+                  <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
+                </svg>
                 <div class="text-forest-dark mt-1 text-xs font-medium">Dinner</div>
               </div>
               <div class="rounded-card bg-mist p-3 text-center">
-                <svg class="text-forest-dark mx-auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4" /><path d="M10 22 9 8" /><path d="m14 22 1-14" /><path d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z" /></svg>
+                <svg
+                  class="text-forest-dark mx-auto"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4"
+                  />
+                  <path d="M10 22 9 8" />
+                  <path d="m14 22 1-14" />
+                  <path
+                    d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z"
+                  />
+                </svg>
                 <div class="text-forest-dark mt-1 text-xs font-medium">Snacks</div>
               </div>
             </div>
@@ -127,51 +276,144 @@
               </div>
             </div>
             <div class="rounded-tile bg-mist flex gap-1 p-1" role="tablist">
-              <button role="tab" aria-selected="true" class="shadow-card text-forest-text flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium">Today</button>
-              <button role="tab" aria-selected="false" class="text-sea-text/70 flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium">Week</button>
+              <button
+                role="tab"
+                aria-selected="true"
+                class="shadow-card text-forest-text flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium"
+              >
+                Today
+              </button>
+              <button
+                role="tab"
+                aria-selected="false"
+                class="text-sea-text/70 flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium"
+              >
+                Week
+              </button>
             </div>
           </div>
 
           <!-- Meal feed -->
           <section>
             <div class="space-y-3">
-              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
-                <span class="bg-leaf-text/10 text-leaf-dark flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 4 8 4 14a8 8 0 0 0 16 0c0-6-4-12-8-12" /></svg>
+              <div
+                class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left"
+              >
+                <span
+                  class="bg-leaf-text/10 text-leaf-dark rounded-tile flex h-11 w-11 shrink-0 items-center justify-center text-xl"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 2C8 2 4 8 4 14a8 8 0 0 0 16 0c0-6-4-12-8-12" />
+                  </svg>
                 </span>
                 <div class="min-w-0 flex-1">
                   <div class="text-forest-dark truncate font-semibold">Oatmeal &amp; Berries</div>
-                  <div class="text-sea-text/70 truncate text-xs">250 kcal • 12g protein • 45g carbs • 6g fat</div>
+                  <div class="text-sea-text/70 truncate text-xs">
+                    250 kcal • 12g protein • 45g carbs • 6g fat
+                  </div>
                 </div>
                 <div class="text-sea-text shrink-0 text-right text-sm">7:30 AM</div>
               </div>
-              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
-                <span class="bg-sea-text/10 text-sea-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2.37 11.223 8.372-6.777a2 2 0 0 1 2.516 0l8.371 6.777" /><path d="M21 15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-5.25" /><path d="M3 15a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h9" /><path d="m6.67 15 6.13 4.6a2 2 0 0 0 2.8-.4l3.15-4.2" /><rect width="20" height="4" x="2" y="11" rx="1" /></svg>
+              <div
+                class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left"
+              >
+                <span
+                  class="bg-sea-text/10 text-sea-text rounded-tile flex h-11 w-11 shrink-0 items-center justify-center text-xl"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m2.37 11.223 8.372-6.777a2 2 0 0 1 2.516 0l8.371 6.777" />
+                    <path d="M21 15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-5.25" />
+                    <path d="M3 15a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h9" />
+                    <path d="m6.67 15 6.13 4.6a2 2 0 0 0 2.8-.4l3.15-4.2" />
+                    <rect width="20" height="4" x="2" y="11" rx="1" />
+                  </svg>
                 </span>
                 <div class="min-w-0 flex-1">
                   <div class="text-forest-dark truncate font-semibold">Grilled Chicken Salad</div>
-                  <div class="text-sea-text/70 truncate text-xs">550 kcal • 42g protein • 38g carbs • 22g fat</div>
+                  <div class="text-sea-text/70 truncate text-xs">
+                    550 kcal • 42g protein • 38g carbs • 22g fat
+                  </div>
                 </div>
                 <div class="text-sea-text shrink-0 text-right text-sm">12:45 PM</div>
               </div>
-              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
-                <span class="bg-pinkish-text/10 text-pinkish-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></svg>
+              <div
+                class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left"
+              >
+                <span
+                  class="bg-pinkish-text/10 text-pinkish-text rounded-tile flex h-11 w-11 shrink-0 items-center justify-center text-xl"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+                    <path d="M7 2v20" />
+                    <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
+                  </svg>
                 </span>
                 <div class="min-w-0 flex-1">
                   <div class="text-forest-dark truncate font-semibold">Salmon with Asparagus</div>
-                  <div class="text-sea-text/70 truncate text-xs">620 kcal • 38g protein • 42g carbs • 28g fat</div>
+                  <div class="text-sea-text/70 truncate text-xs">
+                    620 kcal • 38g protein • 42g carbs • 28g fat
+                  </div>
                 </div>
                 <div class="text-sea-text shrink-0 text-right text-sm">7:00 PM</div>
               </div>
-              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
-                <span class="bg-forest-text/10 text-forest-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4" /><path d="M10 22 9 8" /><path d="m14 22 1-14" /><path d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z" /></svg>
+              <div
+                class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left"
+              >
+                <span
+                  class="bg-forest-text/10 text-forest-text rounded-tile flex h-11 w-11 shrink-0 items-center justify-center text-xl"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4"
+                    />
+                    <path d="M10 22 9 8" />
+                    <path d="m14 22 1-14" />
+                    <path
+                      d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z"
+                    />
+                  </svg>
                 </span>
                 <div class="min-w-0 flex-1">
                   <div class="text-forest-dark truncate font-semibold">Greek Yogurt &amp; Nuts</div>
-                  <div class="text-sea-text/70 truncate text-xs">180 kcal • 15g protein • 12g carbs • 10g fat</div>
+                  <div class="text-sea-text/70 truncate text-xs">
+                    180 kcal • 15g protein • 12g carbs • 10g fat
+                  </div>
                 </div>
                 <div class="text-sea-text shrink-0 text-right text-sm">9:00 AM</div>
               </div>
@@ -182,20 +424,85 @@
           <section>
             <h2 class="text-forest-dark mb-3 text-lg font-semibold">Quick Add</h2>
             <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
-              <button class="rounded-tile bg-mist text-forest-dark hover:bg-leaf-bright flex flex-col items-center gap-1 p-3">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" /></svg>
+              <button
+                class="rounded-tile bg-mist text-forest-dark hover:bg-leaf-bright flex flex-col items-center gap-1 p-3"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"
+                  />
+                </svg>
                 <span class="text-xs font-medium">Water</span>
               </button>
-              <button class="rounded-tile bg-mist text-forest-dark hover:bg-leaf-bright flex flex-col items-center gap-1 p-3">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.116 4.104A1 1 0 0 1 6.11 3h11.78a1 1 0 0 1 .994 1.105L17.19 20.21A2 2 0 0 1 15.2 22H8.8a2 2 0 0 1-2-1.79z" /><path d="M6 12a5 5 0 0 1 6 0 5 5 0 0 0 6 0" /></svg>
+              <button
+                class="rounded-tile bg-mist text-forest-dark hover:bg-leaf-bright flex flex-col items-center gap-1 p-3"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M5.116 4.104A1 1 0 0 1 6.11 3h11.78a1 1 0 0 1 .994 1.105L17.19 20.21A2 2 0 0 1 15.2 22H8.8a2 2 0 0 1-2-1.79z"
+                  />
+                  <path d="M6 12a5 5 0 0 1 6 0 5 5 0 0 0 6 0" />
+                </svg>
                 <span class="text-xs font-medium">Protein</span>
               </button>
-              <button class="rounded-tile bg-mist text-forest-dark hover:bg-leaf-bright flex flex-col items-center gap-1 p-3">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.528V3a1 1 0 0 1 1-1h0" /><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /></svg>
+              <button
+                class="rounded-tile bg-mist text-forest-dark hover:bg-leaf-bright flex flex-col items-center gap-1 p-3"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 6.528V3a1 1 0 0 1 1-1h0" />
+                  <path
+                    d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21"
+                  />
+                </svg>
                 <span class="text-xs font-medium">Fruit</span>
               </button>
-              <button class="rounded-tile bg-mist text-forest-dark hover:bg-leaf-bright flex flex-col items-center gap-1 p-3">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2" /><path d="M14 2v2" /><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" /><path d="M6 2v2" /></svg>
+              <button
+                class="rounded-tile bg-mist text-forest-dark hover:bg-leaf-bright flex flex-col items-center gap-1 p-3"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M10 2v2" />
+                  <path d="M14 2v2" />
+                  <path
+                    d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"
+                  />
+                  <path d="M6 2v2" />
+                </svg>
                 <span class="text-xs font-medium">Coffee</span>
               </button>
             </div>
@@ -215,33 +522,77 @@
                   <div class="relative shrink-0" style="width: 160px; height: 160px">
                     <svg viewBox="0 0 160 160" class="h-full w-full -rotate-90">
                       <!-- protein 35% forest, carbs 52% sea, fats 13% pinkish -->
-                      <circle cx="80" cy="80" r="62" fill="none" stroke="#156b44" stroke-width="22" stroke-dasharray="136 389" stroke-dashoffset="0" />
-                      <circle cx="80" cy="80" r="62" fill="none" stroke="#185661" stroke-width="22" stroke-dasharray="202 389" stroke-dashoffset="-139" />
-                      <circle cx="80" cy="80" r="62" fill="none" stroke="#b69a96" stroke-width="22" stroke-dasharray="51 389" stroke-dashoffset="-344" />
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="62"
+                        fill="none"
+                        stroke="#156b44"
+                        stroke-width="22"
+                        stroke-dasharray="136 389"
+                        stroke-dashoffset="0"
+                      />
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="62"
+                        fill="none"
+                        stroke="#185661"
+                        stroke-width="22"
+                        stroke-dasharray="202 389"
+                        stroke-dashoffset="-139"
+                      />
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="62"
+                        fill="none"
+                        stroke="#b69a96"
+                        stroke-width="22"
+                        stroke-dasharray="51 389"
+                        stroke-dashoffset="-344"
+                      />
                     </svg>
-                    <div class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+                    <div
+                      class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"
+                    >
                       <span class="text-forest-dark text-xl font-bold tabular-nums">1,600</span>
                       <span class="text-sea-text text-xs">kcal</span>
                     </div>
                   </div>
                   <ul class="w-full space-y-2">
                     <li class="flex items-center gap-2 text-sm">
-                      <span class="h-2.5 w-2.5 shrink-0 rounded-full" style="background-color: #156b44"></span>
+                      <span
+                        class="h-2.5 w-2.5 shrink-0 rounded-full"
+                        style="background-color: #156b44"
+                      ></span>
                       <span class="text-sea-text flex-1">Protein</span>
                       <span class="text-sea-text/70 text-xs">164 g</span>
-                      <span class="text-forest-text w-10 text-right font-semibold tabular-nums">35%</span>
+                      <span class="text-forest-text w-10 text-right font-semibold tabular-nums"
+                        >35%</span
+                      >
                     </li>
                     <li class="flex items-center gap-2 text-sm">
-                      <span class="h-2.5 w-2.5 shrink-0 rounded-full" style="background-color: #185661"></span>
+                      <span
+                        class="h-2.5 w-2.5 shrink-0 rounded-full"
+                        style="background-color: #185661"
+                      ></span>
                       <span class="text-sea-text flex-1">Carbs</span>
                       <span class="text-sea-text/70 text-xs">246 g</span>
-                      <span class="text-sea-text w-10 text-right font-semibold tabular-nums">52%</span>
+                      <span class="text-sea-text w-10 text-right font-semibold tabular-nums"
+                        >52%</span
+                      >
                     </li>
                     <li class="flex items-center gap-2 text-sm">
-                      <span class="h-2.5 w-2.5 shrink-0 rounded-full" style="background-color: #b69a96"></span>
+                      <span
+                        class="h-2.5 w-2.5 shrink-0 rounded-full"
+                        style="background-color: #b69a96"
+                      ></span>
                       <span class="text-sea-text flex-1">Fats</span>
                       <span class="text-sea-text/70 text-xs">61 g</span>
-                      <span class="text-pinkish-text w-10 text-right font-semibold tabular-nums">13%</span>
+                      <span class="text-pinkish-text w-10 text-right font-semibold tabular-nums"
+                        >13%</span
+                      >
                     </li>
                   </ul>
                 </div>
@@ -254,7 +605,9 @@
             <div class="space-y-3 p-4">
               <div class="flex items-start justify-between gap-3">
                 <div class="min-w-0">
-                  <h3 class="text-forest-dark truncate text-base font-semibold">Weekly Comparison</h3>
+                  <h3 class="text-forest-dark truncate text-base font-semibold">
+                    Weekly Comparison
+                  </h3>
                   <p class="text-sea-text/70 truncate text-xs">Calories per day</p>
                 </div>
               </div>
@@ -267,7 +620,13 @@
                     <line x1="34" y1="170" x2="352" y2="170" />
                     <line x1="34" y1="210" x2="352" y2="210" />
                   </g>
-                  <g fill="#0a3c45" fill-opacity="0.7" font-size="11" font-family="Inter, sans-serif" text-anchor="end">
+                  <g
+                    fill="#0a3c45"
+                    fill-opacity="0.7"
+                    font-size="11"
+                    font-family="Inter, sans-serif"
+                    text-anchor="end"
+                  >
                     <text x="28" y="24">2,500</text>
                     <text x="28" y="124">1,250</text>
                     <text x="28" y="214">0</text>
@@ -280,7 +639,13 @@
                     <rect x="264" y="59" width="30" height="151" rx="6" />
                     <rect x="318" y="77" width="30" height="133" rx="6" />
                   </g>
-                  <g fill="#0a3c45" fill-opacity="0.7" font-size="11" font-family="Inter, sans-serif" text-anchor="middle">
+                  <g
+                    fill="#0a3c45"
+                    fill-opacity="0.7"
+                    font-size="11"
+                    font-family="Inter, sans-serif"
+                    text-anchor="middle"
+                  >
                     <text x="63" y="228">M</text>
                     <text x="117" y="228">T</text>
                     <text x="171" y="228">W</text>
@@ -294,37 +659,135 @@
           </div>
         </main>
 
-        <nav class="border-forest-dark/10 fixed inset-x-0 bottom-0 z-20 border-t bg-white/95 backdrop-blur lg:hidden">
+        <nav
+          class="border-forest-dark/10 fixed inset-x-0 bottom-0 z-20 border-t bg-white/95 backdrop-blur lg:hidden"
+        >
           <div class="mx-auto flex h-16 max-w-md items-center justify-around">
             <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                <path
+                  d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                />
+              </svg>
               <span class="text-xs font-medium">Home</span>
             </button>
             <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                />
+                <path d="m2.5 21.5 1.4-1.4" />
+                <path d="m20.1 3.9 1.4-1.4" />
+                <path
+                  d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                />
+                <path d="m9.6 14.4 4.8-4.8" />
+              </svg>
               <span class="text-xs font-medium">Fitness</span>
             </button>
-            <button aria-current="page" class="text-forest-text flex flex-col items-center gap-1 px-2 py-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.528V3a1 1 0 0 1 1-1h0" /><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /></svg>
+            <button
+              aria-current="page"
+              class="text-forest-text flex flex-col items-center gap-1 px-2 py-2"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 6.528V3a1 1 0 0 1 1-1h0" />
+                <path
+                  d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21"
+                />
+              </svg>
               <span class="text-xs font-medium">Food</span>
             </button>
             <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                <path d="M18 17V9" />
+                <path d="M13 17V5" />
+                <path d="M8 17v-3" />
+              </svg>
               <span class="text-xs font-medium">Stats</span>
             </button>
             <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <circle cx="9" cy="7" r="4" />
+              </svg>
               <span class="text-xs font-medium">Squad</span>
             </button>
           </div>
         </nav>
       </div>
 
-      <aside class="border-forest-dark/10 bg-mist sticky top-0 hidden h-screen w-64 flex-col border-r lg:flex">
+      <aside
+        class="border-forest-dark/10 bg-mist sticky top-0 hidden h-screen w-64 flex-col border-r lg:flex"
+      >
         <div class="p-6">
           <div class="flex items-center gap-3">
-            <span class="from-leaf-text to-forest-text flex h-12 w-12 items-center justify-center rounded-tile bg-gradient-to-br text-2xl text-white">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></svg>
+            <span
+              class="from-leaf-text to-forest-text rounded-tile flex h-12 w-12 items-center justify-center bg-gradient-to-br text-2xl text-white"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"
+                />
+                <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+              </svg>
             </span>
             <div>
               <h1 class="text-forest-dark text-xl font-bold">Health App</h1>
@@ -333,30 +796,125 @@
           </div>
         </div>
         <nav class="flex-1 space-y-2 p-4">
-          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
-            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg></span>
+          <button
+            class="text-sea-text rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium hover:bg-white/60"
+          >
+            <span class="shrink-0"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                <path
+                  d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                /></svg
+            ></span>
             Dashboard
           </button>
-          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
-            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></span>
+          <button
+            class="text-sea-text rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium hover:bg-white/60"
+          >
+            <span class="shrink-0"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                />
+                <path d="m2.5 21.5 1.4-1.4" />
+                <path d="m20.1 3.9 1.4-1.4" />
+                <path
+                  d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                />
+                <path d="m9.6 14.4 4.8-4.8" /></svg
+            ></span>
             Fitness
           </button>
-          <button aria-current="page" class="rounded-tile shadow-card text-forest-text flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
-            <span class="shrink-0 text-forest-text"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.528V3a1 1 0 0 1 1-1h0" /><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /></svg></span>
+          <button
+            aria-current="page"
+            class="rounded-tile shadow-card text-forest-text flex w-full items-center gap-3 px-4 py-3 text-left font-medium"
+          >
+            <span class="text-forest-text shrink-0"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 6.528V3a1 1 0 0 1 1-1h0" />
+                <path
+                  d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21"
+                /></svg
+            ></span>
             Food &amp; Macros
           </button>
-          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
-            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg></span>
+          <button
+            class="text-sea-text rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium hover:bg-white/60"
+          >
+            <span class="shrink-0"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                <path d="M18 17V9" />
+                <path d="M13 17V5" />
+                <path d="M8 17v-3" /></svg
+            ></span>
             Analytics
           </button>
-          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
-            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></span>
+          <button
+            class="text-sea-text rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium hover:bg-white/60"
+          >
+            <span class="shrink-0"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <circle cx="9" cy="7" r="4" /></svg
+            ></span>
             Squad Game
           </button>
         </nav>
         <div class="border-forest-dark/10 border-t p-4">
-          <div class="shadow-card flex items-center gap-3 rounded-tile bg-white px-4 py-3">
-            <div class="from-sea-text to-forest-text flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white">A</div>
+          <div class="shadow-card rounded-tile flex items-center gap-3 bg-white px-4 py-3">
+            <div
+              class="from-sea-text to-forest-text flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white"
+            >
+              A
+            </div>
             <div class="flex-1">
               <p class="text-forest-dark text-sm font-medium">Alex</p>
             </div>

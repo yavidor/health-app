@@ -13,6 +13,10 @@ LLM-generated documentation for the Health App project.
 | [`frontend-architecture.md`](./frontend-architecture.md)         | Frontend layout & conventions | Layers, routing, page/feature layout                   |
 | [`design-system.md`](./design-system.md)                       | Design system reference       | Palette tokens, components, file structure              |
 | [`color-using-guide.md`](./color-using-guide.md)               | Tailwind color usage          | Which token to use where                               |
+| [`context-management.md`](./context-management.md)           | Token & context efficiency    | Chunked reading, output limits, anti-patterns          |
+| [`issue-tracker.md`](./issue-tracker.md)                     | Where issues live            | GitHub Issues via `gh`, wayfinding operations          |
+| [`triage-labels.md`](./triage-labels.md)                     | Triage label vocabulary       | Mapping of the five canonical roles to label strings   |
+| [`domain.md`](./domain.md)                                   | Domain doc consumer rules     | Where `GLOSSARY.md` and ADRs live, how to read them    |
 
 ---
 
@@ -34,6 +38,7 @@ Visual wireframes in the [`../../frontend/mockups/`](../../frontend/mockups/) di
 - [`dashboard.html`](../../frontend/mockups/dashboard.html) — Daily progress overview with workout logging, food tracking, and quest checklist
 - [`fitness.html`](../../frontend/mockups/fitness.html) — Fitness routines and workout session logger
 - [`food.html`](../../frontend/mockups/food.html) — Meal and macro tracking
+- [`squad.html`](../../frontend/mockups/squad.html) — Squad game, quests, and leaderboard
 - [`stats.html`](../../frontend/mockups/stats.html) — Cross-metric analytics: weight trend, dual-axis calories-vs-weight correlation, body measurements, macro balance
 
 These mockups define the target UI for implementation.
@@ -44,21 +49,23 @@ These mockups define the target UI for implementation.
 
 ```
 health-app/
-├── frontend/               ← React PWA (Vite + TypeScript)
+├── backend/                ← Go HTTP Server + SQLite API
+├── deploy/                 ← Deployment scripts
+├── frontend/               ← React PWA (Vite + TypeScript + Tailwind v4)
 │   ├── src/
 │   │   ├── app/            # Routing, config, router
-│   │   ├── components/     # Shared components
-│   │   ├── features/       # Feature pages
+│   │   ├── components/     # Shared UI, layout, domain, and chart components
+│   │   ├── features/       # Feature modules (dashboard, fitness, food, squad, stats)
 │   │   ├── lib/            # Utilities
 │   │   └── index.css
 │   ├── public/             # Static assets
-│   ├── mockups/            # Design wireframes (dashboard, fitness, food, stats)
+│   ├── mockups/            # Design wireframes (dashboard, fitness, food, squad, stats)
 │   ├── index.html          # HTML entry point
 │   └── package.json
 ├── data/                   # SQLite database
 └── docs/                   # Documentation
     ├── humans/             # Source of truth (read-only)
-    └── agents/           # Agent documentation
+    └── agents/             # Agent documentation
 ```
 
 ---

@@ -1,0 +1,10 @@
+export { DashboardPage } from './DashboardPage';
+export type { DashboardPageProps } from './DashboardPage';
+export { FitnessPage } from './FitnessPage';
+export type { FitnessPageProps } from './FitnessPage';
+export { FoodPage } from './FoodPage';
+export type { FoodPageProps } from './FoodPage';
+export { SquadPage } from './SquadPage';
+export type { SquadPageProps } from './SquadPage';
+export { StatsPage } from './StatsPage';
+export type { StatsPageProps } from './StatsPage';

@@ -1,0 +1,283 @@
+{
+  "dashboard": {
+    "greeting": { "name": "Alex", "streakDays": 12 },
+    "dailyTotal": { "consumed": 450, "goal": 2500 },
+    "rings": [
+      { "label": "Calories", "pct": 72, "display": "72%", "accent": "sea" },
+      { "label": "Protein", "pct": 65, "display": "65g", "accent": "forest" }
+    ],
+    "quickActions": [
+      { "id": "workout", "label": "Workout", "icon": "dumbbell" },
+      { "id": "meal", "label": "Meal", "icon": "salad" },
+      { "id": "stats", "label": "Stats", "icon": "chart" },
+      { "id": "squad", "label": "Squad", "icon": "gamepad" }
+    ],
+    "quests": [
+      {
+        "id": "vitamins",
+        "icon": "pill",
+        "title": "Daily Vitamins",
+        "subtitle": "Vitamin C, D, B12",
+        "accent": "leaf"
+      },
+      {
+        "id": "steps",
+        "icon": "footsteps",
+        "title": "5k Steps",
+        "subtitle": "Daily walk goal",
+        "accent": "sea"
+      },
+      {
+        "id": "run",
+        "icon": "activity",
+        "title": "Morning Run",
+        "subtitle": "30 min cardio",
+        "accent": "pinkish"
+      }
+    ],
+    "activity": [
+      {
+        "id": "a1",
+        "icon": "activity",
+        "title": "Morning Run",
+        "subtitle": "5.2 km • 42 min • 320 kcal",
+        "time": "7:42 AM",
+        "accent": "pinkish"
+      },
+      {
+        "id": "a2",
+        "icon": "salad",
+        "title": "Lunch",
+        "subtitle": "Grilled chicken • 550 kcal",
+        "time": "1:30 PM",
+        "accent": "sea"
+      },
+      {
+        "id": "a3",
+        "icon": "dumbbell",
+        "title": "Upper Body",
+        "subtitle": "Gym • 60 min • 380 kcal",
+        "time": "6:00 PM",
+        "accent": "forest"
+      }
+    ],
+    "macros": [
+      { "label": "Protein", "value": 65, "max": 140, "accent": "forest" },
+      { "label": "Carbs", "value": 120, "max": 220, "accent": "sea" },
+      { "label": "Fats", "value": 35, "max": 65, "accent": "pinkish" }
+    ],
+    "squadRank": 3,
+    "squadPoints": 120
+  },
+  "fitness": {
+    "weekMinutes": { "value": 210, "hint": "4 workouts" },
+    "monthMinutes": { "value": 1245, "hint": "18 workouts" },
+    "active": {
+      "id": "w1",
+      "title": "Upper Body",
+      "location": "Gym",
+      "remainingMinutes": 45,
+      "progressPct": 65,
+      "exercises": [
+        { "id": "e1", "name": "Bench Press", "setsDone": 4, "setsTotal": 5, "load": "450 kg" },
+        { "id": "e2", "name": "Overhead Press", "setsDone": 3, "setsTotal": 5, "load": "80 kg" },
+        { "id": "e3", "name": "Bicep Curls", "setsDone": 2, "setsTotal": 5, "load": "45 kg" }
+      ]
+    },
+    "categories": [
+      { "id": "upper", "label": "Upper", "icon": "dumbbell", "accent": "pinkish" },
+      { "id": "cardio", "label": "Cardio", "icon": "activity", "accent": "sea" },
+      { "id": "core", "label": "Core", "icon": "heart", "accent": "forest" },
+      { "id": "flex", "label": "Flex", "icon": "sparkles", "accent": "leaf" }
+    ],
+    "history": [
+      {
+        "id": "h1",
+        "icon": "dumbbell",
+        "title": "Upper Body",
+        "subtitle": "Gym • 3 hours ago",
+        "headline": "450 kg",
+        "detail": "4 sets",
+        "accent": "pinkish"
+      },
+      {
+        "id": "h2",
+        "icon": "activity",
+        "title": "Morning Run",
+        "subtitle": "Home • 1 day ago",
+        "headline": "5.2 km",
+        "detail": "42 min",
+        "accent": "sea"
+      },
+      {
+        "id": "h3",
+        "icon": "dumbbell",
+        "title": "Lower Body",
+        "subtitle": "Gym • 2 days ago",
+        "headline": "85 kg",
+        "detail": "6 sets",
+        "accent": "forest"
+      }
+    ]
+  },
+  "food": {
+    "goal": { "consumed": 850, "target": 2200 },
+    "macroTotals": { "protein": 164, "carbs": 246, "fat": 61 },
+    "meals": [
+      {
+        "id": "breakfast-7:30 AM",
+        "slot": "breakfast",
+        "title": "Oatmeal & Berries",
+        "time": "7:30 AM",
+        "kcal": 250,
+        "protein": 12,
+        "carbs": 45,
+        "fat": 6
+      },
+      {
+        "id": "lunch-12:45 PM",
+        "slot": "lunch",
+        "title": "Grilled Chicken Salad",
+        "time": "12:45 PM",
+        "kcal": 550,
+        "protein": 42,
+        "carbs": 38,
+        "fat": 22
+      },
+      {
+        "id": "dinner-7:00 PM",
+        "slot": "dinner",
+        "title": "Salmon with Asparagus",
+        "time": "7:00 PM",
+        "kcal": 620,
+        "protein": 38,
+        "carbs": 42,
+        "fat": 28
+      }
+    ],
+    "quickAdd": [
+      { "id": "water", "label": "Water", "icon": "droplet" },
+      { "id": "protein", "label": "Protein", "icon": "water" },
+      { "id": "fruit", "label": "Fruit", "icon": "apple" },
+      { "id": "coffee", "label": "Coffee", "icon": "coffee" }
+    ],
+    "weeklyCalories": [
+      { "day": "M", "kcal": 2180 },
+      { "day": "T", "kcal": 2240 },
+      { "day": "W", "kcal": 1980 },
+      { "day": "T", "kcal": 2410 },
+      { "day": "F", "kcal": 2105 },
+      { "day": "S", "kcal": 1850 }
+    ]
+  },
+  "squad": {
+    "members": 5,
+    "leaderboard": [
+      { "id": "u1", "name": "Dana", "rank": 1, "points": 1840, "delta": "▲ 120", "accent": "leaf" },
+      { "id": "u2", "name": "Sam", "rank": 2, "points": 1520, "delta": "▲ 40", "accent": "sea" },
+      { "id": "u3", "name": "Alex", "rank": 3, "points": 1290, "delta": "▲ 120", "isYou": true, "accent": "forest" },
+      { "id": "u4", "name": "Rin", "rank": 4, "points": 980, "delta": "▼ 30", "accent": "pinkish" },
+      { "id": "u5", "name": "Jo", "rank": 5, "points": 640, "delta": "▲ 15", "accent": "sea" }
+    ],
+    "goals": [
+      { "id": "g1", "label": "Workout", "progress": 1, "target": 1, "points": 50, "completed": true },
+      { "id": "g2", "label": "Daily vitamins", "progress": 1, "target": 1, "points": 20, "completed": true },
+      { "id": "g3", "label": "5,000 steps", "progress": 3200, "target": 5000, "points": 40 },
+      { "id": "g4", "label": "Sleep 8 hours", "progress": 7, "target": 8, "points": 30 }
+    ],
+    "quickActions": [
+      { "id": "workout", "label": "Workout", "icon": "dumbbell" },
+      { "id": "steps", "label": "Steps", "icon": "footsteps" },
+      { "id": "pills", "label": "Vitamins", "icon": "pill" },
+      { "id": "sleep", "label": "Sleep", "icon": "moon" }
+    ],
+    "wins": [
+      {
+        "id": "w1",
+        "icon": "trophy",
+        "title": "Beat Sam for 2nd",
+        "subtitle": "Overtook Sam by 40 points",
+        "accent": "leaf"
+      },
+      {
+        "id": "w2",
+        "icon": "flame",
+        "title": "7-day streak",
+        "subtitle": "Logged a goal every day",
+        "accent": "pinkish"
+      }
+    ]
+  },
+  "stats": {
+    "range": "30d",
+    "weightTrend": {
+      "changeLabel": "▼ 3.2 kg",
+      "currentKg": 75.2,
+      "startKg": 78.4,
+      "series": [
+        { "week": "Aug 29", "weight": 78.4 },
+        { "week": "Sep 6", "weight": 77.6 },
+        { "week": "Sep 13", "weight": 76.9 },
+        { "week": "Sep 20", "weight": 75.8 },
+        { "week": "Today", "weight": 75.2 }
+      ]
+    },
+    "summary": [
+      {
+        "id": "kcal",
+        "label": "Avg kcal / day",
+        "value": "2,180",
+        "delta": "▼ 340 vs last month",
+        "direction": "down",
+        "positive": true,
+        "icon": "flame"
+      },
+      {
+        "id": "workouts",
+        "label": "Workouts logged",
+        "value": "14",
+        "delta": "▲ 3 vs last month",
+        "direction": "up",
+        "positive": true,
+        "icon": "dumbbell"
+      },
+      {
+        "id": "fat",
+        "label": "Body fat",
+        "value": "18.4%",
+        "delta": "▼ 1.8 pts",
+        "direction": "down",
+        "positive": true,
+        "icon": "beef"
+      },
+      {
+        "id": "steps",
+        "label": "Avg steps / day",
+        "value": "9,240",
+        "delta": "▲ 620 vs last month",
+        "direction": "up",
+        "positive": true,
+        "icon": "footsteps"
+      }
+    ],
+    "correlation": {
+      "correlation": "-0.84",
+      "insight": "High calorie deficit days correlate with higher weight loss rate.",
+      "series": [
+        { "week": "W1", "calories": 2400, "weight": 78.4 },
+        { "week": "W2", "calories": 2100, "weight": 77.6 },
+        { "week": "W3", "calories": 1950, "weight": 76.9 },
+        { "week": "W4", "calories": 2200, "weight": 75.8 },
+        { "week": "W5", "calories": 1850, "weight": 75.2 }
+      ]
+    },
+    "measurements": [
+      { "id": "waist", "label": "Waist", "latest": "82 cm", "change": "-2.5 cm", "icon": "sparkles" },
+      { "id": "chest", "label": "Chest", "latest": "104 cm", "change": "+1.2 cm", "icon": "sparkles" },
+      { "id": "arms", "label": "Arms", "latest": "37 cm", "change": "+0.5 cm", "icon": "sparkles" },
+      { "id": "thighs", "label": "Thighs", "latest": "58 cm", "change": "-1.0 cm", "icon": "sparkles" }
+    ],
+    "macroTotals": { "kcal": 2180, "protein": 165, "carbs": 240, "fat": 60 },
+    "storage": { "entries": 420, "workouts": 48 }
+  }
+}
