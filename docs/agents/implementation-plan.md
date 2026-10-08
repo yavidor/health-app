@@ -1,21 +1,29 @@
 # Health App: Architecture & Implementation Plan
 
-This document defines the complete technical implementation plan for the Health & Fitness App, using a **modern web stack (Vite + React + Tailwind CSS)** with a **minimal Go backend** and **SQLite database**. The frontend is configured as a **Mobile-First Progressive Web App (PWA)** that also adapts to desktop screens.
+This document defines the complete technical implementation plan for the Health & Fitness App, using a **modern web stack (Vite + React + Tailwind CSS)** with a **minimal Go backend** and **SQLite database**. The frontend is a **Mobile-First, installable Progressive Web App (PWA)** that also adapts to desktop screens. It is online-first: it does not cache API data for offline use (see [Offline support](#offline-support)).
 
 ---
 
 ## 0. Current Project State
 
 ### Completed
-- **Project scaffolding**: Vite + React + TypeScript initialized
-- **Linting & Formatting**: eslint (flat config) and prettier configured and passing
-- **Design system**: Color palette defined in `docs/humans/design/colors.md`
+- **Project Scaffolding**: Vite + React + TypeScript initialized in `frontend/`, Go module initialized in `backend/`.
+- **Linting & Formatting**: ESLint (flat config) and Prettier configured and passing.
+- **Design System & Styling**: Tailwind CSS v4 configured with custom color tokens in `frontend/src/index.css`.
+- **Frontend Feature Views**: UI implemented across all primary feature routes (Dashboard, Fitness, Food, Squad, Stats), backed by a shared `ApiClient` and a `DataBoundary` loading/error boundary.
+- **QA Mock Fixtures**: `frontend/vite/mockApiPlugin.ts` serves `frontend/src/lib/mockData.json` over real HTTP from a Vite middleware, enabled with `npm run dev:mock`. The app has no mock-mode branching, so QA exercises the same code path as production.
+- **Backend Scaffold**: Basic Go HTTP server with routing and structured logging initialized in `backend/main.go`.
 
 ### Pending
-- **Application development**: No React components written yet
-- **UI/UX implementation**: Dashboard, workouts, nutrition, analytics, and squad game screens
-- **PWA configuration**: Web app manifest and service worker to be created
-- **Backend services**: Go HTTP server with SQLite for API
+- **Data Persistence & Database Integration**: Connect Go backend to SQLite with migrations, CRUD endpoints, and JSON export/import.
+- **Backend API Endpoints**: Implement `/api/dashboard`, `/api/fitness`, `/api/food`, `/api/squad`, and `/api/stats`. Until they exist the frontend surfaces a visible error state rather than silently falling back to fixtures.
+- **Automated Tests**: Expand coverage; backend tests are not yet written.
+
+### Offline support
+
+The app is **online-first and intentionally not offline-capable**. It is installable as a PWA (web app manifest plus a service worker that precaches the app shell), but the service worker has **no runtime caching**: `/api/*` responses are never cached, so a network failure is a genuine failure and renders an error state with a retry action. There is no localStorage/IndexedDB cache of domain data and no offline mutation queue.
+
+For UI work without a backend, use `npm run dev:mock` (add `VITE_MOCK_LATENCY_MS=800` to exercise loading states). This is a testing tool, not an offline mode.
 
 ---
 
@@ -24,10 +32,10 @@ This document defines the complete technical implementation plan for the Health 
 | **Framework / Build**    | **Vite + React (TypeScript)**           | Instant local boot time (`npm run dev`), zero mobile toolchain friction, standard web DOM/HTML/CSS.                                                  |
 | **Styling & Theme**      | **Tailwind CSS**                        | Strict adherence to the palette in `docs/humans/design/colors.md` using custom CSS variables (bright tones for UI/cards, dark tones for text/icons). |
 | **Backend & Database**   | **Go + SQLite**                         | Lightweight HTTP server with in-process SQLite database for user data, leaderboards, and quest tracking.                                             |
-| **Frontend & Static**    | **Vite + Static Assets**                | Served by the Go backend; PWA manifest and service worker for installability.                                                                          |
+| **Frontend & Static**    | **Vite + Static Assets**                | Served by the Go backend; PWA manifest and service worker precache the app shell for installability. API responses are never cached.                          |
 | **Data Visualization**   | **Recharts**                            | Lightweight, responsive SVG charts for cross-metric correlation (e.g., Calorie intake vs. Body measurements).                                        |
 | **Iconography**          | **Lucide React**                        | Clean, accessible vector icons for mobile tab bars and dashboard widgets.                                                                            |
-| **Deployment / Target**  | **PWA (Mobile & Desktop)**              | Installable to mobile home screen (standalone window, no address bar) and responsive desktop web layout. and responsive desktop web layout.                              |
+| **Deployment / Target**  | **PWA (Mobile & Desktop)**              | Installable to mobile home screen (standalone window, no address bar) and responsive desktop web layout.                                                |
 
 ---
 
@@ -282,6 +290,6 @@ classDiagram
   - **Squad Game:** Mutual goals, points engine, and local simulated leaderboard.
 
 > **Current Status:** All features are planned but not yet implemented.
-- [ ] **Phase 4: PWA Packaging & Polish**
-  - Add Web App Manifest and Service Worker for home-screen installability.
+- [x] **Phase 4: PWA Packaging & Polish**
+  - Web App Manifest and Service Worker for home-screen installability (done: precaches app shell only, no runtime caching).
   - Verify WCAG contrast and palette constraints.

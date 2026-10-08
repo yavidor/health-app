@@ -5,20 +5,14 @@ import type { NavItem } from '../components/layout';
 
 /** Pages are code-split: each route's chunk loads on first navigation. */
 const DashboardPage = lazy(() =>
-  import('../features/dashboard/DashboardPage').then((m) => ({ default: m.DashboardPage }))
+  import('../pages/DashboardPage').then((m) => ({ default: m.DashboardPage }))
 );
 const FitnessPage = lazy(() =>
-  import('../features/fitness/FitnessPage').then((m) => ({ default: m.FitnessPage }))
+  import('../pages/FitnessPage').then((m) => ({ default: m.FitnessPage }))
 );
-const FoodPage = lazy(() =>
-  import('../features/food/FoodPage').then((m) => ({ default: m.FoodPage }))
-);
-const StatsPage = lazy(() =>
-  import('../features/stats/StatsPage').then((m) => ({ default: m.StatsPage }))
-);
-const SquadPage = lazy(() =>
-  import('../features/squad/SquadPage').then((m) => ({ default: m.SquadPage }))
-);
+const FoodPage = lazy(() => import('../pages/FoodPage').then((m) => ({ default: m.FoodPage })));
+const StatsPage = lazy(() => import('../pages/StatsPage').then((m) => ({ default: m.StatsPage })));
+const SquadPage = lazy(() => import('../pages/SquadPage').then((m) => ({ default: m.SquadPage })));
 
 export interface RouteDefinition extends NavItem {
   /** The page component. Must render a `<Page>` so headers stay consistent. */
@@ -27,7 +21,7 @@ export interface RouteDefinition extends NavItem {
 
 /**
  * Single source of truth for navigation. Adding a page:
- *   1. create `src/app/features/<name>/<Name>Page.tsx` rendering `<Page>`
+ *   1. create `src/pages/<Name>Page.tsx` rendering `<Page>`
  *   2. add an entry here
  * The tab bar, sidebar and router all read from this list.
  */

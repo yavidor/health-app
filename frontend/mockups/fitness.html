@@ -25,12 +25,25 @@
     </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-      body { background: #fff; color: #0a3c45; }
-      h1, h2, h3, h4 { font-weight: 600; color: #0e341f; }
-      .shadow-card {
-        box-shadow: 0 1px 2px rgb(14 52 31 / 0.04), 0 4px 12px rgb(14 52 31 / 0.06);
+      body {
+        background: #fff;
+        color: #0a3c45;
       }
-      .ring-anim { transition: stroke-dashoffset 0.35s; }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-weight: 600;
+        color: #0e341f;
+      }
+      .shadow-card {
+        box-shadow:
+          0 1px 2px rgb(14 52 31 / 0.04),
+          0 4px 12px rgb(14 52 31 / 0.06);
+      }
+      .ring-anim {
+        transition: stroke-dashoffset 0.35s;
+      }
     </style>
   </head>
   <body class="min-h-screen font-sans">
@@ -40,14 +53,49 @@
           <div class="flex items-center justify-between gap-3">
             <div class="min-w-0">
               <h1 class="text-forest-dark flex items-center gap-2 truncate text-2xl font-bold">
-                <svg class="text-forest-bright" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg>
+                <svg
+                  class="text-forest-bright"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                  />
+                  <path d="m2.5 21.5 1.4-1.4" />
+                  <path d="m20.1 3.9 1.4-1.4" />
+                  <path
+                    d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                  />
+                  <path d="m9.6 14.4 4.8-4.8" />
+                </svg>
                 Fitness
               </h1>
               <p class="text-sea-text truncate text-sm">Workout planner &amp; tracker</p>
             </div>
             <div class="flex shrink-0 items-center gap-2">
-              <button aria-label="Add workout" class="bg-leaf-bright text-forest-dark hover:bg-leaf-text inline-flex h-10 w-10 items-center justify-center rounded-full text-white">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+              <button
+                aria-label="Add workout"
+                class="bg-leaf-bright text-forest-dark hover:bg-leaf-text inline-flex h-10 w-10 items-center justify-center rounded-full text-white"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14" />
+                  <path d="M12 5v14" />
+                </svg>
               </button>
             </div>
           </div>
@@ -56,20 +104,53 @@
         <main class="flex-1 space-y-6 p-5 pb-24">
           <!-- Week / month stats -->
           <div class="grid grid-cols-2 gap-3">
-            <div class="rounded-card shadow-card flex flex-col items-start gap-2 bg-white p-4 text-left">
+            <div
+              class="rounded-card shadow-card flex flex-col items-start gap-2 bg-white p-4 text-left"
+            >
               <div class="flex w-full items-center gap-2">
-                <span class="bg-sea-text/10 text-sea-text flex h-8 w-8 items-center justify-center rounded-tile">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                <span
+                  class="bg-sea-text/10 text-sea-text rounded-tile flex h-8 w-8 items-center justify-center"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                  </svg>
                 </span>
                 <span class="text-sea-text/70 truncate text-xs">This week</span>
               </div>
               <div class="text-forest-dark text-2xl font-bold tabular-nums">210 min</div>
               <div class="text-sea-text/70 text-xs">4 workouts</div>
             </div>
-            <div class="rounded-card shadow-card flex flex-col items-start gap-2 bg-white p-4 text-left">
+            <div
+              class="rounded-card shadow-card flex flex-col items-start gap-2 bg-white p-4 text-left"
+            >
               <div class="flex w-full items-center gap-2">
-                <span class="bg-forest-text/10 text-forest-text flex h-8 w-8 items-center justify-center rounded-tile">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></svg>
+                <span
+                  class="bg-forest-text/10 text-forest-text rounded-tile flex h-8 w-8 items-center justify-center"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z"
+                    />
+                  </svg>
                 </span>
                 <span class="text-sea-text/70 truncate text-xs">This month</span>
               </div>
@@ -82,43 +163,123 @@
           <section>
             <div class="mb-3 flex items-center justify-between gap-3">
               <h2 class="text-forest-dark text-lg font-semibold">Active Workout</h2>
-              <span class="bg-pinkish-text inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium text-white">
+              <span
+                class="bg-pinkish-text inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium text-white"
+              >
                 <span class="h-1.5 w-1.5 rounded-full bg-white"></span>LIVE
               </span>
             </div>
-            <div class="rounded-card shadow-card from-forest-text to-sea-text space-y-4 bg-gradient-to-br p-5 text-white">
+            <div
+              class="rounded-card shadow-card from-forest-text to-sea-text space-y-4 bg-gradient-to-br p-5 text-white"
+            >
               <div class="flex items-start justify-between">
                 <div>
                   <h3 class="text-2xl font-bold text-white">Upper Body</h3>
                   <p class="text-sm text-white/80">Gym • 45 min remaining</p>
                 </div>
-                <span class="flex h-12 w-12 items-center justify-center rounded-tile bg-white/20">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2" /><path d="M14 2v2" /><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" /><path d="M6 2v2" /></svg>
+                <span class="rounded-tile flex h-12 w-12 items-center justify-center bg-white/20">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M10 2v2" />
+                    <path d="M14 2v2" />
+                    <path
+                      d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"
+                    />
+                    <path d="M6 2v2" />
+                  </svg>
                 </span>
               </div>
               <div class="w-full">
-                <div class="bg-white h-2.5 w-full overflow-hidden rounded-full">
-                  <div class="bg-white h-full rounded-full" style="width: 65%"></div>
+                <div class="h-2.5 w-full overflow-hidden rounded-full bg-white">
+                  <div class="h-full rounded-full bg-white" style="width: 65%"></div>
                 </div>
               </div>
               <ul class="space-y-2">
                 <li class="flex items-center justify-between text-sm">
                   <span class="flex items-center gap-2 text-white/90">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg> Bench Press
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                      />
+                      <path d="m2.5 21.5 1.4-1.4" />
+                      <path d="m20.1 3.9 1.4-1.4" />
+                      <path
+                        d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                      />
+                      <path d="m9.6 14.4 4.8-4.8" />
+                    </svg>
+                    Bench Press
                     <span class="rounded bg-white/30 px-1.5 py-0.5 text-xs">4/5</span>
                   </span>
                   <span class="text-white/70">450 kg</span>
                 </li>
                 <li class="flex items-center justify-between text-sm">
                   <span class="flex items-center gap-2 text-white/90">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg> Overhead Press
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                      />
+                      <path d="m2.5 21.5 1.4-1.4" />
+                      <path d="m20.1 3.9 1.4-1.4" />
+                      <path
+                        d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                      />
+                      <path d="m9.6 14.4 4.8-4.8" />
+                    </svg>
+                    Overhead Press
                     <span class="rounded bg-white/30 px-1.5 py-0.5 text-xs">3/5</span>
                   </span>
                   <span class="text-white/70">80 kg</span>
                 </li>
                 <li class="flex items-center justify-between text-sm">
                   <span class="flex items-center gap-2 text-white/90">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg> Bicep Curls
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                      />
+                      <path d="m2.5 21.5 1.4-1.4" />
+                      <path d="m20.1 3.9 1.4-1.4" />
+                      <path
+                        d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                      />
+                      <path d="m9.6 14.4 4.8-4.8" />
+                    </svg>
+                    Bicep Curls
                     <span class="rounded bg-white/30 px-1.5 py-0.5 text-xs">2/5</span>
                   </span>
                   <span class="text-white/70">45 kg</span>
@@ -131,27 +292,105 @@
           <section>
             <h2 class="text-forest-dark mb-3 text-lg font-semibold">My Workouts</h2>
             <div class="grid grid-cols-4 gap-2">
-              <button class="rounded-tile shadow-card bg-pinkish-text/10 p-3 text-left transition-all hover:shadow-md">
-                <div class="text-pinkish-text mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg>
+              <button
+                class="rounded-tile shadow-card bg-pinkish-text/10 p-3 text-left transition-all hover:shadow-md"
+              >
+                <div
+                  class="text-pinkish-text mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                    />
+                    <path d="m2.5 21.5 1.4-1.4" />
+                    <path d="m20.1 3.9 1.4-1.4" />
+                    <path
+                      d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                    />
+                    <path d="m9.6 14.4 4.8-4.8" />
+                  </svg>
                 </div>
                 <span class="text-forest-dark text-xs font-medium">Upper</span>
               </button>
-              <button class="rounded-tile shadow-card bg-sea-text/10 p-3 text-left transition-all hover:shadow-md">
-                <div class="text-sea-text mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" /></svg>
+              <button
+                class="rounded-tile shadow-card bg-sea-text/10 p-3 text-left transition-all hover:shadow-md"
+              >
+                <div
+                  class="text-sea-text mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                    />
+                  </svg>
                 </div>
                 <span class="text-forest-dark text-xs font-medium">Cardio</span>
               </button>
-              <button class="rounded-tile shadow-card bg-forest-text/10 p-3 text-left transition-all hover:shadow-md">
-                <div class="text-forest-text mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></svg>
+              <button
+                class="rounded-tile shadow-card bg-forest-text/10 p-3 text-left transition-all hover:shadow-md"
+              >
+                <div
+                  class="text-forest-text mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"
+                    />
+                    <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+                  </svg>
                 </div>
                 <span class="text-forest-dark text-xs font-medium">Core</span>
               </button>
-              <button class="rounded-tile shadow-card bg-leaf-text/10 p-3 text-left transition-all hover:shadow-md">
-                <div class="text-leaf-dark mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg>
+              <button
+                class="rounded-tile shadow-card bg-leaf-text/10 p-3 text-left transition-all hover:shadow-md"
+              >
+                <div
+                  class="text-leaf-dark mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
+                    />
+                    <path d="M20 2v4" />
+                    <path d="M22 4h-4" />
+                    <circle cx="4" cy="20" r="2" />
+                  </svg>
                 </div>
                 <span class="text-forest-dark text-xs font-medium">Flex</span>
               </button>
@@ -162,12 +401,39 @@
           <section>
             <div class="mb-3 flex items-center justify-between gap-3">
               <h2 class="text-forest-dark text-lg font-semibold">Workout History</h2>
-              <button class="text-forest-bright hover:bg-mist h-8 rounded-tile px-3 text-xs font-medium">View all</button>
+              <button
+                class="text-forest-bright hover:bg-mist rounded-tile h-8 px-3 text-xs font-medium"
+              >
+                View all
+              </button>
             </div>
             <div class="space-y-3">
-              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
-                <span class="bg-pinkish-text/10 text-pinkish-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg>
+              <div
+                class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left"
+              >
+                <span
+                  class="bg-pinkish-text/10 text-pinkish-text rounded-tile flex h-11 w-11 shrink-0 items-center justify-center text-xl"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                    />
+                    <path d="m2.5 21.5 1.4-1.4" />
+                    <path d="m20.1 3.9 1.4-1.4" />
+                    <path
+                      d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                    />
+                    <path d="m9.6 14.4 4.8-4.8" />
+                  </svg>
                 </span>
                 <div class="min-w-0 flex-1">
                   <div class="text-forest-dark truncate font-semibold">Upper Body</div>
@@ -175,9 +441,26 @@
                 </div>
                 <div class="text-sea-text shrink-0 text-right text-sm">450 kg · 4 sets</div>
               </div>
-              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
-                <span class="bg-sea-text/10 text-sea-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" /></svg>
+              <div
+                class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left"
+              >
+                <span
+                  class="bg-sea-text/10 text-sea-text rounded-tile flex h-11 w-11 shrink-0 items-center justify-center text-xl"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                    />
+                  </svg>
                 </span>
                 <div class="min-w-0 flex-1">
                   <div class="text-forest-dark truncate font-semibold">Morning Run</div>
@@ -185,9 +468,32 @@
                 </div>
                 <div class="text-sea-text shrink-0 text-right text-sm">5.2 km · 42 min</div>
               </div>
-              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
-                <span class="bg-forest-text/10 text-forest-text flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg>
+              <div
+                class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left"
+              >
+                <span
+                  class="bg-forest-text/10 text-forest-text rounded-tile flex h-11 w-11 shrink-0 items-center justify-center text-xl"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                    />
+                    <path d="m2.5 21.5 1.4-1.4" />
+                    <path d="m20.1 3.9 1.4-1.4" />
+                    <path
+                      d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                    />
+                    <path d="m9.6 14.4 4.8-4.8" />
+                  </svg>
                 </span>
                 <div class="min-w-0 flex-1">
                   <div class="text-forest-dark truncate font-semibold">Lower Body</div>
@@ -195,9 +501,27 @@
                 </div>
                 <div class="text-sea-text shrink-0 text-right text-sm">85 kg · 6 sets</div>
               </div>
-              <div class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left">
-                <span class="bg-leaf-text/10 text-leaf-dark flex h-11 w-11 shrink-0 items-center justify-center rounded-tile text-xl">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></svg>
+              <div
+                class="rounded-card shadow-card flex w-full items-center gap-3 bg-white p-4 text-left"
+              >
+                <span
+                  class="bg-leaf-text/10 text-leaf-dark rounded-tile flex h-11 w-11 shrink-0 items-center justify-center text-xl"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"
+                    />
+                    <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+                  </svg>
                 </span>
                 <div class="min-w-0 flex-1">
                   <div class="text-forest-dark truncate font-semibold">Core Workout</div>
@@ -209,37 +533,135 @@
           </section>
         </main>
 
-        <nav class="border-forest-dark/10 fixed inset-x-0 bottom-0 z-20 border-t bg-white/95 backdrop-blur lg:hidden">
+        <nav
+          class="border-forest-dark/10 fixed inset-x-0 bottom-0 z-20 border-t bg-white/95 backdrop-blur lg:hidden"
+        >
           <div class="mx-auto flex h-16 max-w-md items-center justify-around">
             <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                <path
+                  d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                />
+              </svg>
               <span class="text-xs font-medium">Home</span>
             </button>
-            <button aria-current="page" class="text-forest-text flex flex-col items-center gap-1 px-2 py-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg>
+            <button
+              aria-current="page"
+              class="text-forest-text flex flex-col items-center gap-1 px-2 py-2"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                />
+                <path d="m2.5 21.5 1.4-1.4" />
+                <path d="m20.1 3.9 1.4-1.4" />
+                <path
+                  d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                />
+                <path d="m9.6 14.4 4.8-4.8" />
+              </svg>
               <span class="text-xs font-medium">Fitness</span>
             </button>
             <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.528V3a1 1 0 0 1 1-1h0" /><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /></svg>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 6.528V3a1 1 0 0 1 1-1h0" />
+                <path
+                  d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21"
+                />
+              </svg>
               <span class="text-xs font-medium">Food</span>
             </button>
             <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                <path d="M18 17V9" />
+                <path d="M13 17V5" />
+                <path d="M8 17v-3" />
+              </svg>
               <span class="text-xs font-medium">Stats</span>
             </button>
             <button class="text-sea-text/60 flex flex-col items-center gap-1 px-2 py-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <circle cx="9" cy="7" r="4" />
+              </svg>
               <span class="text-xs font-medium">Squad</span>
             </button>
           </div>
         </nav>
       </div>
 
-      <aside class="border-forest-dark/10 bg-mist sticky top-0 hidden h-screen w-64 flex-col border-r lg:flex">
+      <aside
+        class="border-forest-dark/10 bg-mist sticky top-0 hidden h-screen w-64 flex-col border-r lg:flex"
+      >
         <div class="p-6">
           <div class="flex items-center gap-3">
-            <span class="from-leaf-text to-forest-text flex h-12 w-12 items-center justify-center rounded-tile bg-gradient-to-br text-2xl text-white">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></svg>
+            <span
+              class="from-leaf-text to-forest-text rounded-tile flex h-12 w-12 items-center justify-center bg-gradient-to-br text-2xl text-white"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"
+                />
+                <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+              </svg>
             </span>
             <div>
               <h1 class="text-forest-dark text-xl font-bold">Health App</h1>
@@ -248,30 +670,125 @@
           </div>
         </div>
         <nav class="flex-1 space-y-2 p-4">
-          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
-            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg></span>
+          <button
+            class="text-sea-text rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium hover:bg-white/60"
+          >
+            <span class="shrink-0"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                <path
+                  d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                /></svg
+            ></span>
             Dashboard
           </button>
-          <button aria-current="page" class="rounded-tile shadow-card text-forest-text flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
-            <span class="shrink-0 text-forest-text"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></span>
+          <button
+            aria-current="page"
+            class="rounded-tile shadow-card text-forest-text flex w-full items-center gap-3 px-4 py-3 text-left font-medium"
+          >
+            <span class="text-forest-text shrink-0"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"
+                />
+                <path d="m2.5 21.5 1.4-1.4" />
+                <path d="m20.1 3.9 1.4-1.4" />
+                <path
+                  d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"
+                />
+                <path d="m9.6 14.4 4.8-4.8" /></svg
+            ></span>
             Fitness
           </button>
-          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
-            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.528V3a1 1 0 0 1 1-1h0" /><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /></svg></span>
+          <button
+            class="text-sea-text rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium hover:bg-white/60"
+          >
+            <span class="shrink-0"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 6.528V3a1 1 0 0 1 1-1h0" />
+                <path
+                  d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21"
+                /></svg
+            ></span>
             Food &amp; Macros
           </button>
-          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
-            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg></span>
+          <button
+            class="text-sea-text rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium hover:bg-white/60"
+          >
+            <span class="shrink-0"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                <path d="M18 17V9" />
+                <path d="M13 17V5" />
+                <path d="M8 17v-3" /></svg
+            ></span>
             Analytics
           </button>
-          <button class="text-sea-text hover:bg-white/60 rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium">
-            <span class="shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></span>
+          <button
+            class="text-sea-text rounded-tile flex w-full items-center gap-3 px-4 py-3 text-left font-medium hover:bg-white/60"
+          >
+            <span class="shrink-0"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <circle cx="9" cy="7" r="4" /></svg
+            ></span>
             Squad Game
           </button>
         </nav>
         <div class="border-forest-dark/10 border-t p-4">
-          <div class="shadow-card flex items-center gap-3 rounded-tile bg-white px-4 py-3">
-            <div class="from-sea-text to-forest-text flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white">A</div>
+          <div class="shadow-card rounded-tile flex items-center gap-3 bg-white px-4 py-3">
+            <div
+              class="from-sea-text to-forest-text flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white"
+            >
+              A
+            </div>
             <div class="flex-1">
               <p class="text-forest-dark text-sm font-medium">Alex</p>
             </div>

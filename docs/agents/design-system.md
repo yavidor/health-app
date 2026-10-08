@@ -18,7 +18,9 @@
 
 ## Overview
 
-The Health & Fitness App is a Progressive Web App (PWA) built with Vite + React + TypeScript. It provides workout planning, nutrition tracking, analytics, and a gamified squad experience - all running on a raspberry pi (explained in [`raspberry-pi-hosting`](./raspberry-pi-hosting.md))
+The Health & Fitness App is an installable Progressive Web App (PWA) built with Vite + React + TypeScript. It provides workout planning, nutrition tracking, analytics, and a gamified squad experience - all running on a raspberry pi (explained in [`raspberry-pi-hosting`](./raspberry-pi-hosting.md))
+
+It is online-first: the service worker precaches the app shell for installability but does not cache API data, so screens show a retryable error state when the backend is unreachable. Use `npm run dev:mock` for UI work against fixtures.
 
 ### Key Principles
 - **Mobile-first design** with responsive desktop adaptation

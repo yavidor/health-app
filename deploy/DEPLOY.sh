@@ -5,7 +5,7 @@ set -x
 REMOTE_EXECUTABLE_PATH='/home/yavidor/health-app/health-app'
 
 function exec_on_ssh() {
-    ssh -o ConnectTimeout=5 yavidor@raspberry $@
+    ssh -o ConnectTimeout=5 yavidor@raspberry "$@"
 }
 
 function log_error() {
@@ -17,7 +17,11 @@ function log_error() {
 
 trap 'log_error $LINENO' ERR
 
-a
+# Build frontend production assets
+npm --prefix frontend run build
+
+# Build Go backend binary for linux/arm64
+(cd backend && GOOS=linux GOARCH=arm64 go build -o health-app .)
 
 scp ./backend/health-app yavidor@raspberry:$REMOTE_EXECUTABLE_PATH
 

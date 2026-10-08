@@ -6,11 +6,19 @@ export { ProgressBar, ProgressRing } from './Progress';
 export type { ProgressBarProps, ProgressRingProps } from './Progress';
 export { StatCard, ListRow } from './Data';
 export type { StatCardProps, ListRowProps } from './Data';
-export { Badge, SectionHeader, EmptyState, SegmentedControl, QuickActionGrid } from './Feedback';
+export {
+  Badge,
+  SectionHeader,
+  EmptyState,
+  ErrorState,
+  SegmentedControl,
+  QuickActionGrid,
+} from './Feedback';
 export type {
   BadgeProps,
   SectionHeaderProps,
   EmptyStateProps,
+  ErrorStateProps,
   SegmentedControlProps,
   QuickActionGridProps,
 } from './Feedback';

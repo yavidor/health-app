@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
+import { CloudOff, RotateCw } from 'lucide-react';
 import { cn } from '../../lib/cn';
 import { ACCENT_TINT, ACCENT_TEXT, type Accent } from './accents';
+import { Button } from './Button';
 
 export type BadgeTone = 'accent' | 'neutral' | 'live';
 
@@ -80,6 +82,55 @@ export function EmptyState({ icon, title, description, action, className }: Empt
       <p className="text-forest-dark font-semibold">{title}</p>
       {description ? <p className="text-sea-text/70 max-w-xs text-sm">{description}</p> : null}
       {action ? <div className="mt-2">{action}</div> : null}
+    </div>
+  );
+}
+
+export interface ErrorStateProps {
+  title?: string;
+  error?: Error | null;
+  onRetry?: () => void;
+  retryLabel?: string;
+  className?: string;
+}
+
+/**
+ * Shown when a request fails. The app is online-first, so a failure is always
+ * surfaced rather than replaced with placeholder data.
+ */
+export function ErrorState({
+  title = 'Could not load this data',
+  error,
+  onRetry,
+  retryLabel = 'Try again',
+  className,
+}: ErrorStateProps) {
+  return (
+    <div
+      role="alert"
+      className={cn(
+        'rounded-card shadow-card flex flex-col items-center gap-3 bg-white p-8 text-center',
+        className
+      )}
+    >
+      <span
+        className={cn(
+          'rounded-tile flex h-12 w-12 items-center justify-center',
+          ACCENT_TINT.pinkish,
+          ACCENT_TEXT.pinkish
+        )}
+      >
+        <CloudOff size={24} />
+      </span>
+      <p className="text-forest-dark font-semibold">{title}</p>
+      {error ? (
+        <p className="text-sea-text/70 max-w-sm text-sm break-words">{error.message}</p>
+      ) : null}
+      {onRetry ? (
+        <Button size="sm" variant="outline" onClick={onRetry} leadingIcon={<RotateCw size={14} />}>
+          {retryLabel}
+        </Button>
+      ) : null}
     </div>
   );
 }

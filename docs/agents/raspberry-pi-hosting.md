@@ -1,4 +1,4 @@
-# Raspberry Pi Self-Hosting Guide (Pending Implementation)
+# Raspberry Pi Self-Hosting Guide
 
 This guide details how to host the Health App on a single Raspberry Pi with **$0 monthly cloud costs**, zero port forwarding, automatic HTTPS, and remote access for your friend group using **Cloudflare Tunnel**.
 
@@ -29,7 +29,7 @@ flowchart LR
     Phone1 -->|HTTPS| Edge
     Phone2 -->|HTTPS| Edge
     Edge <== encrypted tunnel ==> CFD
-    CFD -->|localhost:3000| GoApp
+    CFD -->|localhost:8080| GoApp
     GoApp <--> DB
     DB -.-> Backup
 ```
@@ -67,35 +67,39 @@ echo 'export PATH=$PATH:/usr/local/go/bin' | sudo tee /etc/profile.d/go.sh
 # Verify versions
 go version
 git --version
+```
 
 ---
 
 ### Step 2: Build and Run the App Locally on the Pi
 
-Clone your repository and build the production bundle:
+Clone your repository and build both frontend and backend:
 
 ```bash
 # Clone project (on the Pi)
 git clone <your-repo-url> ~/health-app
 cd ~/health-app
 
-# Install frontend dependencies and build
+# 1. Build frontend production assets
+cd frontend
 npm install
 npm run build
+cd ..
 
-# Build Go binary (production)
-go build -o main
+# 2. Build Go backend binary
+cd backend
+go build -o health-app
+cd ..
 
-# Start the Go HTTP server
-./main
+# 3. Start the Go HTTP server
+./backend/health-app
+```
 
 ---
 
 ### Step 3: Run Continuously via systemd (Auto-Restart on Boot)
 
 Create a systemd service so the app automatically boots up if the Pi restarts (e.g. after a power outage).
-
-**Note**: The `main` binary must exist at `/home/pi/health-app/main` (built via `go build`).
 
 Create `/etc/systemd/system/health-app.service`:
 
@@ -106,9 +110,9 @@ After=network.target
 
 [Service]
 Type=simple
-User=pi
-WorkingDirectory=/home/pi/health-app
-ExecStart=/home/pi/health-app/main
+User=yavidor
+WorkingDirectory=/home/yavidor/health-app
+ExecStart=/home/yavidor/health-app/backend/health-app
 Restart=always
 RestartSec=10
 
@@ -129,7 +133,7 @@ sudo systemctl status health-app
 
 ### Step 4: Expose Securely with Cloudflare Tunnel (cloudflared)
 
-1. **Prerequisite:** A domain name managed through Cloudflare (free tier). You can buy a cheap domain for ~$3–$10/year (e.g. `.xyz`, `.me`, or `.top`) or use a free domain provider.
+1. **Prerequisite:** A domain name managed through Cloudflare (free tier).
 2. **Install `cloudflared` on the Pi:**
    ```bash
    # Add Cloudflare GPG key and repository
@@ -156,11 +160,11 @@ sudo systemctl status health-app
 5. **Configure the Tunnel (`~/.cloudflared/config.yml`):**
    ```yaml
    tunnel: <TUNNEL_UUID>
-   credentials-file: /home/pi/.cloudflared/<TUNNEL_UUID>.json
+   credentials-file: /home/yavidor/.cloudflared/<TUNNEL_UUID>.json
 
    ingress:
      - hostname: app.yourdomain.com
-       service: http://localhost:3000
+       service: http://localhost:8080
      - service: http_status:404
    ```
 6. **Run Tunnel as a System Service:**
@@ -187,7 +191,7 @@ Plug an inexpensive USB flash drive into the Pi, and add a nightly cron job:
 crontab -e
 
 # Run safe SQLite backup at 3:00 AM every night
-0 3 * * * sqlite3 /home/pi/health-app/data/health.db ".backup '/mnt/usb/backups/health_$(date +\%Y\%m\%d).db'"
+0 3 * * * sqlite3 /home/yavidor/health-app/data/health.db ".backup '/mnt/usb/backups/health_$(date +\%Y\%m\%d).db'"
 ```
 
 ### Option B: Free Cloud Backup with `rclone`
@@ -195,7 +199,7 @@ crontab -e
 Use `rclone` (free command-line tool) to mirror daily encrypted database backups to Google Drive, Dropbox, or OneDrive (all within free storage tiers):
 
 ```bash
-0 3 * * * sqlite3 /home/pi/health-app/data/health.db ".backup /tmp/backup.db" && rclone copy /tmp/backup.db "gdrive:HealthAppBackups"
+0 3 * * * sqlite3 /home/yavidor/health-app/data/health.db ".backup /tmp/backup.db" && rclone copy /tmp/backup.db "gdrive:HealthAppBackups"
 ```
 
 ---
