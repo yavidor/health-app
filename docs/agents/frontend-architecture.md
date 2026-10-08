@@ -94,6 +94,24 @@ That is the whole change. The tab bar, desktop sidebar and router all read
 pre-commit hook runs the same set on whatever is staged; see
 `setup-git-hooks.sh` to enable it after cloning.
 
+## Rewriting code
+
+To change the shape of existing files, parse them — don't edit them as text. Regex
+and string surgery break on the first nested brace, and the breakage is silent.
+
+`typescript` is already a devDependency, so the compiler API is available with no
+new tooling:
+
+```js
+const ts = require('typescript');
+const source = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
+source.forEachChild((node) => { /* match on node.kind, then edit node.getStart()..node.getEnd() */ });
+```
+
+Write the codemod as a throwaway script, run it, read the diff, delete the script.
+A persistent rule belongs in `eslint.config.js`, which already owns import and
+lint policy for this codebase.
+
 ## Testing
 
 The seam is the rendered Screen: stub the network, render, assert on what a User
