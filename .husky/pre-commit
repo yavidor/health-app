@@ -1,0 +1,32 @@
+repo_root=$(git rev-parse --show-toplevel)
+cd "$repo_root" || exit 1
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+
+has_frontend() {
+  echo "$staged" | grep -q '^frontend/'
+}
+
+if has_frontend; then
+  echo "pre-commit: formatting staged files"
+  ./frontend/node_modules/.bin/lint-staged --config frontend/.lintstagedrc.json
+fi
+
+if has_frontend; then
+  echo "pre-commit: typechecking frontend"
+  (cd frontend && npx tsc -b)
+
+  echo "pre-commit: linting frontend"
+  (cd frontend && npx eslint)
+
+  echo "pre-commit: testing frontend"
+  (cd frontend && npx vitest run)
+
+  echo "pre-commit: auditing for stale references"
+  node scripts/audit-stale-references.mjs
+fi
+
+if echo "$staged" | grep -q '^backend/'; then
+  echo "pre-commit: vetting backend"
+  (cd backend && go vet ./...)
+fi

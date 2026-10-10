@@ -13,6 +13,7 @@
     "test:watch": "vitest",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "prepare": "cd .. && husky .husky",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -38,7 +39,9 @@
     "eslint-plugin-no-emoji": "^2.0.2",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.12.0",
+    "husky": "^9.1.7",
     "jsdom": "^30.1.2",
+    "lint-staged": "^17.6.0",
     "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.3",

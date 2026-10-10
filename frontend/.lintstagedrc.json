@@ -1,0 +1,12 @@
+{
+  "*.{ts,tsx}": [
+    "sh -c 'cd frontend && ./node_modules/.bin/prettier --config .prettierrc.json --write \"$@\"' sh"
+  ],
+  "*.{md,markdown}": [
+    "sh -c 'cd frontend && ./node_modules/.bin/prettier --config .prettierrc.json --write \"$@\"' sh"
+  ],
+  "!({docs,AGENTS.md,skills-lock.json}){,/**}": [],
+  "frontend/dist/**": [],
+  "frontend/.vite/**": [],
+  "frontend/node_modules/**": []
+}
