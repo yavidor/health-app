@@ -65,6 +65,25 @@ Conventions every Screen follows:
   wants its own module.
 - The header renders only inside the success branch, so nothing reads
   partially-loaded data.
+
+## Logging food is a modal, and may become a Screen
+
+Logging a Food opens a modal over the Food Screen — the User taps a Meal Slot tile
+or the add button, and the sheet opens over the day they were looking at. Logging
+is a burst they want to enter and leave, and a navigation would lose the day's
+context and make the Saved Food case (the common one) slower.
+
+This is expected to change. If logging becomes its own Screen, the form has to
+become a self-contained unit that fetches its own Saved Foods and owns its own
+loading, error, and empty states, crossing the same seam as every other Screen.
+So the form **must not** be built as a component that assumes the Food Screen hands
+it data.
+
+What is not negotiable now: the modal renders inside the Food Screen, so it does
+not fetch anything itself, and the Food Screen owns the mutation and the refetch.
+Keep the form's input handling independent of who renders it, and promoting it is
+a move rather than a rewrite.
+
 - `ScreenStates` prefers data over error: a cold failure shows the error, a failed
   background refresh keeps the data already on screen.
 
@@ -77,13 +96,13 @@ extract at that point. A failed extraction means the seam was in the wrong place
 2. Add `<Name>Screen.test.tsx` beside it (see Testing).
 3. Add one entry to `ROUTES` in `frontend/src/app/routes.tsx`:
 
-    ```tsx
-    const NameScreen = lazy(() =>
-      import('../screens/NameScreen').then((m) => ({ default: m.NameScreen }))
-    );
+   ```tsx
+   const NameScreen = lazy(() =>
+     import('../screens/NameScreen').then((m) => ({ default: m.NameScreen }))
+   );
 
-    { id: 'name', label: 'Name', icon: <Icon size={20} />, component: NameScreen },
-    ```
+   { id: 'name', label: 'Name', icon: <Icon size={20} />, component: NameScreen },
+   ```
 
 That is the whole change. The tab bar, desktop sidebar and router all read
 `ROUTES`, and the Screen is code-split automatically.
@@ -133,7 +152,11 @@ replaced, and success including the derived numbers a User actually reads.
   because nothing called it, which removes the duplication but not the problem.
 - The hardcoded protein target in `FoodScreen.tsx` disagrees with the Dashboard's
   server-sent ring percentages. Recorded in ADR-0003 (Unresolved) and in a TODO at
-  the site; one of the two is wrong and it is a data-shape question.
-- Several `onSelect`/`onAdd` handlers are no-ops pending real mutations.
+  the site; one of the two is wrong and it is a data-shape question. Resolved in
+  principle by ADR-0004 (totals derived server-side from Foods) and ADR-0006 (both
+  screens read the same derived result); the code change lands with the food work.
+- Several `onSelect`/`onAdd` handlers are no-ops pending real mutations. The Food
+  Screen's are being replaced outright — its composition assumes one Meal per Meal
+  Slot per day, which ADR-0004 rejects.
 - Hash routing only (no history routing); fine for the static PWA deployment but
   URLs are not clean.
