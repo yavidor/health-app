@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help install dev dev-frontend dev-backend build build-pi test typecheck check audit lint format deploy clean
+.PHONY: help install dev dev-frontend dev-backend build build-pi test typecheck check audit lint format sqlc deploy clean
 
 help: ## Print available make targets with descriptions
 	@echo "Usage: make [target]"
@@ -25,7 +25,7 @@ build: ## Build frontend and backend
 
 build-pi: ## Build frontend and cross-compile backend for Raspberry Pi
 	npm --prefix frontend run build
-	cd backend && GOOS=linux GOARCH=arm64 go build -o health-app .
+	cd backend && CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o health-app .
 
 test: ## Run frontend and backend tests
 	npm --prefix frontend test
@@ -47,6 +47,9 @@ lint: ## Run frontend linter and Go vet
 format: ## Format frontend and Go code
 	npm --prefix frontend run format
 	cd backend && go fmt ./...
+
+sqlc: ## Regenerate Go code from db/queries and db/bootstrap
+	cd backend && sqlc generate
 
 deploy: ## Execute deployment script
 	./deploy/DEPLOY.sh
