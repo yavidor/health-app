@@ -1,7 +1,10 @@
 package main
 
 import (
+	"context"
+	"database/sql"
 	"fmt"
+	"health-app/db"
 	"net/http"
 	"time"
 
@@ -38,10 +41,14 @@ func (c *controller) logMiddleware(handler http.Handler) http.HandlerFunc {
 }
 
 func main() {
+	ctx := context.Background()
 	logger := CreateLogger()
 	controller := &controller{make([]string, 1), logger}
-	// TODO: open the database, then call db.Migrate(ctx, conn) here so that
-	// migrations apply at startup (issue #20).
+	database, err := sql.Open("sqlite", "health.db?_pragma=foreign_keys(1)")
+	orFatal(err, logger)
+	applied, err := db.Migrate(ctx, database)
+	orFatal(err, logger)
+	logger.Info("migrations applied", "count", applied)
 	orFatal(controller.registerRoute("/a", http.HandlerFunc(controller.handleHello)), logger)
 	orFatal(controller.registerRoute("/", http.FileServer(http.Dir("/home/yavidor/gitProjects/health-app/frontend/dist"))), logger)
 	orFatal(http.ListenAndServe(":8080", nil), logger)
