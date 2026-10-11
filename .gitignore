@@ -12,3 +12,6 @@ frontend/.vite/
 .agents/
 .opencode/
 skills-lock.json
+
+# Playwright MCP
+.playwright-mcp/
