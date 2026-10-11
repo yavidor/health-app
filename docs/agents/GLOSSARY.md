@@ -40,6 +40,44 @@ A single measurable quantity that can be read on a date, such as weight, calorie
 or Mood Score. The unit of cross-data comparison.
 _Avoid_: Measure, Stat, Data point
 
+### Food
+
+**Meal**:
+One eating occasion on one date — breakfast, lunch, dinner, a snack. A Meal holds
+zero or more Foods, and its totals are derived from them rather than entered.
+_Avoid_: Entry, Log, Dish
+
+**Food**:
+A single thing a User ate, belonging to exactly one Meal, carrying its own
+calories, macros, and Portion. A Food is logged once and does not recur on its own.
+_Avoid_: Item, Entry, Record, Dish (implies a recipe)
+
+**Saved Food**:
+A named Food a User has deliberately kept to log again — "usual protein shake" —
+holding its calories, macros, and Portion so that logging it costs one tap. A Saved
+Food is never eaten and never dated; logging one copies its numbers into a new Food.
+Saving is opt-in and off by default, so a Saved Food is not simply every Food ever
+logged.
+_Avoid_: Item, Template, Preset, Favourite, Recipe, Quick Add
+
+**Portion**:
+How much of a Food was eaten, as a quantity and a named serving. A whole portion
+is a quantity of one.
+_Avoid_: Serving, Amount, Size
+
+**Meal Slot**:
+Which occasion a Meal belongs to: breakfast, lunch, dinner, or snacks. Optional
+in the model — the User never has to choose one — but set as a side effect of
+where they chose to log from.
+_Avoid_: Category, Type, Meal type
+
+**Calorie Target**:
+A dated daily calorie count a User aims at. Setting one starts a new Target from
+that date onward; days already logged keep the Target that was in force, so
+history never re-rates itself. Every User has one; a new User starts on the app's
+default.
+_Avoid_: Goal, Budget, TDEE (a formula's output, not the User's choice)
+
 ### App
 
 **Screen**:

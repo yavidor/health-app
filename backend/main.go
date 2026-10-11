@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 )
 
 type controller struct {
@@ -40,7 +40,9 @@ func (c *controller) logMiddleware(handler http.Handler) http.HandlerFunc {
 func main() {
 	logger := CreateLogger()
 	controller := &controller{make([]string, 1), logger}
+	// TODO: open the database, then call db.Migrate(ctx, conn) here so that
+	// migrations apply at startup (issue #20).
 	orFatal(controller.registerRoute("/a", http.HandlerFunc(controller.handleHello)), logger)
 	orFatal(controller.registerRoute("/", http.FileServer(http.Dir("/home/yavidor/gitProjects/health-app/frontend/dist"))), logger)
-	orFatal(http.ListenAndServe(":8081", nil), logger)
+	orFatal(http.ListenAndServe(":8080", nil), logger)
 }

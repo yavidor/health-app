@@ -1,0 +1,20 @@
+# Retired names.
+#
+# Words the glossary no longer defines, that prose elsewhere may still reference.
+# After renaming a glossary term, add the old word here and run the command in
+# AGENTS.md ("After renaming a glossary term") to find the files that missed it.
+#
+# Two rules:
+#
+#   - Only add a word the glossary no longer defines. Meal, Food, Metric, and
+#     Screen are live terms appearing all over the docs; listing one produces
+#     dozens of hits and teaches you to ignore the output.
+#   - Prefer words that do not occur in ordinary English elsewhere in the repo.
+#     "Item" was safe only because it stopped appearing; "entry" or "item" would
+#     also match CSS class names like `.exercise-item`.
+#
+# Remove a line once nothing refers to it any more. One name per line; `#`
+# comments and blanks ignored.
+#
+# Example (real, current):
+Item
