@@ -17,7 +17,7 @@ dev-frontend: ## Run frontend Vite dev server
 	npm --prefix frontend run dev
 
 dev-backend: ## Run backend Go server
-	cd backend && go run .
+	cd backend && DB_PATH=../data/health.db STATIC_DIR=../frontend/dist go run .
 
 build: ## Build frontend and backend
 	npm --prefix frontend run build

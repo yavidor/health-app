@@ -173,10 +173,10 @@
   "squad": {
     "members": 5,
     "leaderboard": [
-      { "id": "u1", "name": "Dana", "rank": 1, "points": 1840, "delta": "▲ 120", "accent": "leaf" },
-      { "id": "u2", "name": "Sam", "rank": 2, "points": 1520, "delta": "▲ 40", "accent": "sea" },
+      { "id": "3f2504e0-4f89-41d3-9a0c-0305e82c3301", "name": "Dana", "rank": 1, "points": 1840, "delta": "▲ 120", "accent": "leaf" },
+      { "id": "3f2504e0-4f89-41d3-9a0c-0305e82c3302", "name": "Sam", "rank": 2, "points": 1520, "delta": "▲ 40", "accent": "sea" },
       {
-        "id": "u3",
+        "id": "3f2504e0-4f89-41d3-9a0c-0305e82c3303",
         "name": "Alex",
         "rank": 3,
         "points": 1290,
@@ -184,8 +184,8 @@
         "isYou": true,
         "accent": "forest"
       },
-      { "id": "u4", "name": "Rin", "rank": 4, "points": 980, "delta": "▼ 30", "accent": "pinkish" },
-      { "id": "u5", "name": "Jo", "rank": 5, "points": 640, "delta": "▲ 15", "accent": "sea" }
+      { "id": "3f2504e0-4f89-41d3-9a0c-0305e82c3304", "name": "Rin", "rank": 4, "points": 980, "delta": "▼ 30", "accent": "pinkish" },
+      { "id": "3f2504e0-4f89-41d3-9a0c-0305e82c3305", "name": "Jo", "rank": 5, "points": 640, "delta": "▲ 15", "accent": "sea" }
     ],
     "goals": [
       {

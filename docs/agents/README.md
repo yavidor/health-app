@@ -63,7 +63,7 @@ health-app/
 │   ├── mockups/            # Design wireframes (dashboard, fitness, food, squad, stats)
 │   ├── index.html          # HTML entry point
 │   └── package.json
-├── data/                   # SQLite database
+├── data/                   # SQLite database (created on first run)
 └── docs/                   # Documentation
     ├── humans/             # Source of truth (read-only)
     └── agents/             # Agent documentation

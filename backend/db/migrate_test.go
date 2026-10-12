@@ -6,19 +6,16 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
-
-	_ "modernc.org/sqlite"
 )
 
 // openTestDB opens a private on-disk database for one test. On-disk rather than
 // :memory: so that the file outlives a single connection the way the real one does.
 func openTestDB(t *testing.T) *sql.DB {
 	t.Helper()
-	conn, err := sql.Open("sqlite", "file:"+filepath.Join(t.TempDir(), "test.db")+"?_pragma=foreign_keys(1)")
+	conn, err := Open(filepath.Join(t.TempDir(), "test.db"))
 	if err != nil {
 		t.Fatalf("open: %v", err)
 	}
-	conn.SetMaxOpenConns(1)
 	t.Cleanup(func() { conn.Close() })
 	return conn
 }

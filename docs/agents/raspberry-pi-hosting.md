@@ -92,7 +92,8 @@ go build -o health-app
 cd ..
 
 # 3. Start the Go HTTP server
-./backend/health-app
+# DB_PATH and STATIC_DIR are required; there are no defaults.
+DB_PATH=./data/health.db STATIC_DIR=./frontend/dist ./backend/health-app
 ```
 
 ---
@@ -112,6 +113,8 @@ After=network.target
 Type=simple
 User=yavidor
 WorkingDirectory=/home/yavidor/health-app
+Environment=DB_PATH=/home/yavidor/health-app/data/health.db
+Environment=STATIC_DIR=/home/yavidor/health-app/frontend/dist
 ExecStart=/home/yavidor/health-app/backend/health-app
 Restart=always
 RestartSec=10
