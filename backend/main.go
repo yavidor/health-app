@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"health-app/db"
+	"health-app/logs"
+	"health-app/utils"
 	"net/http"
 )
 
@@ -13,19 +15,19 @@ const (
 
 func main() {
 	ctx := context.Background()
-	logger := CreateLogger()
-	dbPath, err := getEnvOrErr(DB_PATH_ENV)
-	orFatal(err, logger)
-	staticDir, err := getEnvOrErr(STATIC_DIR_ENV)
-	orFatal(err, logger)
+	logger := logs.CreateLogger()
+	dbPath, err := utils.GetEnvOrErr(DB_PATH_ENV)
+	utils.OrFatal(err, logger)
+	staticDir, err := utils.GetEnvOrErr(STATIC_DIR_ENV)
+	utils.OrFatal(err, logger)
 	database, err := db.Open(dbPath)
-	orFatal(err, logger)
+	utils.OrFatal(err, logger)
 	defer database.Close()
 
 	applied, err := db.Migrate(ctx, database)
-	orFatal(err, logger)
+	utils.OrFatal(err, logger)
 	logger.Info("migrations applied", "count", applied)
 
-	controller := NewController(logger, staticDir, db.New(database))
-	orFatal(http.ListenAndServe(":8080", controller), logger)
+	server := NewServer(logger, staticDir)
+	utils.OrFatal(http.ListenAndServe(":8080", server), logger)
 }
