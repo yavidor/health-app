@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"database/sql"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -11,8 +10,6 @@ import (
 	"testing"
 
 	"health-app/db"
-
-	_ "modernc.org/sqlite"
 )
 
 // newTestController builds the real controller over a private, migrated SQLite
@@ -24,11 +21,10 @@ func newTestController(t *testing.T, staticDir string) http.Handler {
 	// Keep the middleware's request logging out of the test output.
 	t.Setenv("LOG_LEVEL", "ERROR")
 
-	conn, err := sql.Open("sqlite", "file:"+filepath.Join(t.TempDir(), "test.db")+"?_pragma=foreign_keys(1)")
+	conn, err := db.Open(filepath.Join(t.TempDir(), "test.db"))
 	if err != nil {
 		t.Fatalf("open test database: %v", err)
 	}
-	conn.SetMaxOpenConns(1)
 	t.Cleanup(func() { conn.Close() })
 
 	if _, err := db.Migrate(context.Background(), conn); err != nil {
