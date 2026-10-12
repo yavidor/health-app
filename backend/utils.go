@@ -23,5 +23,5 @@ func getEnvOrErr(envName string) (string, error) {
 	if envValue := os.Getenv(envName); envValue != "" {
 		return envValue, nil
 	}
-	return "", fmt.Errorf("Env %s wasn't found")
+	return "", fmt.Errorf("Env %s wasn't found", envName)
 }
