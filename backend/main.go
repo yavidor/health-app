@@ -6,16 +6,17 @@ import (
 	"net/http"
 )
 
-const dbPathEnv = "HEALTH_DB_PATH"
-
-const staticDirPathEnv = "STATIC_DIR_PATH"
+const (
+	DB_PATH_ENV    = "DB_PATH"
+	STATIC_DIR_ENV = "STATIC_DIR"
+)
 
 func main() {
 	ctx := context.Background()
 	logger := CreateLogger()
-	dbPath, err := getEnvOrErr(dbPathEnv)
+	dbPath, err := getEnvOrErr(DB_PATH_ENV)
 	orFatal(err, logger)
-	staticDir, err := getEnvOrErr(staticDirPathEnv)
+	staticDir, err := getEnvOrErr(STATIC_DIR_ENV)
 	orFatal(err, logger)
 	database, err := db.Open(dbPath)
 	orFatal(err, logger)

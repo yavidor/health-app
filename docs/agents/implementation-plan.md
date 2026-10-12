@@ -13,13 +13,13 @@ This document defines the complete technical implementation plan for the Health 
 - **Design System & Styling**: Tailwind CSS v4 configured with custom color tokens in `frontend/src/index.css`.
 - **Frontend Feature Views**: UI implemented across all primary feature routes (Dashboard, Fitness, Food, Squad, Stats), backed by a shared `ApiClient` and a `DataBoundary` loading/error boundary.
 - **QA Mock Fixtures**: `frontend/vite/mockApiPlugin.ts` serves `frontend/src/lib/mockData.json` over real HTTP from a Vite middleware, enabled with `npm run dev:mock`. The app has no mock-mode branching, so QA exercises the same code path as production.
-- **Backend Scaffold**: Basic Go HTTP server with routing and structured logging initialized in `backend/main.go`.
+- **Backend Scaffold**: Go HTTP server with structured logging initialized in `backend/main.go`, and a testable `NewController` in `backend/controller.go`. The database is opened and migrated at startup; `DB_PATH` and `STATIC_DIR` are required environment variables with no defaults.
 
 ### Pending
 
-- **Data Persistence & Database Integration**: Connect Go backend to SQLite with migrations, CRUD endpoints, and JSON export/import.
+- **Data Persistence**: SQLite is opened and migrated at startup, and `db.Open` creates the database's directory if it is missing. CRUD endpoints and JSON export/import remain.
 - **Backend API Endpoints**: Implement `/api/dashboard`, `/api/fitness`, `/api/food`, `/api/squad`, and `/api/stats`. Until they exist the frontend surfaces a visible error state rather than silently falling back to fixtures.
-- **Automated Tests**: Expand coverage; backend tests are not yet written.
+- **Automated Tests**: The backend has its first tests, crossing the HTTP seam against a real SQLite database (`backend/controller_test.go`) and covering migration idempotency (`backend/db/migrate_test.go`). Expand coverage.
 
 ### Offline support
 
