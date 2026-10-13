@@ -6,6 +6,8 @@ package db
 
 import (
 	"time"
+
+	"uuid"
 )
 
 type SchemaMigration struct {
@@ -14,7 +16,7 @@ type SchemaMigration struct {
 }
 
 type User struct {
-	ID          string    `json:"id"`
+	ID          uuid.UUID `json:"id"`
 	DisplayName string    `json:"displayName"`
 	CreatedAt   time.Time `json:"createdAt"`
 }

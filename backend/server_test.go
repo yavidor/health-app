@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"health-app/db"
-	"health-app/logs"
+	"health-app/utils"
 )
 
 // newTestServer builds the real controller over a private, migrated SQLite
@@ -31,7 +31,7 @@ func newTestServer(t *testing.T, staticDir string) http.Handler {
 	if _, err := db.Migrate(context.Background(), conn); err != nil {
 		t.Fatalf("migrate test database: %v", err)
 	}
-	return NewServer(logs.CreateLogger(), staticDir)
+	return NewServer(utils.CreateLogger(), staticDir)
 }
 
 // get drives one GET through the handler and returns the recorder, so tests

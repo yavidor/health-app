@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"health-app/db"
-	"health-app/logs"
+	"health-app/user"
 	"health-app/utils"
 	"net/http"
 )
@@ -15,7 +15,7 @@ const (
 
 func main() {
 	ctx := context.Background()
-	logger := logs.CreateLogger()
+	logger := utils.CreateLogger()
 	dbPath, err := utils.GetEnvOrErr(DB_PATH_ENV)
 	utils.OrFatal(err, logger)
 	staticDir, err := utils.GetEnvOrErr(STATIC_DIR_ENV)
@@ -27,7 +27,9 @@ func main() {
 	applied, err := db.Migrate(ctx, database)
 	utils.OrFatal(err, logger)
 	logger.Info("migrations applied", "count", applied)
+	querier := db.New(database)
 
 	server := NewServer(logger, staticDir)
+	server.mountHandler("/user", user.NewController(user.NewService(querier), logger))
 	utils.OrFatal(http.ListenAndServe(":8080", server), logger)
 }

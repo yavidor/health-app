@@ -7,12 +7,36 @@ package db
 
 import (
 	"context"
+
+	"uuid"
 )
 
+const createUser = `-- name: CreateUser :exec
+;
+
+INSERT INTO
+  user (id, display_name, created_at)
+VALUES
+  (?, ?, CURRENT_TIMESTAMP)
+`
+
+type CreateUserParams struct {
+	ID          uuid.UUID `json:"id"`
+	DisplayName string    `json:"displayName"`
+}
+
+func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) error {
+	_, err := q.db.ExecContext(ctx, createUser, arg.ID, arg.DisplayName)
+	return err
+}
+
 const getUserByDisplayName = `-- name: GetUserByDisplayName :one
-SELECT id, display_name, created_at
-    FROM user
-    WHERE display_name = ? LIMIT 1
+;
+
+select id, display_name, created_at
+from user
+where display_name = ?
+limit 1
 `
 
 func (q *Queries) GetUserByDisplayName(ctx context.Context, displayName string) (User, error) {
@@ -23,7 +47,8 @@ func (q *Queries) GetUserByDisplayName(ctx context.Context, displayName string) 
 }
 
 const getUsers = `-- name: GetUsers :many
-SELECT id, display_name, created_at FROM user
+SELECT id, display_name, created_at
+from user
 `
 
 func (q *Queries) GetUsers(ctx context.Context) ([]User, error) {

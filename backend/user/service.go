@@ -6,10 +6,9 @@ import (
 	"errors"
 	"fmt"
 	"health-app/db"
+	"uuid"
 )
 
-// ErrNotFound is returned when no User matches the lookup. Callers map it to a
-// 404; no other error from this package means that.
 var ErrNotFound = errors.New("user not found")
 
 type User = db.User
@@ -25,7 +24,7 @@ func NewService(querier db.Querier) *Service {
 func (s *Service) ListUsers(ctx context.Context) ([]User, error) {
 	users, err := s.querier.GetUsers(ctx)
 	if err != nil {
-		return nil, fmt.Errorf("list users: %w", err)
+		return nil, err
 	}
 	// An empty table yields a nil slice with a nil error; normalize it so the result marshals to [] rather than null.
 	if len(users) == 0 {
@@ -34,9 +33,6 @@ func (s *Service) ListUsers(ctx context.Context) ([]User, error) {
 	return users, nil
 }
 
-// GetUserByDisplayName returns the User with this display name, or ErrNotFound.
-// It matches the querier's name because the two do the same lookup; the
-// no-rows case is translated here so no caller has to know it came from SQL.
 func (s *Service) GetUserByDisplayName(ctx context.Context, displayName string) (*User, error) {
 	user, err := s.querier.GetUserByDisplayName(ctx, displayName)
 	if errors.Is(err, sql.ErrNoRows) {
@@ -46,4 +42,8 @@ func (s *Service) GetUserByDisplayName(ctx context.Context, displayName string) 
 		return nil, fmt.Errorf("get user %q: %w", displayName, err)
 	}
 	return &user, nil
+}
+
+func (s *Service) CreateUser(ctx context.Context, displayName string) error {
+	return s.querier.CreateUser(ctx, db.CreateUserParams{ID: uuid.NewV4(), DisplayName: displayName})
 }

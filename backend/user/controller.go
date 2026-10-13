@@ -1,17 +1,20 @@
 package user
 
 import (
-	"health-app/logs"
 	"health-app/utils"
 	"net/http"
 )
 
 type Controller struct {
 	svc    *Service
-	logger *logs.Logger
+	logger *utils.Logger
 }
 
-func NewController(svc *Service, log *logs.Logger) *Controller {
+type UserCreateRequest struct {
+	DisplayName string `json:"displayName"`
+}
+
+func NewController(svc *Service, log *utils.Logger) *Controller {
 	return &Controller{svc: svc, logger: log}
 }
 
@@ -22,13 +25,33 @@ func (c *Controller) list(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "internal server error", http.StatusInternalServerError)
 		return
 	}
-	utils.WriteJSON(w, http.StatusOK, users, c.logger)
+	err = utils.WriteJSON(w, http.StatusOK, users, c.logger)
+	if err != nil {
+		c.logger.Error(err.Error())
+		http.Error(w, "internal server error", http.StatusInternalServerError)
+	}
 
+}
+
+func (c *Controller) CreateUser(w http.ResponseWriter, r *http.Request) {
+	body, err := utils.ReadJSON[UserCreateRequest](r, c.logger)
+	if err != nil {
+		c.logger.Error(err.Error())
+		http.Error(w, "Unprocessable Entity", http.StatusUnprocessableEntity)
+		return
+	}
+	err = c.svc.CreateUser(r.Context(), body.DisplayName)
+	if err != nil {
+		c.logger.Error(err.Error())
+		http.Error(w, "internal server error", http.StatusInternalServerError)
+		return
+	}
 }
 
 func (c *Controller) setup() *http.ServeMux {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /", c.list)
+	mux.HandleFunc("POST /", c.CreateUser)
 	return mux
 }
 

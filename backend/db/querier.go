@@ -11,6 +11,7 @@ import (
 type Querier interface {
 	// Queries against schema_migration, owned by Migrate in db/migrate.go.
 	AppliedVersions(ctx context.Context) ([]int64, error)
+	CreateUser(ctx context.Context, arg CreateUserParams) error
 	GetUserByDisplayName(ctx context.Context, displayName string) (User, error)
 	GetUsers(ctx context.Context) ([]User, error)
 	RecordMigration(ctx context.Context, arg RecordMigrationParams) error

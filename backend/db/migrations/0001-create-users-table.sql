@@ -2,7 +2,7 @@
 -- format is deliberately not enforced with a CHECK constraint; see the
 -- "Id format" section of docs/agents/implementation-plan.md.
 CREATE TABLE user (
-  id           TEXT PRIMARY KEY,
+  id           BLOB PRIMARY KEY,
   display_name TEXT NOT NULL,
   created_at   DATETIME NOT NULL
 );
