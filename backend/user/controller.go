@@ -1,8 +1,10 @@
 package user
 
 import (
+	"errors"
 	"health-app/utils"
 	"net/http"
+	"strings"
 )
 
 type Controller struct {
@@ -12,6 +14,16 @@ type Controller struct {
 
 type UserCreateRequest struct {
 	DisplayName string `json:"displayName"`
+}
+
+func (r UserCreateRequest) Validate() error {
+	if strings.TrimSpace(r.DisplayName) == "" {
+		return errors.New("displayName is required")
+	}
+	if len(r.DisplayName) > 50 {
+		return errors.New("display name should be 50 characters or less")
+	}
+	return nil
 }
 
 func NewController(svc *Service, log *utils.Logger) *Controller {

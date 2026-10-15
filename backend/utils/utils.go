@@ -37,10 +37,15 @@ func WriteJSON(w http.ResponseWriter, status int, body any, logger *Logger) erro
 	return nil
 }
 
-func ReadJSON[T any](r *http.Request, logger *Logger) (*T, error) {
+type Validator interface {
+	Validate() error
+}
+
+func ReadJSON[T Validator](r *http.Request, logger *Logger) (*T, error) {
 	var v T
 	if err := json.NewDecoder(r.Body).Decode(&v); err != nil {
 		return nil, err
 	}
-	return &v, nil
+
+	return &v, v.Validate()
 }
